@@ -140,14 +140,14 @@ export default function Home() {
           {/* Story Section */}
           <StorySection />
 
-          {/* Contact Section */}
-          <ContactSection />
-
           {/* Signature Animation Sector */}
           <SignatureSection />
 
           {/* Currently Section */}
           <CurrentlySection />
+
+          {/* Contact Section */}
+          <ContactSection />
 
           {/* Footer */}
           <FooterSection />
