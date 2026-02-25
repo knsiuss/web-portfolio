@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --acid: #DFFF00;
+  --racing-red: #DFFF00;
+  --font-lando: 'Anton', sans-serif;
+  --font-tech: 'Space Grotesk', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-acid: var(--acid);
+  --color-racing-red: var(--racing-red);
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-inter), sans-serif;
+  background-color: #050505;
+  color: #ffffff;
+}
+
+/* Font Utility Classes */
+.font-lando {
+  font-family: var(--font-lando), 'Anton', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-tech {
+  font-family: var(--font-tech), 'Space Grotesk', sans-serif;
+}
+
+.font-inter {
+  font-family: var(--font-inter), 'Inter', sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #DFFF00;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #DFFF00;
+  color: white;
+}
+
+/* Cinematic Animations */
+@keyframes gradient-shift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+@keyframes text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(225, 6, 0, 0.4) 50%,
+      transparent 100%);
+  background-size: 200% 100%;
+  animation: text-shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* 120 FPS Marquee Animations */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 30s linear infinite;
+  will-change: transform;
+}
+
+.marquee-right {
+  animation: marquee-right 35s linear infinite;
+  will-change: transform;
+}
+
+/* Pause marquee on hover */
+.marquee-left:hover,
+.marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-left,
+  .marquee-right {
+    animation: none !important;
+  }
+}
+
+/* GPU Acceleration */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Racing Red Accent */
+.text-racing-red {
+  color: #DFFF00;
+}
+
+.bg-racing-red {
+  background-color: #DFFF00;
+}
+
+.border-racing-red {
+  border-color: #DFFF00;
+}
+
+/* Racing Structural Elements */
+.bg-carbon {
+  background-image: linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111),
+    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+
+.bg-noise {
+  position: absolute;
+  inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 50;
+  /* Removed heavy animation, static noise is much cheaper */
+}
+
+.bg-grid-tech {
+  background-size: 50px 50px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.skew-racing {
+  transform: skewX(-10deg);
+}
+
+.unskew-racing {
+  transform: skewX(10deg);
+}
+
+/* Neon Glow */
+.text-glow-neon {
+  text-shadow: 0 0 10px rgba(223, 255, 0, 0.5), 0 0 20px rgba(223, 255, 0, 0.3);
+}
+
+/* Glitch Effect */
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0) skewX(-10deg);
+  }
+
+  2% {
+    transform: translate(-2px, 1px) skewX(-10deg);
+  }
+
+  4% {
+    transform: translate(-1px, -1px) skewX(-10deg);
+  }
+
+  6% {
+    transform: translate(2px, 1px) skewX(-10deg);
+  }
+
+  8% {
+    transform: translate(1px, -1px) skewX(-10deg);
+  }
+
+  10% {
+    transform: translate(0) skewX(-10deg);
+  }
+
+  100% {
+    transform: translate(0) skewX(-10deg);
+  }
+}
+
+.hover-glitch:hover {
+  animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+  color: #DFFF00;
+}
+
+@keyframes flash-neon {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-flash-neon {
+  animation: flash-neon 0.1s infinite;
+}
+
+/* Typography Lando Style */
+.text-outline-black {
+  -webkit-text-stroke: 1px black;
+  color: transparent;
+}
+
+.text-outline-white {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
+
+/* Spin animation for star */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid #DFFF00;
+  outline-offset: 2px;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
