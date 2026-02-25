@@ -86,7 +86,7 @@ export default function AboutSection() {
               <p>
                 My approach combines rigorous data research analysis with{" "}
                 <span className="text-[#DFFF00]">First Principles Thinking</span>{" "}
-                inspired by Elon Musk—stripping complex problems down to their fundamental truths
+                —stripping complex problems down to their fundamental truths
                 before building scalable ML architectures.
               </p>
             </div>

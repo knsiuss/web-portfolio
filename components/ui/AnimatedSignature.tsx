@@ -65,7 +65,7 @@ export default function AnimatedSignature() {
                 <motion.path
                     d={PATH_MAIN}
                     initial={{ pathLength: 0, opacity: 0 }}
-                    animate={strokeAnimate(2.5, 0.1)}
+                    animate={strokeAnimate(1.5, 0.1)}
                     stroke="#C5F542"
                     strokeWidth="18"
                     strokeLinecap="round"
@@ -76,14 +76,14 @@ export default function AnimatedSignature() {
                 <motion.path
                     d={PATH_MAIN}
                     initial={{ fill: "rgba(197,245,66,0)" }}
-                    animate={fillAnimate(2.4)}
+                    animate={fillAnimate(1.4)}
                     stroke="none"
                 />
                 {/* Dot 1 */}
                 <motion.path
                     d={PATH_DOT_1}
                     initial={{ pathLength: 0, opacity: 0 }}
-                    animate={strokeAnimate(0.3, 2.6)}
+                    animate={strokeAnimate(0.2, 1.6)}
                     stroke="#C5F542"
                     strokeWidth="18"
                     strokeLinecap="round"
@@ -92,14 +92,14 @@ export default function AnimatedSignature() {
                 <motion.path
                     d={PATH_DOT_1}
                     initial={{ fill: "rgba(197,245,66,0)" }}
-                    animate={fillAnimate(2.8)}
+                    animate={fillAnimate(1.8)}
                     stroke="none"
                 />
                 {/* Dot 2 */}
                 <motion.path
                     d={PATH_DOT_2}
                     initial={{ pathLength: 0, opacity: 0 }}
-                    animate={strokeAnimate(0.3, 2.9)}
+                    animate={strokeAnimate(0.2, 1.8)}
                     stroke="#C5F542"
                     strokeWidth="18"
                     strokeLinecap="round"
@@ -108,7 +108,7 @@ export default function AnimatedSignature() {
                 <motion.path
                     d={PATH_DOT_2}
                     initial={{ fill: "rgba(197,245,66,0)" }}
-                    animate={fillAnimate(3.1)}
+                    animate={fillAnimate(2.0)}
                     stroke="none"
                 />
             </g>

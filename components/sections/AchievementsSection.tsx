@@ -9,9 +9,9 @@ const achievements = [
     category: "Technical Impact",
     icon: <GitFork className="w-5 h-5" />,
     items: [
-      { metric: "8+", label: "Open Source Projects", desc: "ML and data science tools" },
-      { metric: "50+", label: "GitHub Stars", desc: "Across all repositories" },
-      { metric: "92%", label: "Model Accuracy", desc: "F1 tire degradation predictor" },
+      { metric: "4+", label: "Advanced ML Projects", desc: "Focusing on predictive analytics" },
+      { metric: "100k+", label: "Data Points Analyzed", desc: "In F1 telemetry research" },
+      { metric: "92%", label: "Peak Accuracy", desc: "F1 tire degradation predictor" },
     ],
   },
   {

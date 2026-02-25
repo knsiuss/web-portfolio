@@ -112,9 +112,9 @@ export default function CurrentlySection() {
               Last updated: {lastUpdated}
             </span>
           </div>
-          
+
           <p className="font-tech text-[10px] md:text-xs text-white/30 text-center md:text-right">
-            This section auto-updates with my latest activities
+            {/* Removed misleading auto-update claim */}
           </p>
         </motion.div>
       </div>
@@ -134,7 +134,7 @@ interface Activity {
 
 function ActivityCard({ activity }: { activity: Activity }) {
   return (
-    <div 
+    <div
       className={`relative h-full bg-gradient-to-br ${activity.color} border ${activity.borderColor} rounded-xl md:rounded-2xl p-5 md:p-6 group-hover:border-opacity-60 transition-all duration-300 hover:scale-[1.01] md:hover:scale-[1.02]`}
     >
       {/* Icon & Label */}

@@ -12,7 +12,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 2500; // Increased to 2500ms to allow full drawing of the signature
+    const duration = 1800; // Reduced to be under 2 seconds for better UX
     const interval = 16;
     const steps = duration / interval;
     let currentStep = 0;

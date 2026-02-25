@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@/components/Analytics";
+import BackToTop from "@/components/ui/BackToTop";
 import { Anton, Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -24,43 +25,31 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-  description: "Machine Learning Engineer building real-time F1 analytics and production ML systems. Google Student Ambassador, Stanford ML Certified, passionate about AI education.",
+  description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
   keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
-  publisher: "Kanisius Bagaskara",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://kanisiusbagas.vercel.app",
     siteName: "Kanisius Bagaskara Portfolio",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Building real-time F1 analytics and production ML systems. Google Student Ambassador, Stanford ML Certified.",
+    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
     images: [
       {
-        url: "/assets/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kanisius Bagaskara - ML Engineer Portfolio",
+        alt: "Kanisius Bagaskara - Machine Learning Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Building real-time F1 analytics and production ML systems. Google Student Ambassador.",
-    images: ["/assets/og-image.jpg"],
+    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures.",
+    images: ["/og-image.jpg"],
     creator: "@maxquincy18",
   },
   verification: {
@@ -178,6 +167,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-[#050505] text-white overflow-x-hidden">
         {children}
+        <BackToTop />
         <GoogleAnalytics />
       </body>
     </html>

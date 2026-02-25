@@ -83,6 +83,10 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60">
             Jakarta, Indonesia • Machine Learning Engineer
           </span>
+          <div className="mt-2 md:mt-4 inline-flex items-center gap-2 px-3 max-md:py-1 py-1.5 rounded-full border border-[#DFFF00]/50 bg-[#DFFF00]/10 backdrop-blur-md shadow-[0_0_15px_rgba(223,255,0,0.15)]">
+            <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#DFFF00] animate-pulse" style={{ boxShadow: "0 0 8px rgba(223,255,0,0.8)" }}></span>
+            <span className="font-tech text-[9px] md:text-xs text-[#DFFF00] uppercase tracking-wider font-bold">Open to Work (Internships)</span>
+          </div>
         </motion.div>
       </motion.div>
 

@@ -12,7 +12,7 @@ export default function FooterSection() {
             <h3 className="font-lando text-2xl md:text-3xl mb-1 md:mb-2">KANISIUS</h3>
             <h3 className="font-lando text-2xl md:text-3xl mb-3 md:mb-4">BAGASKARA</h3>
             <p className="font-tech text-[10px] md:text-xs uppercase tracking-wider opacity-60">
-              Informatics Student<br />
+              Machine Learning Engineer<br />
               Google Student Ambassador
             </p>
           </div>
