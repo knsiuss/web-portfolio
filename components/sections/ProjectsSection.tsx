@@ -29,7 +29,7 @@ const projects = [
     tech: ["Python", "Streamlit", "FastF1", "XGBoost", "FastAPI"],
     links: {
       live: "https://f1-lab.streamlit.app/",
-      github: "https://github.com/maxvyquincy9393",
+      github: "https://github.com/knsiuss",
     },
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
@@ -58,7 +58,7 @@ const projects = [
     ],
     tech: ["XGBoost", "Pandas", "Scikit-learn", "Seaborn"],
     links: {
-      github: "https://github.com/maxvyquincy9393/IEEE_fraud_detection",
+      github: "https://github.com/knsiuss/IEEE_fraud_detection",
     },
     color: "from-green-500/20 to-green-600/10",
     borderColor: "border-green-500/30",
@@ -86,7 +86,7 @@ const projects = [
     ],
     tech: ["Python", "NumPy", "Matplotlib", "Jupyter", "Math"],
     links: {
-      github: "https://github.com/maxvyquincy9393/Deep-Dive-into-ML",
+      github: "https://github.com/knsiuss/Deep-Dive-into-ML",
     },
     color: "from-purple-500/20 to-purple-600/10",
     borderColor: "border-purple-500/30",
@@ -266,7 +266,7 @@ export default function ProjectsSection() {
           className="mt-12 text-center"
         >
           <a
-            href="https://github.com/maxvyquincy9393"
+            href="https://github.com/knsiuss"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-tech uppercase tracking-wider text-white/60 hover:text-[#DFFF00] transition-colors group"

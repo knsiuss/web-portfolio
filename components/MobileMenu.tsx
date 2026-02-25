@@ -76,7 +76,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               className="flex justify-center gap-4 md:gap-6"
             >
               <a
-                href="https://github.com/maxvyquincy9393"
+                href="https://github.com/knsiuss"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 md:w-12 md:h-12 border border-white/20 rounded-full flex items-center justify-center text-white/60 hover:text-[#DFFF00] hover:border-[#DFFF00] transition-all"

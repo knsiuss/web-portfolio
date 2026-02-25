@@ -25,8 +25,8 @@ const contactMethods = [
   {
     icon: <Github className="w-5 h-5" />,
     label: "GitHub",
-    value: "github.com/maxvyquincy9393",
-    href: "https://github.com/maxvyquincy9393",
+    value: "github.com/knsiuss",
+    href: "https://github.com/knsiuss",
     color: "hover:bg-white/20 hover:border-white/50",
     description: "See my code",
   },

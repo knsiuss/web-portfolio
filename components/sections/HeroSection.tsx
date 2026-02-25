@@ -150,7 +150,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
       {/* Socials - Bottom Right, smaller on mobile */}
       <div className="absolute bottom-6 md:bottom-12 right-4 md:right-12 z-40 flex items-center gap-2 md:gap-4 pointer-events-auto">
         <a
-          href="https://github.com/maxvyquincy9393"
+          href="https://github.com/knsiuss"
           target="_blank"
           rel="noopener noreferrer"
           className="w-8 h-8 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"

@@ -35,7 +35,7 @@ export default function FooterSection() {
             <h4 className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] mb-3 md:mb-4 opacity-60">Connect</h4>
             <div className="flex gap-3 md:gap-4">
               <a
-                href="https://github.com/maxvyquincy9393"
+                href="https://github.com/knsiuss"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
