@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import AnimatedSignature from "@/components/ui/AnimatedSignature";
 import AnimatedCollab from "@/components/ui/AnimatedCollab";
 import useReducedMotion from "@/hooks/useReducedMotion";
@@ -10,11 +10,23 @@ export default function SignatureSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const prefersReducedMotion = useReducedMotion();
 
+    // Scroll progress scoped to this section — drives the handwriting animation
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"],
+    });
+    // Spring-smooth it so the pen feels natural, not jittery
+    const smoothProgress = useSpring(scrollYProgress, {
+        stiffness: 40,
+        damping: 25,
+        restDelta: 0.001,
+    });
+
     return (
         <section
             ref={containerRef}
             id="signature-section"
-            className="relative w-full min-h-[60vh] md:min-h-[80vh] flex flex-col items-center justify-center py-24 md:py-32 z-10 overflow-hidden bg-[#050505]"
+            className="relative w-full min-h-[120vh] md:min-h-[150vh] flex flex-col items-center justify-center py-24 md:py-32 z-10 overflow-hidden bg-[#050505]"
         >
             {/* Background Decorative Grid/Lines */}
             <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -75,7 +87,7 @@ export default function SignatureSection() {
 
             {/* Let's Collaborate SVG Graphic - Moved below signature, before Contact Section */}
             <div className="relative w-full max-w-[1400px] mx-auto mt-20 md:mt-32 z-0 opacity-60 mix-blend-screen pointer-events-none">
-                <AnimatedCollab className="w-full h-auto" />
+                <AnimatedCollab className="w-full h-auto" scrollProgress={smoothProgress} />
             </div>
         </section>
     );

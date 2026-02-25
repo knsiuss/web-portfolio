@@ -19,7 +19,7 @@ const techRow2 = [
   { name: 'Seaborn', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', desc: 'Statistical Viz', color: '#4C72B0', bg: 'bg-[#4C72B0]/10' },
   { name: 'Plotly', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/plotly/plotly-original.svg', desc: 'Interactive', color: '#119DFF', bg: 'bg-[#119DFF]/10' },
   { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', desc: 'Containers', color: '#2496ED', bg: 'bg-[#2496ED]/10' },
-  { name: 'GitHub Actions', logo: 'https://github.githubassets.com/images/modules/site/features/actions-icon.svg', desc: 'CI/CD', color: '#2088FF', bg: 'bg-[#2088FF]/10' },
+  { name: 'GitHub Actions', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg', desc: 'CI/CD', color: '#2088FF', bg: 'bg-[#2088FF]/10' },
   { name: 'GitLab CI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg', desc: 'DevOps', color: '#FC6D26', bg: 'bg-[#FC6D26]/10' },
   { name: 'VS Code', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', desc: 'Editor', color: '#007ACC', bg: 'bg-[#007ACC]/10' },
   { name: 'Google Colab', logo: 'https://colab.research.google.com/img/colab_favicon_256px.png', desc: 'Cloud', color: '#F9AB00', bg: 'bg-[#F9AB00]/10' },
