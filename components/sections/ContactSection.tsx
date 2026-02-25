@@ -54,8 +54,8 @@ export default function ContactSection() {
   return (
     <section id="contact" className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden z-0">
       {/* Background Graphic - Lowest Layer */}
-      <div className="absolute inset-0 -z-20 flex items-center justify-center opacity-30 pointer-events-none mix-blend-screen">
-        <AnimatedCollab className="w-full max-w-[1400px] mx-auto h-auto opacity-50" />
+      <div className="absolute inset-0 -z-20 flex items-center justify-center opacity-25 pointer-events-none mix-blend-screen overflow-hidden">
+        <AnimatedCollab className="w-full min-w-[2000px] h-auto object-cover opacity-75 translate-y-[20%]" />
       </div>
 
       {/* Background Glow - Above Graphic */}
