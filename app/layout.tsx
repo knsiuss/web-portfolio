@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@/components/Analytics";
 import BackToTop from "@/components/ui/BackToTop";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { Anton, Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -158,6 +159,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${anton.variable} ${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
       <head>
         <script
@@ -165,10 +167,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="antialiased bg-[#050505] text-white overflow-x-hidden">
-        {children}
-        <BackToTop />
-        <GoogleAnalytics />
+      <body className="antialiased bg-background text-foreground overflow-x-hidden transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+          <BackToTop />
+          <GoogleAnalytics />
+        </ThemeProvider>
       </body>
     </html>
   );

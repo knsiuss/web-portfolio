@@ -52,7 +52,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
       >
         {/* First Name */}
         <div
-          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-white tracking-tighter select-none skew-racing cursor-default"
+          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-foreground tracking-tighter select-none skew-racing cursor-default"
           style={{ filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.8))" }}
         >
           <SplitText text="KANISIUS" delay={0.2} />
@@ -60,7 +60,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
 
         {/* Last Name */}
         <div
-          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-[#DFFF00] tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default"
+          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-racing-red tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default"
           style={{ textShadow: "0px 10px 30px rgba(223, 255, 0, 0.2)" }}
         >
           <SplitText text="BAGASKARA" delay={0.4} />
@@ -74,18 +74,18 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           className="mt-4 md:mt-10 flex flex-col items-center gap-1.5 md:gap-3"
         >
           <div className="flex justify-center items-center gap-2 md:gap-4">
-            <span className="w-8 md:w-16 h-[1.5px] bg-white" />
-            <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.15em] md:tracking-[0.3em]">
+            <span className="w-8 md:w-16 h-[1.5px] bg-foreground" />
+            <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.15em] md:tracking-[0.3em] text-foreground">
               Google Student Ambassador
             </span>
-            <span className="w-8 md:w-16 h-[1.5px] bg-white" />
+            <span className="w-8 md:w-16 h-[1.5px] bg-foreground" />
           </div>
-          <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60">
+          <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-foreground/60">
             Jakarta, Indonesia • Machine Learning Engineer
           </span>
-          <div className="mt-2 md:mt-4 inline-flex items-center gap-2 px-3 max-md:py-1 py-1.5 rounded-full border border-[#DFFF00]/50 bg-[#DFFF00]/10 backdrop-blur-md shadow-[0_0_15px_rgba(223,255,0,0.15)]">
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#DFFF00] animate-pulse" style={{ boxShadow: "0 0 8px rgba(223,255,0,0.8)" }}></span>
-            <span className="font-tech text-[9px] md:text-xs text-[#DFFF00] uppercase tracking-wider font-bold">Open to Work (Internships)</span>
+          <div className="mt-2 md:mt-4 inline-flex items-center gap-2 px-3 max-md:py-1 py-1.5 rounded-full border border-racing-red/50 bg-racing-red/10 backdrop-blur-md shadow-[0_0_15px_var(--color-racing-red)]" style={{ '--tw-shadow-color': 'var(--color-racing-red)', '--tw-shadow': 'var(--tw-shadow-color) 0px 0px 15px 0px inset' } as React.CSSProperties}>
+            <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-racing-red animate-pulse" style={{ boxShadow: "0 0 8px var(--color-racing-red)" }}></span>
+            <span className="font-tech text-[9px] md:text-xs text-racing-red uppercase tracking-wider font-bold">Open to Work</span>
           </div>
         </motion.div>
       </motion.div>
@@ -123,14 +123,14 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.5 }}
       >
-        <span className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-white/60">
+        <span className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/60">
           Scroll
         </span>
         <motion.div
           animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         >
-          <ChevronDown size={18} className="text-white/40 md:w-5 md:h-5" />
+          <ChevronDown size={18} className="text-foreground/40 md:w-5 md:h-5" />
         </motion.div>
       </motion.div>
 
@@ -147,7 +147,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           size={20}
           strokeWidth={1}
           fill="#DFFF00"
-          className="text-white md:w-8 md:h-8"
+          className="text-foreground md:w-8 md:h-8"
         />
       </motion.div>
 
@@ -157,7 +157,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           href="https://github.com/knsiuss"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-8 h-8 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
+          className="w-8 h-8 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
           data-cursor
           data-cursor-text="GitHub"
         >
@@ -167,7 +167,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           href="https://www.linkedin.com/in/kanisiusbagas1212"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-8 h-8 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
+          className="w-8 h-8 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
           data-cursor
           data-cursor-text="LinkedIn"
         >
@@ -177,15 +177,15 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
 
       {/* WIDGET: CURRENT FOCUS - Hidden on mobile, show on md+ */}
       <div className="fixed bottom-6 md:bottom-12 left-4 md:left-12 z-40 hidden md:flex flex-col gap-2 pointer-events-auto">
-        <span className="font-tech text-glow-neon text-[9px] md:text-[10px] uppercase tracking-widest text-[#DFFF00] ml-3">
+        <span className="font-tech text-glow-neon text-[9px] md:text-[10px] uppercase tracking-widest text-racing-red ml-3">
           Current Focus
         </span>
 
-        <div className="w-32 md:w-40 h-48 md:h-64 border border-white/10 rounded-lg bg-white/[0.02] backdrop-blur-md hover:bg-[#DFFF00]/10 hover:border-[#DFFF00]/50 transition-all cursor-pointer group flex flex-col items-center p-3 md:p-4 relative skew-racing overflow-hidden hover:shadow-[0_0_30px_rgba(223,255,0,0.15)]">
+        <div className="w-32 md:w-40 h-48 md:h-64 border border-foreground/10 rounded-lg bg-white/[0.02] backdrop-blur-md hover:bg-[#DFFF00]/10 hover:border-[#DFFF00]/50 transition-all cursor-pointer group flex flex-col items-center p-3 md:p-4 relative skew-racing overflow-hidden hover:shadow-[0_0_30px_rgba(223,255,0,0.15)]">
           {/* Carbon Fiber overlay on hover */}
-          <div className="absolute inset-0 bg-carbon opacity-0 border border-white/30 group-hover:border-[#DFFF00]/50 transition-colors group-hover:opacity-100 mix-blend-overlay z-0" />
+          <div className="absolute inset-0 bg-carbon opacity-0 border border-foreground/30 group-hover:border-[#DFFF00]/50 transition-colors group-hover:opacity-100 mix-blend-overlay z-0" />
 
-          <div className="absolute -top-[1px] -right-[1px] w-3 md:w-4 h-3 md:h-4 bg-[#050505] border-b border-l border-white/30 group-hover:border-[#DFFF00]/50 transition-colors z-10" />
+          <div className="absolute -top-[1px] -right-[1px] w-3 md:w-4 h-3 md:h-4 bg-background border-b border-l border-foreground/30 group-hover:border-[#DFFF00]/50 transition-colors z-10" />
           <div className="flex-1 w-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 z-10 unskew-racing">
             <svg
               viewBox="0 0 100 100"
@@ -200,7 +200,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
               />
             </svg>
           </div>
-          <div className="w-full border-t border-white/30 group-hover:border-[#DFFF00]/30 pt-2 md:pt-3 mt-2 text-center z-10 unskew-racing">
+          <div className="w-full border-t border-foreground/30 group-hover:border-[#DFFF00]/30 pt-2 md:pt-3 mt-2 text-center z-10 unskew-racing">
             <h4 className="font-lando text-sm md:text-lg uppercase leading-none group-hover:text-[#DFFF00] transition-colors">
               F1 Data
               <br />
@@ -208,7 +208,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
             </h4>
             <div className="flex justify-center items-center gap-1 md:gap-2 mt-2 md:mt-3 opacity-60 group-hover:opacity-100 transition-opacity">
               <div className="flex flex-col items-center">
-                <span className="font-tech text-glow-neon text-[7px] md:text-[8px] uppercase font-bold text-[#DFFF00]">
+                <span className="font-tech text-glow-neon text-[7px] md:text-[8px] uppercase font-bold text-racing-red">
                   V2.0 Live
                 </span>
               </div>

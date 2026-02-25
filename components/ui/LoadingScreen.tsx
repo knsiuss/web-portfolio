@@ -33,7 +33,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
   return (
     <motion.div
-      className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center overflow-hidden"
+      className="fixed inset-0 z-[10000] bg-foreground flex flex-col items-center justify-center overflow-hidden"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
@@ -59,13 +59,13 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
           transition={{ delay: 0.4, duration: 0.6 }}
           className="mb-8"
         >
-          <h1 className="font-lando text-xl md:text-3xl uppercase tracking-wider text-white/90">
+          <h1 className="font-lando text-xl md:text-3xl uppercase tracking-wider text-foreground/90">
             P. Kanisius Bagaskara
           </h1>
-          <p className="font-tech text-xs uppercase tracking-[0.2em] text-[#DFFF00] mt-2">
+          <p className="font-tech text-xs uppercase tracking-[0.2em] text-racing-red mt-2">
             Machine Learning Engineer (Student)
           </p>
-          <p className="font-tech text-[10px] uppercase tracking-wider text-white/50 mt-1">
+          <p className="font-tech text-[10px] uppercase tracking-wider text-foreground/50 mt-1">
             Jakarta, Indonesia
           </p>
         </motion.div>
@@ -78,14 +78,14 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="font-tech text-[10px] uppercase text-white/40 mt-2">
+          <p className="font-tech text-[10px] uppercase text-foreground/40 mt-2">
             {Math.round(progress)}%
           </p>
         </div>
 
         {/* Status Text */}
         <motion.p
-          className="font-tech text-xs uppercase tracking-[0.3em] mt-8 text-white/40"
+          className="font-tech text-xs uppercase tracking-[0.3em] mt-8 text-foreground/40"
           animate={{ opacity: [0.4, 1, 0.4] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >

@@ -4,7 +4,7 @@ import { Github, Linkedin } from 'lucide-react';
 
 export default function FooterSection() {
   return (
-    <footer className="bg-black text-white py-12 md:py-16 pointer-events-auto">
+    <footer className="bg-foreground text-background py-12 md:py-16 pointer-events-auto">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-8 md:mb-12">
           {/* Brand */}
@@ -38,7 +38,7 @@ export default function FooterSection() {
                 href="https://github.com/knsiuss"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
+                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
                 aria-label="GitHub"
               >
                 <Github size={16} className="md:w-[18px] md:h-[18px]" />
@@ -47,7 +47,7 @@ export default function FooterSection() {
                 href="https://linkedin.com/in/kanisiusbagas1212"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 md:w-10 md:h-10 border border-white/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
+                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
@@ -57,7 +57,7 @@ export default function FooterSection() {
           </div>
         </div>
 
-        <div className="border-t border-white/20 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+        <div className="border-t border-foreground/20 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
           <p className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.2em] opacity-50 text-center md:text-left">
             © 2026 Kanisius Bagaskara. All Rights Reserved.
           </p>

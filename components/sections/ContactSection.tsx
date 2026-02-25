@@ -27,7 +27,7 @@ const contactMethods = [
     label: "GitHub",
     value: "github.com/knsiuss",
     href: "https://github.com/knsiuss",
-    color: "hover:bg-white/20 hover:border-white/50",
+    color: "hover:bg-white/20 hover:border-foreground/50",
     description: "See my code",
   },
   {
@@ -51,7 +51,7 @@ export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="contact" className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden z-0">
+    <section id="contact" className="relative bg-background py-20 md:py-32 overflow-hidden z-0">
       {/* Background Glow - Above Graphic */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#DFFF00]/5 rounded-full blur-[150px]" />
@@ -65,14 +65,14 @@ export default function ContactSection() {
           viewport={{ once: true }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="font-tech text-xs uppercase tracking-[0.3em] text-[#DFFF00] mb-4 block">
+          <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
             Get In Touch
           </span>
           <h2 className="font-lando text-4xl md:text-6xl lg:text-7xl uppercase mb-4">
             Let&apos;s Build{" "}
-            <span className="text-[#DFFF00]">Something</span>
+            <span className="text-racing-red">Something</span>
           </h2>
-          <p className="font-tech text-white/50 max-w-xl mx-auto">
+          <p className="font-tech text-foreground/50 max-w-xl mx-auto">
             Currently open to opportunities. Usually respond within 24 hours.
           </p>
         </motion.div>
@@ -85,7 +85,7 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-lando text-xl uppercase mb-6 text-white/80">
+            <h3 className="font-lando text-xl uppercase mb-6 text-foreground/80">
               Open For
             </h3>
             <div className="space-y-3 mb-8">
@@ -99,7 +99,7 @@ export default function ContactSection() {
                   className="flex items-center gap-3"
                 >
                   <div className="w-1.5 h-1.5 bg-[#DFFF00] rounded-full" />
-                  <span className="font-tech text-white/70">{opp}</span>
+                  <span className="font-tech text-foreground/70">{opp}</span>
                 </motion.div>
               ))}
             </div>
@@ -109,7 +109,7 @@ export default function ContactSection() {
               <MagneticButton
                 href="mailto:kanisius@novar.me"
                 magneticStrength={0.2}
-                className="inline-flex items-center justify-center gap-2 bg-[#DFFF00] text-black font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:brightness-110 transition-all group"
+                className="inline-flex items-center justify-center gap-2 bg-[#DFFF00] text-background font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:brightness-110 transition-all group"
               >
                 <Mail className="w-4 h-4" />
                 Start a Conversation
@@ -118,7 +118,7 @@ export default function ContactSection() {
               <a
                 href="/assets/resume-kanisius-bagaskara.pdf"
                 download
-                className="inline-flex items-center justify-center gap-2 border border-white/20 text-white font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-white/10 transition-all"
+                className="inline-flex items-center justify-center gap-2 border border-foreground/20 text-foreground font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-white/10 transition-all"
               >
                 <Download className="w-4 h-4" />
                 Download CV
@@ -126,7 +126,7 @@ export default function ContactSection() {
             </div>
 
             {/* Response Time */}
-            <div className="mt-6 flex items-center gap-2 text-white/40">
+            <div className="mt-6 flex items-center gap-2 text-foreground/40">
               <Calendar className="w-4 h-4" />
               <span className="font-tech text-xs">Usually respond within 24 hours</span>
             </div>
@@ -150,17 +150,17 @@ export default function ContactSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className={`flex items-center gap-4 p-4 bg-[#111] border border-white/10 rounded-xl transition-all ${method.color} group`}
+                className={`flex items-center gap-4 p-4 bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl transition-all ${method.color} group`}
               >
-                <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-white/60 group-hover:text-white group-hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-foreground/60 group-hover:text-foreground group-hover:bg-white/10 transition-colors">
                   {method.icon}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <span className="font-tech text-xs uppercase text-white/40">{method.label}</span>
-                    <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white/60 transition-colors" />
+                    <span className="font-tech text-xs uppercase text-foreground/40">{method.label}</span>
+                    <ArrowUpRight className="w-4 h-4 text-foreground/20 group-hover:text-foreground/60 transition-colors" />
                   </div>
-                  <span className="font-tech text-sm text-white truncate block">{method.value}</span>
+                  <span className="font-tech text-sm text-foreground truncate block">{method.value}</span>
                 </div>
               </motion.a>
             ))}

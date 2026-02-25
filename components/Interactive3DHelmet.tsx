@@ -171,7 +171,7 @@ export default function Interactive3DHelmet() {
       
       {/* Overlay Instructions */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-        <p className="font-tech text-xs uppercase tracking-wider text-white/40">
+        <p className="font-tech text-xs uppercase tracking-wider text-foreground/40">
           Move cursor to rotate • Drag to explore
         </p>
       </div>

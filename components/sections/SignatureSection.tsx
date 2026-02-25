@@ -26,7 +26,7 @@ export default function SignatureSection() {
         <section
             ref={containerRef}
             id="signature-section"
-            className="relative w-full min-h-[120vh] md:min-h-[150vh] flex flex-col items-center justify-center py-24 md:py-32 z-10 overflow-hidden bg-[#050505]"
+            className="relative w-full min-h-[120vh] md:min-h-[150vh] flex flex-col items-center justify-center py-24 md:py-32 z-10 overflow-hidden bg-background"
         >
             {/* Background Decorative Grid/Lines */}
             <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -68,7 +68,7 @@ export default function SignatureSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                    className="font-sans italic text-center text-white/90 max-w-4xl text-xl md:text-3xl lg:text-4xl leading-relaxed mb-16 md:mb-24 font-light tracking-wide"
+                    className="font-sans italic text-center text-foreground/90 max-w-4xl text-xl md:text-3xl lg:text-4xl leading-relaxed mb-16 md:mb-24 font-light tracking-wide"
                 >
                     &ldquo;Failure is an option here. If things are not failing, you are not innovating enough.&rdquo;
                 </motion.p>
@@ -76,10 +76,10 @@ export default function SignatureSection() {
                 {/* Animated Signature Wrapper - MASSIVE SIZE */}
                 <div className="relative w-full max-w-[90vw] lg:max-w-6xl h-48 md:h-80 lg:h-[500px] flex items-center justify-center -mt-8 md:-mt-12">
                     {/* Corner accents - Technical Vibe (Scaled UP) */}
-                    <div className="absolute top-0 left-0 w-6 h-6 md:w-8 md:h-8 border-t-[3px] border-l-[3px] border-white/20" />
-                    <div className="absolute top-0 right-0 w-6 h-6 md:w-8 md:h-8 border-t-[3px] border-r-[3px] border-white/20" />
-                    <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-l-[3px] border-white/20" />
-                    <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-r-[3px] border-white/20" />
+                    <div className="absolute top-0 left-0 w-6 h-6 md:w-8 md:h-8 border-t-[3px] border-l-[3px] border-foreground/20" />
+                    <div className="absolute top-0 right-0 w-6 h-6 md:w-8 md:h-8 border-t-[3px] border-r-[3px] border-foreground/20" />
+                    <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-l-[3px] border-foreground/20" />
+                    <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-r-[3px] border-foreground/20" />
 
                     <AnimatedSignature />
                 </div>

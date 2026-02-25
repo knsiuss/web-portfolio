@@ -9,6 +9,8 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
+import { ThemeToggle } from './ui/ThemeToggle';
+
 const menuItems = ['Home', 'Projects', 'About', 'Contact'];
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -20,12 +22,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[100] bg-[#111] flex flex-col"
+          className="fixed inset-0 z-[100] bg-background flex flex-col"
         >
-          {/* Header with Close Button */}
-          <div className="flex justify-end p-4 md:p-6">
+          {/* Header with Theme Toggle & Close Button */}
+          <div className="flex justify-between items-center p-4 md:p-6">
+            <ThemeToggle />
             <MagneticButton
-              className="w-10 h-10 md:w-12 md:h-12 border border-white/30 rounded-full flex items-center justify-center text-white hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black transition-all"
+              className="w-10 h-10 md:w-12 md:h-12 border border-foreground/30 rounded-full flex items-center justify-center text-foreground hover:bg-racing-red hover:border-racing-red hover:text-background transition-all"
               onClick={onClose}
             >
               <X size={20} className="md:w-6 md:h-6" />
@@ -43,7 +46,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 exit={{ opacity: 0, y: 30 }}
                 transition={{ delay: index * 0.08 }}
                 onClick={onClose}
-                className="font-lando text-4xl sm:text-5xl md:text-7xl uppercase text-white hover:text-[#DFFF00] transition-colors"
+                className="font-lando text-4xl sm:text-5xl md:text-7xl uppercase text-foreground hover:text-[#DFFF00] transition-colors"
               >
                 {item}
               </motion.a>
@@ -61,7 +64,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             >
               <a
                 href="mailto:kanisius@novar.me"
-                className="flex items-center gap-2 text-white/60 hover:text-[#DFFF00] transition-colors font-tech text-sm"
+                className="flex items-center gap-2 text-foreground/60 hover:text-[#DFFF00] transition-colors font-tech text-sm"
               >
                 <Mail size={16} />
                 <span>kanisius@novar.me</span>
@@ -79,7 +82,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 href="https://github.com/knsiuss"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 md:w-12 md:h-12 border border-white/20 rounded-full flex items-center justify-center text-white/60 hover:text-[#DFFF00] hover:border-[#DFFF00] transition-all"
+                className="w-10 h-10 md:w-12 md:h-12 border border-foreground/20 rounded-full flex items-center justify-center text-foreground/60 hover:text-[#DFFF00] hover:border-[#DFFF00] transition-all"
                 aria-label="GitHub"
               >
                 <Github size={18} className="md:w-5 md:h-5" />
@@ -88,7 +91,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 href="https://linkedin.com/in/kanisiusbagas1212"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 md:w-12 md:h-12 border border-white/20 rounded-full flex items-center justify-center text-white/60 hover:text-[#DFFF00] hover:border-[#DFFF00] transition-all"
+                className="w-10 h-10 md:w-12 md:h-12 border border-foreground/20 rounded-full flex items-center justify-center text-foreground/60 hover:text-[#DFFF00] hover:border-[#DFFF00] transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={18} className="md:w-5 md:h-5" />
@@ -100,7 +103,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              className="text-center font-tech text-[10px] text-white/30 uppercase tracking-widest"
+              className="text-center font-tech text-[10px] text-foreground/30 uppercase tracking-widest"
             >
               © 2026 Kanisius Bagaskara
             </motion.p>

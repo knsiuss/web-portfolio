@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import MagneticButton from './ui/MagneticButton';
 import StaggerText from './ui/StaggerText';
+import { ThemeToggle } from './ui/ThemeToggle';
 
 interface NavigationProps {
   onMenuOpen: () => void;
@@ -21,7 +22,7 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
+          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-racing-red transition-colors hover-glitch"
         >
           <StaggerText text="KANISIUS" delay={0.2} />
         </motion.h1>
@@ -50,16 +51,19 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
           </svg>
         </a>
 
+        {/* Theme Toggle — always visible */}
+        <ThemeToggle />
+
         <MagneticButton
-          className="w-9 h-9 md:w-12 md:h-12 border border-white/30 rounded-md flex flex-col items-center justify-center gap-1 md:gap-1.5 hover:bg-white/10 group transition-all"
+          className="w-9 h-9 md:w-12 md:h-12 border border-foreground/30 rounded-md flex flex-col items-center justify-center gap-1 md:gap-1.5 hover:bg-foreground/10 group transition-all"
           onClick={onMenuOpen}
           magneticStrength={0.4}
         >
           <motion.span
-            className="w-4 md:w-5 h-[2px] bg-white group-hover:bg-[#DFFF00] transition-colors"
+            className="w-4 md:w-5 h-[2px] bg-foreground group-hover:bg-racing-red transition-colors"
           />
           <motion.span
-            className="w-4 md:w-5 h-[2px] bg-white group-hover:bg-[#DFFF00] transition-colors"
+            className="w-4 md:w-5 h-[2px] bg-foreground group-hover:bg-racing-red transition-colors"
           />
         </MagneticButton>
       </div>

@@ -16,7 +16,7 @@ export default function Custom404() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center overflow-hidden relative">
+    <div className="min-h-screen bg-foreground text-foreground flex flex-col items-center justify-center overflow-hidden relative">
       {/* Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-[#1a0000] to-black" />
@@ -41,7 +41,7 @@ export default function Custom404() {
           transition={{ duration: 1, type: 'spring', stiffness: 100 }}
           className="mb-8"
         >
-          <Flag size={80} className="mx-auto text-[#DFFF00]" strokeWidth={1.5} />
+          <Flag size={80} className="mx-auto text-racing-red" strokeWidth={1.5} />
         </motion.div>
 
         {/* 404 Number */}
@@ -49,7 +49,7 @@ export default function Custom404() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="font-lando text-[20vw] md:text-[15vw] leading-none text-[#DFFF00] mb-4"
+          className="font-lando text-[20vw] md:text-[15vw] leading-none text-racing-red mb-4"
         >
           404
         </motion.h1>
@@ -63,10 +63,10 @@ export default function Custom404() {
           <h2 className="font-lando text-4xl md:text-6xl uppercase mb-4">
             Pit Stop
           </h2>
-          <p className="font-tech text-xl md:text-2xl text-white/60 mb-2">
+          <p className="font-tech text-xl md:text-2xl text-foreground/60 mb-2">
             Looks like you&apos;ve gone off track!
           </p>
-          <p className="font-tech text-lg text-white/40 uppercase tracking-wider">
+          <p className="font-tech text-lg text-foreground/40 uppercase tracking-wider">
             Page Not Found
           </p>
         </motion.div>
@@ -78,10 +78,10 @@ export default function Custom404() {
           transition={{ delay: 1 }}
           className="mt-12 mb-8"
         >
-          <div className="font-tech text-sm uppercase tracking-wider text-white/40 mb-2">
+          <div className="font-tech text-sm uppercase tracking-wider text-foreground/40 mb-2">
             Returning to pits in
           </div>
-          <div className="font-lando text-6xl text-[#DFFF00]">
+          <div className="font-lando text-6xl text-racing-red">
             {count === 0 ? 'GO!' : `0${count}`}
           </div>
         </motion.div>
@@ -94,7 +94,7 @@ export default function Custom404() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-3 bg-[#DFFF00] text-white font-tech uppercase tracking-wider px-8 py-4 rounded-full hover:bg-white hover:text-black transition-all duration-300 group"
+            className="inline-flex items-center gap-3 bg-[#DFFF00] text-foreground font-tech uppercase tracking-wider px-8 py-4 rounded-full hover:bg-white hover:text-background transition-all duration-300 group"
           >
             <Home size={20} />
             <span>Back to Home</span>

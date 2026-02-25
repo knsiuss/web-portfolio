@@ -76,7 +76,7 @@ export default function CertificationsSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="certifications" className="relative bg-black py-20 md:py-32 overflow-hidden">
+    <section id="certifications" className="relative bg-foreground py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-6xl">
         {/* Header - Storytelling */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
@@ -87,7 +87,7 @@ export default function CertificationsSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="md:w-1/2"
           >
-            <span className="font-tech text-xs uppercase tracking-[0.4em] text-[#DFFF00] mb-4 block">
+            <span className="font-tech text-xs uppercase tracking-[0.4em] text-racing-red mb-4 block">
               Continuous Learning
             </span>
             <h2 className="font-lando text-4xl md:text-5xl lg:text-7xl uppercase leading-none mb-6">
@@ -102,7 +102,7 @@ export default function CertificationsSection() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="md:w-1/2 md:mt-12"
           >
-            <p className="font-tech text-sm md:text-base text-white/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6">
+            <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6">
               Every certificate here was earned to solve a real problem — not just to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
             </p>
           </motion.div>
@@ -120,7 +120,7 @@ export default function CertificationsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative flex-1 flex flex-col justify-between p-8 md:p-10 rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
+                className={`group relative flex-1 flex flex-col justify-between p-8 md:p-10 rounded-2xl bg-foreground/5 dark:bg-background border border-foreground/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
               >
                 {/* Subtle background glow on hover */}
                 <div className={`absolute top-0 right-0 w-64 h-64 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[100px] transition-opacity duration-700 pointer-events-none`} />
@@ -129,13 +129,13 @@ export default function CertificationsSection() {
                   {/* Issuer Badge */}
                   <div className="flex items-center gap-3 mb-8">
                     <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
-                    <span className="font-tech text-xs md:text-sm uppercase tracking-widest text-white/50">
+                    <span className="font-tech text-xs md:text-sm uppercase tracking-widest text-foreground/50">
                       {cert.issuer}
                     </span>
                   </div>
 
                   {/* Main Title */}
-                  <h3 className="font-lando text-3xl md:text-4xl text-white mb-10 group-hover:text-white transition-colors">
+                  <h3 className="font-lando text-3xl md:text-4xl text-foreground mb-10 group-hover:text-foreground transition-colors">
                     {cert.title}
                   </h3>
 
@@ -150,12 +150,12 @@ export default function CertificationsSection() {
                       >
                         <div className="flex items-start gap-3">
                           <span className={`text-lg mt-0.5 ${cert.textColor} group-hover/course:scale-125 transition-transform`}>✦</span>
-                          <span className="font-tech text-white/90 text-sm md:text-base uppercase tracking-wide group-hover/course:text-[#DFFF00] transition-colors flex items-center gap-3">
+                          <span className="font-tech text-foreground/90 text-sm md:text-base uppercase tracking-wide group-hover/course:text-racing-red transition-colors flex items-center gap-3">
                             {course.name}
                             <ExternalLink className="w-3 h-3 opacity-0 group-hover/course:opacity-100 transition-opacity" />
                           </span>
                         </div>
-                        <p className="font-tech text-xs text-white/40 ml-7 italic">
+                        <p className="font-tech text-xs text-foreground/40 ml-7 italic">
                           "{course.desc}"
                         </p>
                       </a>
@@ -164,11 +164,11 @@ export default function CertificationsSection() {
                 </div>
 
                 {/* Footer: Date & Verify */}
-                <div className="flex items-center justify-between pt-6 border-t border-white/10 mt-auto">
-                  <span className="font-tech text-xs uppercase tracking-widest text-white/40">
+                <div className="flex items-center justify-between pt-6 border-t border-foreground/10 mt-auto">
+                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/40">
                     {cert.date}
                   </span>
-                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60">
+                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-foreground/60">
                     <span>Click individual courses to verify</span>
                   </div>
                 </div>
@@ -187,7 +187,7 @@ export default function CertificationsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 * (index + 1) }}
-                className={`group relative flex-1 flex flex-col justify-between p-8 rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
+                className={`group relative flex-1 flex flex-col justify-between p-8 rounded-2xl bg-foreground/5 dark:bg-background border border-foreground/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
               >
                 {/* Subtle background glow on hover */}
                 <div className={`absolute top-0 right-0 w-48 h-48 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[80px] transition-opacity duration-700`} />
@@ -196,28 +196,28 @@ export default function CertificationsSection() {
                   {/* Issuer Badge */}
                   <div className="flex items-center gap-3 mb-6">
                     <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
-                    <span className="font-tech text-xs uppercase tracking-widest text-white/50">
+                    <span className="font-tech text-xs uppercase tracking-widest text-foreground/50">
                       {cert.issuer}
                     </span>
                   </div>
 
                   {/* Main Title */}
-                  <h3 className="font-lando text-2xl md:text-3xl text-white mb-4">
+                  <h3 className="font-lando text-2xl md:text-3xl text-foreground mb-4">
                     {cert.title}
                   </h3>
 
                   {/* Description Quote */}
-                  <p className="font-tech text-xs text-white/40 italic mb-8 relative z-10">
+                  <p className="font-tech text-xs text-foreground/40 italic mb-8 relative z-10">
                     "{cert.courses[0].desc}"
                   </p>
                 </div>
 
                 {/* Footer: Date & Verify */}
-                <div className="flex items-center justify-between pt-5 border-t border-white/10 mt-auto">
-                  <span className="font-tech text-xs uppercase tracking-widest text-white/40">
+                <div className="flex items-center justify-between pt-5 border-t border-foreground/10 mt-auto">
+                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/40">
                     {cert.date}
                   </span>
-                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-foreground/60 group-hover:text-foreground transition-colors">
                     <span>Verify</span>
                     <ExternalLink className="w-3 h-3" />
                   </div>

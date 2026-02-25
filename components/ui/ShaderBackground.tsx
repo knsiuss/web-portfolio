@@ -1,25 +1,25 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { extend } from '@react-three/fiber';
+import { useTheme } from 'next-themes';
 
 // 1. Create the Custom Shader Material
 const TopographicMaterial = shaderMaterial(
   {
     u_time: 0,
     u_resolution: new THREE.Vector2(),
-    u_colorBg: new THREE.Color('#0a110a'), // Dark olive/racing green
-    u_colorLine: new THREE.Color('#dfff00') // Neon acid green
+    u_colorBg: new THREE.Color('#0a110a'),
+    u_colorLine: new THREE.Color('#dfff00')
   },
   // Vertex Shader
   `
     varying vec2 vUv;
     void main() {
       vUv = uv;
-      // Bypass camera projection matrix so a 2x2 plane perfectly covers the entire screen
       gl_Position = vec4(position.xy, 0.0, 1.0);
     }
   `,
@@ -31,7 +31,6 @@ const TopographicMaterial = shaderMaterial(
     uniform vec3 u_colorLine;
     varying vec2 vUv;
 
-    // Ashima's 2D Simplex Noise
     vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
     float snoise(vec2 v){
       const vec4 C = vec4(0.211324865405187, 0.366025403784439,
@@ -61,33 +60,20 @@ const TopographicMaterial = shaderMaterial(
     }
 
     void main() {
-      // Fix aspect ratio
       vec2 st = vUv;
       st.x *= u_resolution.x / u_resolution.y;
-      
-      // Zoom level - ULTRA LOW FREQUENCY (Macro scale)
-      vec2 pos = st * 0.8; 
-      // EXTREMELY SLOW MOVEMENT
-      float t = u_time * 0.02; 
+      vec2 pos = st * 0.8;
+      float t = u_time * 0.02;
 
-      // Domain warping for organic, flowing blobs instead of rigid noise
       vec2 warp = vec2(
         snoise(pos * 0.5 + vec2(t * 0.3, -t * 0.2)),
         snoise(pos * 0.5 + vec2(-t * 0.2, t * 0.3))
       );
 
-      // Generate base noise field
       float n = snoise(pos * 0.6 + warp * 0.8 - t * 0.1);
-
-      // Map noise to repeating concentric contour lines using fract
-      // MASSIVE SPACING: extremely low multiplier (e.g. 1.5 to 2.0)
-      float lines = fract(n * 2.0); 
-
-      // SMOOTH, SWEEPING CURVES / SUBTLE APPEARANCE
-      float thickness = 0.02; // Thin, anti-aliased lines
+      float lines = fract(n * 2.0);
+      float thickness = 0.02;
       float edge = smoothstep(0.5 - thickness, 0.5, lines) - smoothstep(0.5, 0.5 + thickness, lines);
-
-      // Blend softly with the background. Raised to 30% so it's actually visible on all monitors.
       vec3 finalColor = mix(u_colorBg, u_colorLine, edge * 0.3);
 
       gl_FragColor = vec4(finalColor, 1.0);
@@ -95,10 +81,8 @@ const TopographicMaterial = shaderMaterial(
   `
 );
 
-// 2. Extend R3F so we can use <topographicMaterial />
 extend({ TopographicMaterial });
 
-// Add TypeScript declaration for the custom material
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -107,22 +91,26 @@ declare global {
   }
 }
 
-// 3. Component that updates the uniform and renders the plane
-function ShaderPlane() {
+// Receives isDark so it can update the WebGL uniforms when theme changes
+function ShaderPlane({ isDark }: { isDark: boolean }) {
   const materialRef = useRef<any>(null);
 
-  // Track resolution so the shader maintains correct aspect ratio
   const resolution = useMemo(() => new THREE.Vector2(
     typeof window !== 'undefined' ? window.innerWidth : 1,
     typeof window !== 'undefined' ? window.innerHeight : 1
   ), []);
 
+  // Switch shader colors when theme changes
+  useEffect(() => {
+    if (materialRef.current) {
+      materialRef.current.u_colorBg = new THREE.Color(isDark ? '#0a110a' : '#e8f0e8');
+      materialRef.current.u_colorLine = new THREE.Color(isDark ? '#dfff00' : '#5a8a00');
+    }
+  }, [isDark]);
+
   useFrame((state) => {
     if (materialRef.current) {
-      // Slow down the time multiplier slightly for more regal, less frantic movement
       materialRef.current.u_time = state.clock.elapsedTime * 0.5;
-
-      // Update resolution in case window was resized
       if (typeof window !== 'undefined') {
         materialRef.current.u_resolution.set(window.innerWidth, window.innerHeight);
       }
@@ -131,25 +119,26 @@ function ShaderPlane() {
 
   return (
     <mesh>
-      {/* Plane that covers the entire camera view */}
       <planeGeometry args={[2, 2]} />
-      {/* @ts-ignore - React Three Fiber custom element typing */}
+      {/* @ts-ignore */}
       <topographicMaterial ref={materialRef} u_resolution={resolution} />
     </mesh>
   );
 }
 
-// 4. Main Exported Canvas Component
 export default function ShaderBackground() {
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme !== 'light';
+
   return (
-    <div className="absolute inset-0 z-0 w-full h-full pointer-events-none bg-[#0a110a]">
+    <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 1] }}
-        gl={{ antialias: false, alpha: false, powerPreference: "default" }} // Relaxed power preference
-        dpr={1} // CRITICAL FOR PERFORMANCE: Clamp pixel ratio to 1.
-        resize={{ scroll: false }} // Prevent unnecessary resizes on scroll
+        gl={{ antialias: false, alpha: false, powerPreference: "default" }}
+        dpr={1}
+        resize={{ scroll: false }}
       >
-        <ShaderPlane />
+        <ShaderPlane isDark={isDark} />
       </Canvas>
     </div>
   );
