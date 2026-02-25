@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedSignature from '@/components/ui/AnimatedSignature';
 
 interface LoadingScreenProps {
   onLoadingComplete: () => void;
@@ -11,7 +12,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 1500; // Reduced from 2500ms to 1500ms
+    const duration = 2500; // Increased to 2500ms to allow full drawing of the signature
     const interval = 16;
     const steps = duration / interval;
     let currentStep = 0;
@@ -41,15 +42,14 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
       {/* Main Content */}
       <div className="relative z-10 text-center">
-        {/* Logo */}
+        {/* Animated Signature Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mb-6"
+          transition={{ delay: 0.1, duration: 0.6 }}
+          className="mb-6 mx-auto w-64 md:w-96 h-32 md:h-48 flex items-center justify-center"
         >
-          <span className="font-lando text-7xl md:text-9xl text-white">K</span>
-          <span className="font-lando text-7xl md:text-9xl text-[#DFFF00]">B</span>
+          <AnimatedSignature />
         </motion.div>
 
         {/* Name */}
