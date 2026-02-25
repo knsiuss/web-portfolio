@@ -52,14 +52,14 @@ export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="contact" className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden">
-      {/* Background Graphic */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none mix-blend-screen">
-        <AnimatedCollab className="w-full max-w-[1400px] mx-auto h-auto opacity-75" />
+    <section id="contact" className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden z-0">
+      {/* Background Graphic - Lowest Layer */}
+      <div className="absolute inset-0 -z-20 flex items-center justify-center opacity-30 pointer-events-none mix-blend-screen">
+        <AnimatedCollab className="w-full max-w-[1400px] mx-auto h-auto opacity-50" />
       </div>
 
-      {/* Background Glow */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Background Glow - Above Graphic */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#DFFF00]/5 rounded-full blur-[150px]" />
       </div>
 
