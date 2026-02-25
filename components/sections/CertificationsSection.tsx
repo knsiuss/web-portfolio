@@ -60,127 +60,86 @@ export default function CertificationsSection() {
   return (
     <section id="certifications" className="relative bg-black py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
-        {/* Header */}
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 md:mb-24"
-        >
-          <span className="font-tech text-xs uppercase tracking-[0.3em] text-[#DFFF00] mb-4 block">
-            Continuous Learning
-          </span>
-          <h2 className="font-lando text-4xl md:text-6xl uppercase mb-4">
-            Official <span className="text-[#DFFF00]">Credentials</span>
-          </h2>
-          <p className="font-tech text-white/50 max-w-xl mx-auto">
-            Verified achievements from Stanford, Google, and IBM.
-          </p>
-        </motion.div>
+        {/* Header - Sleek & Compact */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 border-b border-white/10 pb-8">
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="font-tech text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#DFFF00] mb-3 block">
+              Continuous Learning
+            </span>
+            <h2 className="font-lando text-4xl md:text-5xl uppercase leading-none">
+              Certifications
+            </h2>
+          </motion.div>
+          <motion.div
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="md:text-right"
+          >
+            <p className="font-tech text-xs md:text-sm text-white/50 max-w-sm md:ml-auto">
+              Verified achievements from Stanford, Google, and IBM. Focus on ML optimization and deep learning algorithms.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Featured Certificate */}
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12 md:mb-16"
-        >
-          <div className="group relative w-full overflow-hidden rounded-2xl md:rounded-[2rem] border border-white/10 bg-[#0a0a0a] p-2 md:p-4 hover:border-[#DFFF00]/30 transition-colors">
-            {/* Image Wrapper */}
-            <div className="relative aspect-[1.414/1] w-full overflow-hidden rounded-xl bg-white/5">
-              <Image
-                src={certifications[0].image}
-                alt={certifications[0].title}
-                fill
-                className="object-cover transition-transform duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-              />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-
-              {/* Featured Badge */}
-              <div className="absolute top-4 left-4 md:top-6 md:left-6">
-                <span className={`font-tech text-xs uppercase px-3 py-1.5 ${certifications[0].badgeColor} text-white rounded-sm shadow-xl flex items-center gap-2`}>
-                  <Award className="w-4 h-4" />
-                  {certifications[0].badge} Featured
-                </span>
-              </div>
-
-              {/* Hover Button */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 ease-[0.16,1,0.3,1]">
-                <a
-                  href={certifications[0].link}
-                  download
-                  className="bg-[#DFFF00] text-black font-lando uppercase tracking-wider px-8 py-4 rounded-full flex items-center gap-3 shadow-[0_0_30px_rgba(223,255,0,0.3)] hover:scale-105 transition-transform"
-                >
-                  View Original <ExternalLink className="w-5 h-5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="mt-6 px-2 md:px-6 pb-4">
-              <h3 className="font-lando text-2xl md:text-4xl uppercase mb-2 group-hover:text-[#DFFF00] transition-colors">
-                {certifications[0].title}
-              </h3>
-              <p className="font-tech text-sm text-white/60">
-                {certifications[0].org} <span className="mx-2 text-white/20">•</span> {certifications[0].date}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Certificate Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {certifications.slice(1).map((cert, index) => (
-            <motion.div
+        {/* Certificate Grid - Compact Lando Style */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {certifications.map((cert, index) => (
+            <motion.a
+              href={cert.link}
+              download
               key={cert.title}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 100 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-              className="group relative rounded-xl md:rounded-2xl border border-white/10 bg-[#0a0a0a] p-2 hover:border-[#DFFF00]/30 transition-colors"
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: index * 0.05 }}
+              className="group block relative"
             >
-              <div className="relative aspect-[1.414/1] w-full overflow-hidden rounded-lg bg-white/5">
+              {/* Image Card */}
+              <div className="relative aspect-[1.414/1] w-full overflow-hidden rounded-md border border-white/10 bg-[#0a0a0a] transition-all duration-500 ease-[0.16,1,0.3,1] group-hover:border-[#DFFF00]/50 group-hover:shadow-[0_0_20px_rgba(223,255,0,0.1)]">
                 <Image
                   src={cert.image}
                   alt={cert.title}
                   fill
-                  className="object-cover grayscale-[50%] group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1] group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover grayscale-[80%] opacity-60 transition-all duration-700 ease-[0.16,1,0.3,1] group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500" />
 
-                {/* Badge */}
-                <div className="absolute top-3 left-3">
-                  <span className={`font-tech text-[10px] uppercase px-2 py-1 ${cert.badgeColor} text-white rounded-sm`}>
-                    {cert.badge}
-                  </span>
+                {/* Overlay / vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 group-hover:opacity-0 transition-opacity duration-500 ease-[0.16,1,0.3,1]" />
+
+                {/* Hover UI */}
+                <div className="absolute top-2 right-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[0.16,1,0.3,1]">
+                  <div className="w-6 h-6 rounded bg-[#DFFF00] text-black flex items-center justify-center shadow-lg hover:bg-white transition-colors">
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
                 </div>
 
-                {/* Hover Action */}
-                <div className="absolute bottom-4 right-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-[0.16,1,0.3,1]">
-                  <a
-                    href={cert.link}
-                    download
-                    className="w-10 h-10 bg-[#DFFF00] text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-lg"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                {/* Badge inside image (bottom left) */}
+                <div className="absolute bottom-2 left-2 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                  <span className={`w-1.5 h-1.5 rounded-full inline-block ${cert.badgeColor} shadow-[0_0_5px_currentColor]`} />
                 </div>
               </div>
 
-              <div className="mt-4 px-2 pb-2">
-                <h3 className="font-lando text-lg md:text-xl uppercase mb-1 group-hover:text-white text-white/90 transition-colors">
+              {/* Text underneath */}
+              <div className="mt-3 px-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className={`w-1.5 h-1.5 rounded-full ${cert.badgeColor} hidden group-hover:inline-block transition-all`} />
+                  <p className="font-tech text-[8px] md:text-[9px] text-white/40 uppercase tracking-[0.2em] truncate">
+                    {cert.org.split('•')[0].trim()}
+                  </p>
+                </div>
+                <h3 className="font-lando text-sm md:text-base text-white/90 group-hover:text-[#DFFF00] transition-colors leading-tight uppercase tracking-wide truncate">
                   {cert.title}
                 </h3>
-                <p className="font-tech text-xs text-white/50">
-                  {cert.org}
-                </p>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
