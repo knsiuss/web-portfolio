@@ -81,7 +81,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
             <span className="w-8 md:w-16 h-[1.5px] bg-white" />
           </div>
           <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-white/60">
-            Universitas Pamulang • Tangerang, Indonesia
+            Jakarta, Indonesia • Machine Learning Engineer
           </span>
         </motion.div>
       </motion.div>

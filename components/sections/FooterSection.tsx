@@ -27,8 +27,7 @@ export default function FooterSection() {
               kanisius@novar.me
             </a>
 
-            <p className="font-tech text-xs md:text-sm opacity-60">Tangerang, Indonesia</p>
-            <p className="font-tech text-xs md:text-sm opacity-60">Universitas Pamulang</p>
+            <p className="font-tech text-xs md:text-sm opacity-60">Jakarta, Indonesia</p>
           </div>
 
           {/* Links */}

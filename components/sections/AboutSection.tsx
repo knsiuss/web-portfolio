@@ -1,30 +1,35 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Database, Brain, Users, Trophy, Rocket, ExternalLink } from 'lucide-react';
+import { Code2, Database, Brain, Users, Trophy, Rocket, ExternalLink, LineChart, Github, Bot } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Image from 'next/image';
 
 const expertise = [
   {
-    icon: <Brain className="w-5 h-5" />,
+    icon: <Bot className="w-6 h-6" />,
     title: "AI Integration",
     desc: "Claude AI, OpenAI Codex, LLM Prompting",
   },
   {
-    icon: <Database className="w-5 h-5" />,
+    icon: <LineChart className="w-6 h-6" />,
+    title: "Data Research",
+    desc: "First Principles Thinking, Statistical Modeling",
+  },
+  {
+    icon: <Database className="w-6 h-6" />,
     title: "MLOps",
-    desc: "Docker, CI/CD, Model Deployment, API Development",
+    desc: "Docker, CI/CD, Model Deployment",
   },
   {
-    icon: <Code2 className="w-5 h-5" />,
+    icon: <Github className="w-6 h-6" />,
     title: "Data Engineering",
-    desc: "ETL Pipelines, Web Scraping, FastF1 API, Feature Engineering",
+    desc: "FastF1 API, Version Control, Pipelines",
   },
   {
-    icon: <Users className="w-5 h-5" />,
+    icon: <Users className="w-6 h-6" />,
     title: "Leadership",
-    desc: "Google Student Ambassador, AI Workshops, Public Speaking",
+    desc: "Google Student Ambassador, Tech Overviews",
   },
 ];
 
@@ -79,9 +84,10 @@ export default function AboutSection() {
                 accessible through hands-on learning.
               </p>
               <p>
-                My approach combines rigorous engineering with practical application—whether
-                that&apos;s implementing algorithms from scratch (Stanford CS229) or deploying
-                models that process real-time telemetry data.
+                My approach combines rigorous data research analysis with{" "}
+                <span className="text-[#DFFF00]">First Principles Thinking</span>{" "}
+                inspired by Elon Musk—stripping complex problems down to their fundamental truths
+                before building scalable ML architectures.
               </p>
             </div>
 
@@ -154,42 +160,32 @@ export default function AboutSection() {
           >
             <h3 className="font-lando text-2xl uppercase mb-6">Core Expertise</h3>
 
-            {expertise.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={prefersReducedMotion ? {} : {
-                  opacity: 0,
-                  y: 60,
-                  clipPath: "inset(100% 0 0 0)"
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  clipPath: "inset(0% 0 0 0)"
-                }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 + index * 0.15 }}
-                style={{ perspective: '800px' }}
-              >
+            {/* Restored Box Expertise List - Matching Screenshot Reference */}
+            <div className="flex flex-col space-y-4">
+              {expertise.map((item, index) => (
                 <motion.div
-                  whileHover={prefersReducedMotion ? {} : { y: -5, scale: 1.01 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className="group bg-[#111] border border-white/10 rounded-xl p-5 shadow-lg hover:border-[#DFFF00]/50 hover:shadow-[0_10px_30px_rgba(223,255,0,0.15)] transition-all"
+                  key={item.title}
+                  initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 + (index * 0.1) }}
+                  whileHover={prefersReducedMotion ? {} : { y: -2, scale: 1.01 }}
+                  className="flex items-center gap-4 bg-[#0a0a0a] border border-[#DFFF00]/20 hover:border-[#DFFF00]/80 rounded-xl p-4 transition-all duration-300 shadow-[0_0_15px_rgba(223,255,0,0.05)] hover:shadow-[0_0_20px_rgba(223,255,0,0.15)] cursor-default"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-[#DFFF00]/10 rounded-lg flex items-center justify-center text-[#DFFF00] group-hover:bg-[#DFFF00] group-hover:text-black transition-colors">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-lando text-lg uppercase mb-1 group-hover:text-[#DFFF00] transition-colors">
-                        {item.title}
-                      </h4>
-                      <p className="font-tech text-sm text-white/50">{item.desc}</p>
-                    </div>
+                  <div className="w-14 h-14 shrink-0 rounded-lg bg-[#DFFF00] flex items-center justify-center text-black">
+                    {item.icon}
+                  </div>
+                  <div className="overflow-hidden">
+                    <h4 className="font-lando text-xl md:text-2xl text-[#DFFF00] uppercase italic tracking-wide leading-none mb-1 shadow-black drop-shadow-md">
+                      {item.title}
+                    </h4>
+                    <p className="font-tech text-xs text-white/50">
+                      {item.desc}
+                    </p>
                   </div>
                 </motion.div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
 
             {/* Availability Badge */}
             <motion.div

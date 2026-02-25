@@ -21,7 +21,7 @@ const timeline = [
       },
       {
         title: "Joined Data Science Club",
-        desc: "Universitas Pamulang - started community learning",
+        desc: "Jakarta, Indonesia - started community learning",
         highlight: false,
       },
     ],

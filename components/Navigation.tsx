@@ -13,7 +13,7 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
     <nav className="fixed top-0 left-0 w-full px-4 sm:px-6 md:px-12 py-4 md:py-6 z-50 flex justify-between items-start pointer-events-none">
       {/* LEFT: Logo */}
       <motion.div
-        className="flex flex-col leading-[0.85] pointer-events-auto"
+        className="flex flex-col sm:flex-row sm:gap-2 leading-[0.85] pointer-events-auto"
         data-cursor
         data-cursor-text="Home"
       >
@@ -21,7 +21,7 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-lando text-xl sm:text-2xl md:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
+          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
         >
           <StaggerText text="KANISIUS" delay={0.2} />
         </motion.h1>
@@ -29,7 +29,7 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          className="font-lando text-xl sm:text-2xl md:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
+          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
         >
           <StaggerText text="BAGASKARA" delay={0.3} />
         </motion.h1>

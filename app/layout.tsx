@@ -97,14 +97,10 @@ const structuredData = {
       telephone: "+6285183268643",
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Tangerang",
+        addressLocality: "Jakarta",
         addressCountry: "Indonesia",
       },
       alumniOf: [
-        {
-          "@type": "EducationalOrganization",
-          name: "Universitas Pamulang",
-        },
         {
           "@type": "EducationalOrganization",
           name: "Stanford University",
@@ -170,8 +166,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang="en"
       className={`${anton.variable} ${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
     >
       <head>

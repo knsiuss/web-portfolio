@@ -66,7 +66,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
             Machine Learning Engineer (Student)
           </p>
           <p className="font-tech text-[10px] uppercase tracking-wider text-white/50 mt-1">
-            Universitas Pamulang
+            Jakarta, Indonesia
           </p>
         </motion.div>
 
