@@ -107,49 +107,72 @@ export default function CertificationsSection() {
           </motion.div>
         </div>
 
-        {/* Sleek Lando Table List */}
-        <div className="w-full max-w-5xl flex flex-col pt-8">
-          {/* Table Header */}
-          <div className="border-b border-white/20 pb-4 mb-4 justify-between text-[10px] md:text-xs font-tech text-white/40 uppercase tracking-widest hidden md:flex">
-            <span className="w-1/3 pl-2">Organization</span>
-            <span className="w-1/2">Certification Detail</span>
-            <span className="w-1/6 text-right pr-2">Date</span>
-          </div>
-
+        {/* Certificate Grid - Compact Lando Style */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
           {certifications.map((cert, index) => (
             <motion.a
               href={cert.link}
               download
               key={cert.title}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              // Lando style clip-path reveal wrapper
+              initial={prefersReducedMotion ? {} : { opacity: 0 }}
+              whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-              className="group flex flex-col md:flex-row items-start md:items-center py-6 md:py-8 border-b border-white/10 hover:border-[#DFFF00]/50 transition-colors relative"
+              transition={{ duration: 0.1 }}
+              className="group block relative"
             >
-              {/* Organization and Indicator */}
-              <div className="w-full md:w-1/3 flex items-center gap-4 mb-3 md:mb-0 pl-0 md:pl-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E50000] shadow-[0_0_8px_rgba(229,0,0,0.6)] group-hover:bg-[#DFFF00] group-hover:shadow-[0_0_12px_rgba(223,255,0,0.6)] transition-all duration-300" />
-                <p className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#888888] group-hover:text-white transition-colors duration-300">
-                  {cert.org.split('•')[0].trim()}
-                </p>
-              </div>
+              {/* Image Card with Clip-Path Animation */}
+              <motion.div
+                initial={prefersReducedMotion ? {} : { clipPath: "inset(100% 0 0 0)" }}
+                whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
+                className="relative aspect-[1.414/1] w-full overflow-hidden rounded-md border border-white/10 bg-[#0a0a0a] group-hover:border-[#DFFF00]/50 transition-colors duration-500 ease-[0.16,1,0.3,1]"
+              >
+                <div className="w-full h-full transform transition-transform duration-[1.5s] ease-[0.16,1,0.3,1] group-hover:scale-110">
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    fill
+                    className="object-cover grayscale-[80%] opacity-50 transition-all duration-700 ease-[0.16,1,0.3,1] group-hover:grayscale-0 group-hover:opacity-100"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  />
+                </div>
 
-              {/* Title */}
-              <div className="w-full md:w-1/2 relative z-10 pr-4">
-                <h3 className="font-lando text-xl md:text-2xl lg:text-3xl text-white/90 group-hover:text-[#DFFF00] uppercase tracking-wide leading-none transition-all duration-500 ease-[0.16,1,0.3,1] transform group-hover:translate-x-3">
+                {/* Overlay / vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent group-hover:opacity-0 transition-opacity duration-500 ease-[0.16,1,0.3,1]" />
+
+                {/* Hover UI - Magnetic Feel */}
+                <div className="absolute top-2 right-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[0.16,1,0.3,1]">
+                  <div className="w-6 h-6 rounded bg-[#DFFF00] text-black flex items-center justify-center shadow-[0_0_15px_rgba(223,255,0,0.4)] hover:bg-white transition-colors">
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
+                </div>
+
+                {/* Badge inside image (bottom left) */}
+                <div className="absolute bottom-2 left-2 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                  <span className={`w-1.5 h-1.5 rounded-full inline-block ${cert.badgeColor} shadow-[0_0_5px_currentColor]`} />
+                </div>
+              </motion.div>
+
+              {/* Text underneath - Reveal sequence */}
+              <motion.div
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 + (index * 0.1) }}
+                className="mt-3 px-1"
+              >
+                <div className="flex items-center gap-2 mb-1">
+                  <span className={`w-1.5 h-1.5 rounded-full ${cert.badgeColor} hidden group-hover:inline-block transition-all`} />
+                  <p className="font-tech text-xs md:text-[10px] text-white/40 uppercase tracking-[0.2em] truncate">
+                    {cert.org.split('•')[0].trim()}
+                  </p>
+                </div>
+                <h3 className="font-lando text-sm md:text-base text-white/90 group-hover:text-[#DFFF00] transition-colors leading-tight uppercase tracking-wide truncate">
                   {cert.title}
                 </h3>
-              </div>
-
-              {/* Arrow and Date */}
-              <div className="w-full md:w-1/6 flex justify-between md:justify-end items-center mt-4 md:mt-0 text-white/40 group-hover:text-white transition-colors pr-0 md:pr-2">
-                <span className="font-tech text-[10px] uppercase tracking-widest block md:hidden">Date</span>
-                <div className="flex items-center gap-4">
-                  <span className="font-tech text-xs tracking-[0.2em]">{cert.date.split(' ')[1] || cert.date}</span>
-                  <ExternalLink className="w-3.5 h-3.5 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 ease-out" />
-                </div>
-              </div>
+              </motion.div>
             </motion.a>
           ))}
         </div>
