@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, Linkedin, Github, Twitter, MessageCircle, Calendar, Download, ArrowUpRight } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import MagneticButton from '@/components/ui/MagneticButton';
+import AnimatedCollab from '@/components/ui/AnimatedCollab';
 
 const contactMethods = [
   {
@@ -52,8 +53,13 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none mix-blend-screen">
+        <AnimatedCollab className="w-full max-w-[1400px] mx-auto h-auto opacity-75" />
+      </div>
+
+      {/* Background Glow */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#DFFF00]/5 rounded-full blur-[150px]" />
       </div>
 
