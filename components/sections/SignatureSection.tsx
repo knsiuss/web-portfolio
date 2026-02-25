@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import AnimatedSignature from "@/components/ui/AnimatedSignature";
+import AnimatedCollab from "@/components/ui/AnimatedCollab";
 import useReducedMotion from "@/hooks/useReducedMotion";
 
 export default function SignatureSection() {
@@ -72,6 +73,11 @@ export default function SignatureSection() {
 
                     <AnimatedSignature />
                 </div>
+            </div>
+
+            {/* Let's Collaborate SVG Graphic - Moved below signature, before Contact Section */}
+            <div className="relative w-full max-w-[1400px] mx-auto mt-20 md:mt-32 z-0 opacity-60 mix-blend-screen pointer-events-none">
+                <AnimatedCollab className="w-full h-auto" />
             </div>
         </section>
     );
