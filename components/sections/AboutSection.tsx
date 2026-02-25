@@ -160,28 +160,30 @@ export default function AboutSection() {
           >
             <h3 className="font-lando text-2xl uppercase mb-6">Core Expertise</h3>
 
-            {/* Restored Box Expertise List - Matching Screenshot Reference */}
-            <div className="flex flex-col space-y-4">
+            {/* Minimalist Expertise List - Refined First Principles Style */}
+            <div className="flex flex-col space-y-8 md:space-y-12">
               {expertise.map((item, index) => (
                 <motion.div
                   key={item.title}
                   initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 + (index * 0.1) }}
-                  whileHover={prefersReducedMotion ? {} : { y: -2, scale: 1.01 }}
-                  className="flex items-center gap-4 bg-[#0a0a0a] border border-[#DFFF00]/20 hover:border-[#DFFF00]/80 rounded-xl p-4 transition-all duration-300 shadow-[0_0_15px_rgba(223,255,0,0.05)] hover:shadow-[0_0_20px_rgba(223,255,0,0.15)] cursor-default"
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + (index * 0.1) }}
+                  className="group relative cursor-default"
                 >
-                  <div className="w-14 h-14 shrink-0 rounded-lg bg-[#DFFF00] flex items-center justify-center text-black">
-                    {item.icon}
-                  </div>
-                  <div className="overflow-hidden">
-                    <h4 className="font-lando text-xl md:text-2xl text-[#DFFF00] uppercase italic tracking-wide leading-none mb-1 shadow-black drop-shadow-md">
-                      {item.title}
-                    </h4>
-                    <p className="font-tech text-xs text-white/50">
+                  {/* Subtle Top Metadata */}
+                  <div className="flex items-center gap-3 mb-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E50000] group-hover:bg-[#DFFF00] transition-colors duration-300 shadow-[0_0_8px_rgba(229,0,0,0.5)] group-hover:shadow-[0_0_12px_rgba(223,255,0,0.5)]" />
+                    <p className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-[#888888] group-hover:text-white transition-colors duration-300">
                       {item.desc}
                     </p>
+                  </div>
+
+                  {/* Main Title - Italicized Lando Style */}
+                  <div className="overflow-hidden">
+                    <h4 className="font-lando text-3xl md:text-5xl text-[#DFFF00] uppercase leading-[0.85] tracking-tight italic transform group-hover:translate-x-4 transition-transform duration-700 ease-[0.16,1,0.3,1] opacity-90 group-hover:opacity-100">
+                      {item.title}
+                    </h4>
                   </div>
                 </motion.div>
               ))}

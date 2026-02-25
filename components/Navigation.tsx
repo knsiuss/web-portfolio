@@ -25,31 +25,6 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
         >
           <StaggerText text="KANISIUS" delay={0.2} />
         </motion.h1>
-        <motion.h1
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-[#DFFF00] transition-colors hover-glitch"
-        >
-          <StaggerText text="BAGASKARA" delay={0.3} />
-        </motion.h1>
-      </motion.div>
-
-      {/* CENTER: K Logo - Hidden on small mobile */}
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.5, type: 'spring' }}
-        className="absolute left-1/2 -translate-x-1/2 top-4 md:top-8 hidden sm:block pointer-events-auto"
-        data-cursor
-        data-cursor-text="Logo"
-      >
-        <motion.span
-          className="font-lando text-xl md:text-3xl italic tracking-tighter border-2 border-white/30 p-0.5 md:p-1 px-2 md:px-3 skew-x-[-10deg] inline-block hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-black hover:shadow-[0_0_15px_rgba(223,255,0,0.8)] transition-all"
-          whileHover={{ scale: 1.1, rotate: 5 }}
-        >
-          K
-        </motion.span>
       </motion.div>
 
       {/* RIGHT: Contact & Menu */}
