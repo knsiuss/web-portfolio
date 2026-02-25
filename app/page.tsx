@@ -8,6 +8,7 @@ import useLenis from '@/hooks/useLenis';
 
 // UI Components
 import LoadingScreen from '@/components/ui/LoadingScreen';
+import ShaderBackground from '@/components/ui/ShaderBackground';
 
 // Feature Components
 import EasterEgg from '@/components/EasterEgg';
@@ -27,6 +28,7 @@ import StorySection from '@/components/sections/StorySection';
 import ContactSection from '@/components/sections/ContactSection';
 import CurrentlySection from '@/components/sections/CurrentlySection';
 import FooterSection from '@/components/sections/FooterSection';
+import SignatureSection from '@/components/sections/SignatureSection';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -83,17 +85,11 @@ export default function Home() {
       >
         {/* CINEMATIC VIDEO BACKGROUND LAYER */}
         <div className="fixed inset-0 z-0 overflow-hidden bg-[#050505]">
-          {/* Animated Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#050505] via-[#111] to-[#050505] animate-gradient-shift" />
+          {/* Math & Physics WebGL Shader Background (Isolines) */}
+          <ShaderBackground />
 
-          {/* Static Carbon Fiber Pattern - Optimized for Performance with Parallax */}
-          <motion.div
-            className="absolute inset-[-20%] bg-carbon opacity-20"
-            style={{ y: bgY }}
-          />
-
-          {/* Tech Grid Overlay */}
-          <div className="absolute inset-0 bg-grid-tech opacity-10 z-0 pointer-events-none" />
+          {/* Tech Grid Overlay - Made extremely faint so it doesn't overpower the shader */}
+          <div className="absolute inset-0 bg-grid-tech opacity-[0.05] z-0 pointer-events-none" />
 
           {/* Subtle Static Light Effects with Parallax */}
           <motion.div
@@ -146,6 +142,9 @@ export default function Home() {
 
           {/* Contact Section */}
           <ContactSection />
+
+          {/* Signature Animation Sector */}
+          <SignatureSection />
 
           {/* Currently Section */}
           <CurrentlySection />
