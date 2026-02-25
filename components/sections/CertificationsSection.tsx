@@ -5,52 +5,65 @@ import { ExternalLink, Award } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Image from 'next/image';
 
-const certifications = [
+const certificates = [
   {
+    issuer: "Stanford University",
     title: "Machine Learning Specialization",
-    org: "Stanford University • DeepLearning.AI",
-    date: "January 2026",
-    badge: "Stanford",
-    badgeColor: "bg-[#8C1515]",
-    image: "/assets/certificates/previews/stanford-supervised-learning-2026.jpg",
+    color: "bg-[#8C1515]", // Stanford Red
+    textColor: "text-[#8C1515]",
+    borderColor: "group-hover:border-[#8C1515]/50",
+    glow: "group-hover:shadow-[0_0_30px_rgba(140,21,21,0.15)]",
+    date: "Jan 2026",
     link: "/assets/certificates/stanford-supervised-learning-2026.pdf",
-    featured: true,
+    isLarge: true,
+    courses: [
+      {
+        name: "Supervised Learning",
+        desc: "The math behind the magic — regression to neural nets",
+      },
+      {
+        name: "Advanced Learning Algorithms",
+        desc: "Deep dive into neural networks & decision trees",
+      },
+      {
+        name: "Unsupervised Learning",
+        desc: "Clustering, anomaly detection, and recommender systems",
+      }
+    ]
   },
   {
-    title: "Advanced Learning Algorithms",
-    org: "Stanford University",
-    date: "January 2026",
-    badge: "Stanford",
-    badgeColor: "bg-[#8C1515]",
-    image: "/assets/certificates/previews/stanford-advanced-algorithms-2026.jpg",
-    link: "/assets/certificates/stanford-advanced-algorithms-2026.pdf",
-  },
-  {
-    title: "Unsupervised Learning",
-    org: "Stanford University",
-    date: "January 2026",
-    badge: "Stanford",
-    badgeColor: "bg-[#8C1515]",
-    image: "/assets/certificates/previews/stanford-unsupervised-learning-2026.jpg",
-    link: "/assets/certificates/stanford-unsupervised-learning-2026.pdf",
-  },
-  {
+    issuer: "IBM",
     title: "Python for Data Science",
-    org: "IBM • Coursera",
-    date: "August 2025",
-    badge: "IBM",
-    badgeColor: "bg-[#DFFF00]",
-    image: "/assets/certificates/previews/ibm-python-data-science-2025.jpg",
+    color: "bg-[#0530AD]", // IBM Blue
+    textColor: "text-[#0530AD]",
+    borderColor: "group-hover:border-[#0530AD]/50",
+    glow: "group-hover:shadow-[0_0_30px_rgba(5,48,173,0.15)]",
+    date: "Aug 2025",
     link: "/assets/certificates/ibm-python-data-science-2025.pdf",
+    isLarge: false,
+    courses: [
+      {
+        name: "", // Not needed for small card, but we use desc
+        desc: "The foundation. Where it all started.",
+      }
+    ]
   },
   {
+    issuer: "Google for Education",
     title: "Gemini Certified Educator",
-    org: "Google for Education",
-    date: "September 2025",
-    badge: "Google",
-    badgeColor: "bg-[#4285F4]",
-    image: "/assets/certificates/previews/google-gemini-educator-2025.jpg",
+    color: "bg-[#4285F4]", // Google Blue
+    textColor: "text-[#4285F4]",
+    borderColor: "group-hover:border-[#4285F4]/50",
+    glow: "group-hover:shadow-[0_0_30px_rgba(66,133,244,0.15)]",
+    date: "Sep 2025",
     link: "/assets/certificates/google-gemini-educator-2025.pdf",
+    isLarge: false,
+    courses: [
+      {
+        name: "",
+        desc: "Bridging AI tools with real teaching impact",
+      }
+    ]
   }
 ];
 
@@ -59,96 +72,152 @@ export default function CertificationsSection() {
 
   return (
     <section id="certifications" className="relative bg-black py-20 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
-        {/* Header - Sleek & Compact */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16 border-b border-white/10 pb-8">
+      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+        {/* Header - Storytelling */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, x: -50 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="md:w-1/2"
           >
-            <span className="font-tech text-[10px] md:text-xs uppercase tracking-[0.4em] text-[#DFFF00] mb-3 block">
+            <span className="font-tech text-xs uppercase tracking-[0.4em] text-[#DFFF00] mb-4 block">
               Continuous Learning
             </span>
-            <div className="overflow-hidden">
-              <motion.h2
-                className="font-lando text-4xl md:text-5xl uppercase leading-none flex"
-              >
-                {"Certifications".split('').map((char, index) => (
-                  <motion.span
-                    key={index}
-                    initial={{ y: '120%', opacity: 0 }}
-                    whileInView={{ y: '0%', opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.8,
-                      ease: [0.16, 1, 0.3, 1],
-                      delay: index * 0.04
-                    }}
-                    className="inline-block"
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </motion.h2>
-            </div>
+            <h2 className="font-lando text-4xl md:text-5xl lg:text-7xl uppercase leading-none mb-6">
+              Certifications
+            </h2>
           </motion.div>
+
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, x: 50 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="md:text-right"
+            className="md:w-1/2 md:mt-12"
           >
-            <p className="font-tech text-xs md:text-sm text-white/50 max-w-sm md:ml-auto">
-              Verified achievements from Stanford, Google, and IBM. Focus on ML optimization and deep learning algorithms.
+            <p className="font-tech text-sm md:text-base text-white/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6">
+              Every certificate here was earned to solve a real problem — not just to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
             </p>
           </motion.div>
         </div>
 
-        {/* Certificate List - Minimal First Principles Lando Style */}
-        <div className="flex flex-col space-y-12 md:space-y-16 max-w-5xl w-full">
-          {certifications.map((cert, index) => (
-            <motion.div
-              key={cert.title}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: index * 0.1 }}
-            >
-              <a
+        {/* 2-Column Card Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+          {/* Left Column: Stanford (Large) */}
+          <div className="lg:col-span-7 flex flex-col h-full">
+            {certificates.filter(c => c.isLarge).map((cert, index) => (
+              <motion.a
                 href={cert.link}
                 download
-                className="group block relative"
+                key={cert.title}
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className={`group relative flex-1 flex flex-col justify-between p-8 md:p-10 rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
               >
-                {/* Org & Dot */}
-                <div className="flex items-center gap-4 mb-2 md:mb-4">
-                  <span className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-[#E50000] group-hover:bg-[#DFFF00] transition-colors duration-300 shadow-[0_0_10px_rgba(229,0,0,0.4)] group-hover:shadow-[0_0_15px_rgba(223,255,0,0.6)]" />
-                  <p className="font-tech text-xs md:text-sm uppercase tracking-[0.2em] md:tracking-[0.3em] text-[#888888] group-hover:text-white transition-colors duration-300">
-                    {cert.org}
+                {/* Subtle background glow on hover */}
+                <div className={`absolute top-0 right-0 w-64 h-64 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[100px] transition-opacity duration-700`} />
+
+                <div>
+                  {/* Issuer Badge */}
+                  <div className="flex items-center gap-3 mb-8">
+                    <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
+                    <span className="font-tech text-xs md:text-sm uppercase tracking-widest text-white/50">
+                      {cert.issuer}
+                    </span>
+                  </div>
+
+                  {/* Main Title */}
+                  <h3 className="font-lando text-3xl md:text-4xl text-white mb-10 group-hover:text-white transition-colors">
+                    {cert.title}
+                  </h3>
+
+                  {/* Courses List */}
+                  <div className="space-y-6 mb-12 relative z-10">
+                    {cert.courses.map((course) => (
+                      <div key={course.name} className="flex flex-col gap-1">
+                        <div className="flex items-start gap-3">
+                          <span className={`text-lg mt-0.5 ${cert.textColor}`}>✦</span>
+                          <span className="font-tech text-white/90 text-sm md:text-base uppercase tracking-wide">
+                            {course.name}
+                          </span>
+                        </div>
+                        <p className="font-tech text-xs text-white/40 ml-7 italic">
+                          "{course.desc}"
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer: Date & Verify */}
+                <div className="flex items-center justify-between pt-6 border-t border-white/10 mt-auto">
+                  <span className="font-tech text-xs uppercase tracking-widest text-white/40">
+                    {cert.date}
+                  </span>
+                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+                    <span>Verify</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Right Column: IBM & Google (Compact) */}
+          <div className="lg:col-span-5 flex flex-col gap-6">
+            {certificates.filter(c => !c.isLarge).map((cert, index) => (
+              <motion.a
+                href={cert.link}
+                download
+                key={cert.title}
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 * (index + 1) }}
+                className={`group relative flex-1 flex flex-col justify-between p-8 rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
+              >
+                {/* Subtle background glow on hover */}
+                <div className={`absolute top-0 right-0 w-48 h-48 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[80px] transition-opacity duration-700`} />
+
+                <div>
+                  {/* Issuer Badge */}
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
+                    <span className="font-tech text-xs uppercase tracking-widest text-white/50">
+                      {cert.issuer}
+                    </span>
+                  </div>
+
+                  {/* Main Title */}
+                  <h3 className="font-lando text-2xl md:text-3xl text-white mb-4">
+                    {cert.title}
+                  </h3>
+
+                  {/* Description Quote */}
+                  <p className="font-tech text-xs text-white/40 italic mb-8 relative z-10">
+                    "{cert.courses[0].desc}"
                   </p>
                 </div>
 
-                {/* Main Title - Italicized Racing Style */}
-                <div className="overflow-hidden">
-                  <h3 className="font-lando text-4xl md:text-5xl lg:text-7xl text-[#DFFF00] uppercase leading-[0.85] tracking-tight italic transform group-hover:translate-x-6 transition-transform duration-700 ease-[0.16,1,0.3,1] opacity-90 group-hover:opacity-100 drop-shadow-[0_0_15px_rgba(223,255,0,0)] group-hover:drop-shadow-[0_0_15px_rgba(223,255,0,0.3)]">
-                    {cert.title}
-                  </h3>
-                </div>
-
-                {/* Sub-info / Date (Optional subtle tech text) */}
-                <div className="mt-4 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out flex items-center gap-4">
-                  <span className="font-tech text-[10px] md:text-xs text-white/40 uppercase tracking-widest border border-white/10 px-3 py-1 rounded-full">
+                {/* Footer: Date & Verify */}
+                <div className="flex items-center justify-between pt-5 border-t border-white/10 mt-auto">
+                  <span className="font-tech text-xs uppercase tracking-widest text-white/40">
                     {cert.date}
                   </span>
-                  <span className="font-tech text-[10px] md:text-xs text-[#DFFF00]/60 uppercase tracking-widest flex items-center gap-2">
-                    <ExternalLink className="w-3 h-3" /> View Source
-                  </span>
+                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
+                    <span>Verify</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
                 </div>
-              </a>
-            </motion.div>
-          ))}
+              </motion.a>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
