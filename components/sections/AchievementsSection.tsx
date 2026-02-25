@@ -36,9 +36,9 @@ const achievements = [
 
 const stats = [
   { value: "8+", label: "Repositories", icon: <GitFork className="w-4 h-4" /> },
-  { value: "200+", label: "GSA Top Rank", icon: <Trophy className="w-4 h-4" /> },
-  { value: "35+", label: "Tech Stack", icon: <Star className="w-4 h-4" /> },
-  { value: "4", label: "Major Projects", icon: <Rocket className="w-4 h-4" /> },
+  { value: "Top 100", label: "GSA Rising Star", icon: <Trophy className="w-4 h-4" /> },
+  { value: "10+", label: "Tech Stack", icon: <Star className="w-4 h-4" /> },
+  { value: "3", label: "Major Projects", icon: <Rocket className="w-4 h-4" /> },
 ];
 
 export default function AchievementsSection() {

@@ -19,7 +19,6 @@ import MobileMenu from '@/components/MobileMenu';
 import HeroSection from '@/components/sections/HeroSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import TechStackSection from '@/components/sections/TechStackSection';
-import StatsSection from '@/components/sections/StatsSection';
 import AchievementsSection from '@/components/sections/AchievementsSection';
 import TimelineSection from '@/components/sections/TimelineSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
@@ -121,9 +120,6 @@ export default function Home() {
 
           {/* Tech Stack Section */}
           <TechStackSection />
-
-          {/* Stats Section */}
-          <StatsSection />
 
           {/* Achievements Section */}
           <AchievementsSection />

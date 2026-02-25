@@ -6,48 +6,38 @@ import useReducedMotion from '@/hooks/useReducedMotion';
 
 const timeline = [
   {
-    year: "2025",
+    year: "Early 2025",
     icon: <Rocket className="w-4 h-4" />,
     events: [
       {
         title: "Started ML Journey",
-        desc: "November 2025 - Inspired by Iron Man's JARVIS, began learning Python and ML fundamentals",
+        desc: "Inspired by Iron Man's JARVIS — began learning Python fundamentals and data science basics",
         highlight: true,
       },
       {
         title: "First Classification Model",
-        desc: "Built Iris dataset classifier using scikit-learn",
+        desc: "Built Iris dataset classifier using scikit-learn — the 'Hello World' of ML",
         highlight: false,
       },
       {
-        title: "Joined Data Science Club",
-        desc: "Jakarta, Indonesia - started community learning",
+        title: "IBM Python for Data Science",
+        desc: "Completed professional certificate — the foundation that made everything click",
         highlight: false,
       },
     ],
   },
   {
-    year: "2025",
+    year: "Mid 2025",
     icon: <Award className="w-4 h-4" />,
     events: [
       {
-        title: "IBM Python for Data Science",
-        desc: "Completed professional certificate (after November)",
+        title: "Joined Data Science Club",
+        desc: "Jakarta, Indonesia — started teaching and community learning",
         highlight: false,
       },
       {
         title: "Google Student Ambassador",
         desc: "Awarded Rising Star Top 100 & Fully Funded Invitation for Graduation",
-        highlight: true,
-      },
-      {
-        title: "First ML Workshop",
-        desc: "Conducted workshop for 50+ students",
-        highlight: false,
-      },
-      {
-        title: "F1 Analytics Dashboard",
-        desc: "Launched real-time telemetry analysis tool",
         highlight: true,
       },
       {
@@ -58,22 +48,38 @@ const timeline = [
     ],
   },
   {
+    year: "Late 2025",
+    icon: <Star className="w-4 h-4" />,
+    events: [
+      {
+        title: "F1 Analytics Dashboard",
+        desc: "Launched real-time telemetry analysis tool — 23 race tracks across the season",
+        highlight: true,
+      },
+      {
+        title: "First ML Workshop",
+        desc: "Conducted hands-on workshop training 100+ students in AI and data science",
+        highlight: false,
+      },
+    ],
+  },
+  {
     year: "2026",
     icon: <GraduationCap className="w-4 h-4" />,
     events: [
       {
         title: "Stanford ML Specialization",
-        desc: "Completed 3-course program with honors",
+        desc: "Completed 3-course program — Jan–Feb 2026",
         highlight: true,
       },
       {
         title: "Deep Dive into ML",
-        desc: "Implemented 8 CS229 algorithms from scratch",
+        desc: "Implementing 8+ CS229 algorithms from scratch — performance on par with Scikit-Learn",
         highlight: false,
       },
       {
         title: "Currently Building",
-        desc: "F1 tire degradation predictor with weather integration",
+        desc: "F1 tire degradation predictor with real-time weather integration",
         highlight: true,
         current: true,
       },

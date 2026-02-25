@@ -19,7 +19,7 @@ const projects = [
     impact: [
       { label: "Model Accuracy", value: "92%" },
       { label: "API Response", value: "<50ms" },
-      { label: "Active Users", value: "50+" },
+      { label: "Race Tracks", value: "23" },
     ],
     challenges: [
       "Handled missing telemetry data with interpolation algorithms",
@@ -75,9 +75,9 @@ const projects = [
       "Compared performance against enterprise libraries (Scikit-Learn)",
     ],
     impact: [
-      { label: "Algorithms", value: "10+" },
-      { label: "Focus", value: "Core Math" },
-      { label: "Goal", value: "Mastery" },
+      { label: "Algorithms", value: "8+" },
+      { label: "vs Scikit-Learn", value: "≈ Parity" },
+      { label: "From Scratch", value: "100%" },
     ],
     challenges: [
       "Deriving complex calculus for backward passes",
