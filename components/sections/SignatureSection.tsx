@@ -58,9 +58,7 @@ export default function SignatureSection() {
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     className="font-sans italic text-center text-white/90 max-w-4xl text-xl md:text-3xl lg:text-4xl leading-relaxed mb-16 md:mb-24 font-light tracking-wide"
                 >
-                    "I build high-performance data pipelines and intelligent systems with
-                    the same precision and relentless pursuit of speed found in
-                    motorsport. Always pushing the limits, always optimizing for the win."
+                    &ldquo;Failure is an option here. If things are not failing, you are not innovating enough.&rdquo;
                 </motion.p>
 
                 {/* Animated Signature Wrapper - MASSIVE SIZE */}
