@@ -1,21 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import AnimatedSignature from "@/components/ui/AnimatedSignature";
 import useReducedMotion from "@/hooks/useReducedMotion";
 
 export default function SignatureSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const prefersReducedMotion = useReducedMotion();
-
-    // The scroll method: maps the user's scroll progress linearly into the drawing progress
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        // Start drawing when the top of the section enters the bottom of the viewport
-        // Finish drawing when the top of the section hits the middle of the viewport
-        offset: ["start end", "center center"],
-    });
 
     return (
         <section
@@ -78,7 +70,7 @@ export default function SignatureSection() {
                     <div className="absolute bottom-0 left-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-l-[3px] border-white/20" />
                     <div className="absolute bottom-0 right-0 w-6 h-6 md:w-8 md:h-8 border-b-[3px] border-r-[3px] border-white/20" />
 
-                    <AnimatedSignature scrollProgress={scrollYProgress} />
+                    <AnimatedSignature />
                 </div>
             </div>
         </section>

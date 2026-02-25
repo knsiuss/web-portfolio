@@ -9,11 +9,11 @@ export default function useLenis() {
   useEffect(() => {
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
+
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      duration: 1.2, // Slightly reduced from 1.8 for better performance
+      duration: 1.8, // Heavy, long inertia matching LN4
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',

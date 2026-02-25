@@ -19,8 +19,8 @@ const achievements = [
     icon: <Users className="w-5 h-5" />,
     items: [
       { metric: "Top 100", label: "GSA Rising Star", desc: "Fully funded graduation invite" },
-      { metric: "5+", label: "ML Workshops", desc: "Conducted for students" },
-      { metric: "100+", label: "Students Trained", desc: "In ML and data science" },
+      { metric: "5+", label: "AI Workshops", desc: "Conducted for students" },
+      { metric: "100+", label: "Students Trained", desc: "In AI and data science" },
     ],
   },
   {

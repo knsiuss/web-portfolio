@@ -24,7 +24,7 @@ const expertise = [
   {
     icon: <Users className="w-5 h-5" />,
     title: "Leadership",
-    desc: "Google Student Ambassador, ML Workshops, Public Speaking",
+    desc: "Google Student Ambassador, AI Workshops, Public Speaking",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function AboutSection() {
               <p>
                 As a{" "}
                 <span className="text-white">Google Student Ambassador Rising Star + Top 100</span>,
-                I&apos;ve conducted ML workshops for 100+ students, making complex AI concepts
+                I&apos;ve conducted AI workshops for 100+ students, making complex AI concepts
                 accessible through hands-on learning.
               </p>
               <p>
@@ -114,7 +114,7 @@ export default function AboutSection() {
                   {/* Badge Overlay */}
                   <div className="absolute bottom-3 left-3 bg-[#DFFF00] text-black font-lando uppercase text-xs px-2 py-1 flex items-center gap-1 leading-none rounded-sm">
                     <Trophy className="w-3 h-3" />
-                    GSA '23
+                    GSA '25
                   </div>
                 </div>
 
