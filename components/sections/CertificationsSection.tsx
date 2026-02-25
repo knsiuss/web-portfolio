@@ -20,14 +20,17 @@ const certificates = [
       {
         name: "Supervised Learning",
         desc: "The math behind the magic — regression to neural nets",
+        link: "/assets/certificates/stanford-supervised-learning-2026.pdf"
       },
       {
         name: "Advanced Learning Algorithms",
         desc: "Deep dive into neural networks & decision trees",
+        link: "/assets/certificates/stanford-advanced-algorithms-2026.pdf"
       },
       {
         name: "Unsupervised Learning",
         desc: "Clustering, anomaly detection, and recommender systems",
+        link: "/assets/certificates/stanford-unsupervised-learning-2026.pdf"
       }
     ]
   },
@@ -45,6 +48,7 @@ const certificates = [
       {
         name: "", // Not needed for small card, but we use desc
         desc: "The foundation. Where it all started.",
+        link: "/assets/certificates/ibm-python-data-science-2025.pdf"
       }
     ]
   },
@@ -62,6 +66,7 @@ const certificates = [
       {
         name: "",
         desc: "Bridging AI tools with real teaching impact",
+        link: "/assets/certificates/google-gemini-educator-2025.pdf"
       }
     ]
   }
@@ -109,9 +114,7 @@ export default function CertificationsSection() {
           {/* Left Column: Stanford (Large) */}
           <div className="lg:col-span-7 flex flex-col h-full">
             {certificates.filter(c => c.isLarge).map((cert, index) => (
-              <motion.a
-                href={cert.link}
-                download
+              <motion.div
                 key={cert.title}
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +123,7 @@ export default function CertificationsSection() {
                 className={`group relative flex-1 flex flex-col justify-between p-8 md:p-10 rounded-2xl bg-[#0a0a0a] border border-white/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
               >
                 {/* Subtle background glow on hover */}
-                <div className={`absolute top-0 right-0 w-64 h-64 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[100px] transition-opacity duration-700`} />
+                <div className={`absolute top-0 right-0 w-64 h-64 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[100px] transition-opacity duration-700 pointer-events-none`} />
 
                 <div>
                   {/* Issuer Badge */}
@@ -139,17 +142,23 @@ export default function CertificationsSection() {
                   {/* Courses List */}
                   <div className="space-y-6 mb-12 relative z-10">
                     {cert.courses.map((course) => (
-                      <div key={course.name} className="flex flex-col gap-1">
+                      <a
+                        key={course.name}
+                        href={course.link}
+                        download
+                        className="flex flex-col gap-1 group/course block p-3 -m-3 rounded-lg hover:bg-white/5 transition-colors"
+                      >
                         <div className="flex items-start gap-3">
-                          <span className={`text-lg mt-0.5 ${cert.textColor}`}>✦</span>
-                          <span className="font-tech text-white/90 text-sm md:text-base uppercase tracking-wide">
+                          <span className={`text-lg mt-0.5 ${cert.textColor} group-hover/course:scale-125 transition-transform`}>✦</span>
+                          <span className="font-tech text-white/90 text-sm md:text-base uppercase tracking-wide group-hover/course:text-[#DFFF00] transition-colors flex items-center gap-3">
                             {course.name}
+                            <ExternalLink className="w-3 h-3 opacity-0 group-hover/course:opacity-100 transition-opacity" />
                           </span>
                         </div>
                         <p className="font-tech text-xs text-white/40 ml-7 italic">
                           "{course.desc}"
                         </p>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -159,12 +168,11 @@ export default function CertificationsSection() {
                   <span className="font-tech text-xs uppercase tracking-widest text-white/40">
                     {cert.date}
                   </span>
-                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">
-                    <span>Verify</span>
-                    <ExternalLink className="w-3 h-3" />
+                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-white/60">
+                    <span>Click individual courses to verify</span>
                   </div>
                 </div>
-              </motion.a>
+              </motion.div>
             ))}
           </div>
 
