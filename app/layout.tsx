@@ -26,8 +26,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-  description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
-  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia"],
+  description: "ML Engineer & Data Scientist specializing in real-time F1 analytics, deep learning, and production MLOps pipelines. Google Student Ambassador Top 200. Based in Jakarta, Indonesia.",
+  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
   openGraph: {
