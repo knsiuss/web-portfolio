@@ -11,7 +11,13 @@ interface MobileMenuProps {
 
 import { ThemeToggle } from './ui/ThemeToggle';
 
-const menuItems = ['Home', 'Projects', 'About', 'Contact'];
+const menuItems = [
+  { label: 'Home', href: '#home' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'About', href: '#about' },
+  { label: 'Contact', href: '#contact' },
+];
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (
@@ -39,8 +45,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <nav className="flex-1 flex flex-col items-center justify-center gap-6 md:gap-8 px-4">
             {menuItems.map((item, index) => (
               <motion.a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.label}
+                href={item.href}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 30 }}
@@ -48,7 +54,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 onClick={onClose}
                 className="font-lando text-4xl sm:text-5xl md:text-7xl uppercase text-foreground hover:text-[#DFFF00] transition-colors"
               >
-                {item}
+                {item.label}
               </motion.a>
             ))}
           </nav>

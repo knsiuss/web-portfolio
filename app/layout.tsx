@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
+  icons: {
+    icon: "/logo.svg",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
