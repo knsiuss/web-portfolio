@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, ArrowUpRight, Target, Zap, BarChart3 } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight, Target, Zap, BarChart3, BookOpen } from 'lucide-react';
+import Link from 'next/link';
 import useReducedMotion from '@/hooks/useReducedMotion';
 
 const projects = [
@@ -30,6 +31,7 @@ const projects = [
     links: {
       live: "https://f1-lab.streamlit.app/",
       github: "https://github.com/knsiuss",
+      caseStudy: "/projects/f1-dashboard",
     },
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
@@ -172,6 +174,15 @@ export default function ProjectsSection() {
                         <Github className="w-3.5 h-3.5" />
                         Code
                       </a>
+                      {project.links.caseStudy && (
+                        <Link
+                          href={project.links.caseStudy}
+                          className="inline-flex items-center gap-1.5 border border-[#DFFF00]/40 text-[#DFFF00] font-tech text-xs uppercase px-4 py-2 rounded-full hover:bg-[#DFFF00] hover:text-background transition-all"
+                        >
+                          <BookOpen className="w-3.5 h-3.5" />
+                          Case Study
+                        </Link>
+                      )}
                     </div>
                   </div>
 

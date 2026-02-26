@@ -12,7 +12,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const duration = 1800; // Reduced to be under 2 seconds for better UX
+    const duration = 1200; // Under 2 seconds for better UX
     const interval = 16;
     const steps = duration / interval;
     let currentStep = 0;
@@ -24,7 +24,7 @@ export default function LoadingScreen({ onLoadingComplete }: LoadingScreenProps)
 
       if (currentStep >= steps) {
         clearInterval(timer);
-        setTimeout(onLoadingComplete, 300); // Reduced from 500ms
+        setTimeout(onLoadingComplete, 200); // Reduced from 300ms
       }
     }, interval);
 
