@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo, useEffect } from 'react';
+import { useRef, useMemo, useEffect, useCallback } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -95,10 +95,22 @@ declare global {
 function ShaderPlane({ isDark }: { isDark: boolean }) {
   const materialRef = useRef<any>(null);
 
-  const resolution = useMemo(() => new THREE.Vector2(
+  // Cache resolution in a ref — updated only on resize, NOT every frame
+  const resolutionRef = useRef(new THREE.Vector2(
     typeof window !== 'undefined' ? window.innerWidth : 1,
     typeof window !== 'undefined' ? window.innerHeight : 1
-  ), []);
+  ));
+
+  useEffect(() => {
+    const handleResize = () => {
+      resolutionRef.current.set(window.innerWidth, window.innerHeight);
+      if (materialRef.current) {
+        materialRef.current.u_resolution.copy(resolutionRef.current);
+      }
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Switch shader colors when theme changes
   useEffect(() => {
@@ -110,10 +122,8 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
 
   useFrame((state) => {
     if (materialRef.current) {
+      // Only update time — no layout reads (window.innerWidth removed)
       materialRef.current.u_time = state.clock.elapsedTime * 0.5;
-      if (typeof window !== 'undefined') {
-        materialRef.current.u_resolution.set(window.innerWidth, window.innerHeight);
-      }
     }
   });
 
@@ -121,7 +131,7 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
     <mesh>
       <planeGeometry args={[2, 2]} />
       {/* @ts-ignore */}
-      <topographicMaterial ref={materialRef} u_resolution={resolution} />
+      <topographicMaterial ref={materialRef} u_resolution={resolutionRef.current} />
     </mesh>
   );
 }
@@ -134,9 +144,19 @@ export default function ShaderBackground() {
     <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 1] }}
-        gl={{ antialias: false, alpha: false, powerPreference: "default" }}
-        dpr={1}
-        resize={{ scroll: false }}
+        gl={{
+          antialias: false,
+          alpha: false,
+          // high-performance hint: prefer dedicated GPU, reduce power draw
+          powerPreference: "high-performance",
+        }}
+        // Cap at 1x pixel ratio — halves GPU work on HiDPI screens
+        dpr={Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1)}
+        // Prevents R3F from triggering layout reads on scroll
+        resize={{ scroll: false, debounce: { scroll: 0, resize: 200 } }}
+        // frameloop='demand' would stop rendering when idle — but shader is animated
+        // so we keep 'always', just with reduced overhead
+        frameloop="always"
       >
         <ShaderPlane isDark={isDark} />
       </Canvas>

@@ -27,6 +27,13 @@ export default function SignatureSection() {
             ref={containerRef}
             id="signature-section"
             className="relative w-full min-h-[120vh] md:min-h-[150vh] flex flex-col items-center justify-center py-24 md:py-32 z-10 overflow-hidden bg-background"
+            style={{
+                // Isolate this section's layout — prevents scroll animations
+                // from triggering parent/sibling layout recalculations
+                contain: 'layout',
+                // Hint browser to composite this section on its own GPU layer
+                willChange: 'transform',
+            }}
         >
             {/* Background Decorative Grid/Lines */}
             <div className="absolute inset-0 pointer-events-none opacity-20">
@@ -34,8 +41,11 @@ export default function SignatureSection() {
                 <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
             </div>
 
-            {/* Subtle Glow Behind Signature */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] md:w-[60%] md:h-[60%] bg-racing-red opacity-[0.03] blur-[100px] pointer-events-none rounded-full" />
+            {/* Subtle Glow Behind Signature - GPU composited via will-change */}
+            <div
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] md:w-[60%] md:h-[60%] bg-racing-red opacity-[0.03] blur-[100px] pointer-events-none rounded-full"
+                style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+            />
 
             <div className="relative w-full max-w-5xl px-8 flex flex-col items-center z-10">
                 {/* Label */}

@@ -79,7 +79,13 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                 viewBox="0 0 1536 1024"
                 className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
                 preserveAspectRatio="xMidYMid meet"
-                style={{ opacity: useTransform(actualProgress, [0, 0.1], [0, 1]) }}
+                style={{
+                    opacity: useTransform(actualProgress, [0, 0.1], [0, 1]),
+                    // Isolate this SVG on its own GPU layer so pathLength repaints
+                    // don't cause the rest of the page to repaint
+                    willChange: 'opacity, transform',
+                    transform: 'translateZ(0)',
+                }}
             >
                 <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="var(--racing-red, #DFFF00)">
                     <motion.path
@@ -88,6 +94,8 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        // Prevents stroke width from rescaling, reduces reflow
+                        vectorEffect="non-scaling-stroke"
                     />
                     <motion.path
                         d={PATH_DOT_1}
@@ -95,6 +103,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        vectorEffect="non-scaling-stroke"
                     />
                     <motion.path
                         d={PATH_DOT_2}
@@ -102,6 +111,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        vectorEffect="non-scaling-stroke"
                     />
                 </g>
             </motion.svg>

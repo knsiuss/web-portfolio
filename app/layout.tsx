@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     creator: "@maxquincy18",
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "hqAZ8rtWx92tpMkiCwDi6imswCTZ7WLBq_lVDUnlpJE",
   },
   alternates: {
     canonical: "https://kanisiusbagas.vercel.app",
