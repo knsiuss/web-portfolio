@@ -157,7 +157,7 @@ export default function ProjectsSection() {
                           href={project.links.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 bg-[#DFFF00] text-background font-tech text-xs uppercase px-4 py-2 rounded-full hover:brightness-110 transition-all"
+                          className="inline-flex items-center gap-1.5 bg-racing-red text-background font-tech text-xs uppercase px-4 py-2 rounded-full hover:brightness-110 transition-all"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                           Live Demo

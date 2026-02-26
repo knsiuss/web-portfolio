@@ -50,8 +50,8 @@ export default function StorySection() {
                 The Iron Man Thing
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
-                Honestly? I got into Data Science because of Iron Man. Watching JARVIS talk, analyze data in real-time, 
-                help Tony make decisions—I thought, "Damn, I wanna build something like that." Started learning Python, 
+                Honestly? I got into Data Science because of Iron Man. Watching JARVIS talk, analyze data in real-time,
+                help Tony make decisions—I thought, "Damn, I wanna build something like that." Started learning Python,
                 fell into ML, and now I'm stuck here (in a good way).
               </p>
             </div>
@@ -73,8 +73,8 @@ export default function StorySection() {
                 From Bedroom to Stage
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
-                Used to be just some kid coding alone in my room. Next thing I know, I'm a Google Student Ambassador. 
-                I was the guy who got nervous talking to 5 people. Now I can teach workshops with 100+ people. 
+                Used to be just some kid coding alone in my room. Next thing I know, I'm a Google Student Ambassador.
+                I was the guy who got nervous talking to 5 people. Now I can teach workshops with 100+ people.
                 Didn't see that coming, but turns out teaching is fun—it actually makes me understand stuff better.
               </p>
             </div>
@@ -96,8 +96,8 @@ export default function StorySection() {
                 The Stubbornness
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
-                I never aim to be the best. I just know that when I have a target, I chase it until I get it. 
-                Like F1—it's not about being perfect, it's about improving every single lap. Code broke? Fix it. 
+                I never aim to be the best. I just know that when I have a target, I chase it until I get it.
+                Like F1—it's not about being perfect, it's about improving every single lap. Code broke? Fix it.
                 Algorithm failed? Try again. Just keep moving forward.
               </p>
             </div>
@@ -115,7 +115,7 @@ export default function StorySection() {
           <div className="absolute -top-4 md:-top-8 left-0 md:-left-8">
             <Quote className="w-10 h-10 md:w-16 md:h-16 lg:w-24 lg:h-24 text-racing-red opacity-20" />
           </div>
-          
+
           <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 text-center">
             <blockquote>
               <p className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-5xl uppercase leading-tight mb-4 md:mb-6">
@@ -125,13 +125,13 @@ export default function StorySection() {
                 <span className="text-racing-red">I DON'T STOP UNTIL I GET IT.</span>
               </p>
             </blockquote>
-            
+
             <div className="flex items-center justify-center gap-3 md:gap-4">
-              <div className="h-[1px] w-8 md:w-12 bg-[#DFFF00]/50" />
+              <div className="h-[1px] w-8 md:w-12 bg-racing-red/50" />
               <span className="font-tech text-[10px] md:text-xs uppercase tracking-[0.15em] md:tracking-[0.2em] text-foreground/30">
                 Too stubborn to quit
               </span>
-              <div className="h-[1px] w-8 md:w-12 bg-[#DFFF00]/50" />
+              <div className="h-[1px] w-8 md:w-12 bg-racing-red/50" />
             </div>
           </div>
         </motion.div>
@@ -145,7 +145,7 @@ export default function StorySection() {
           className="flex flex-wrap justify-center gap-2 md:gap-4 mt-10 md:mt-16"
         >
           {['Always Learning', 'Too Stubborn To Quit', 'F1 > Football'].map((tag) => (
-            <span 
+            <span
               key={tag}
               className="font-tech text-[10px] md:text-xs uppercase px-3 md:px-4 py-1.5 md:py-2 border border-foreground/10 rounded-full text-foreground/50"
             >

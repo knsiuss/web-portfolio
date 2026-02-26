@@ -60,8 +60,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
 
         {/* Last Name */}
         <div
-          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-racing-red tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default"
-          style={{ textShadow: "0px 10px 30px rgba(223, 255, 0, 0.2)" }}
+          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-racing-red tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default text-shadow-racing"
         >
           <SplitText text="BAGASKARA" delay={0.4} />
         </div>

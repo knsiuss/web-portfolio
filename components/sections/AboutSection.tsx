@@ -65,7 +65,7 @@ export default function AboutSection() {
             </span>
             <h2 className="font-lando text-4xl md:text-6xl uppercase mb-6">
               Turning Data Into{" "}
-              <span className="text-transparent" style={{ WebkitTextStroke: '2px #DFFF00' }}>
+              <span className="text-transparent" style={{ WebkitTextStroke: '2px var(--racing-red)' }}>
                 Racing Insights
               </span>
             </h2>

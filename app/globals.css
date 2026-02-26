@@ -18,8 +18,13 @@
 :root {
   --background: #fafafa;
   --foreground: #050505;
-  --racing-red: #3d5c00;
-  --acid: #3d5c00;
+  --racing-red: #1D4ED8;
+  --acid: #1D4ED8;
+  /* Override Tailwind's @theme inline generated values at runtime */
+  --color-background: #fafafa;
+  --color-foreground: #050505;
+  --color-racing-red: #1D4ED8;
+  --color-acid: #1D4ED8;
 }
 
 .dark {
@@ -27,6 +32,23 @@
   --foreground: #ffffff;
   --racing-red: #DFFF00;
   --acid: #DFFF00;
+  /* Override Tailwind's @theme inline generated values at runtime */
+  --color-background: #050505;
+  --color-foreground: #ffffff;
+  --color-racing-red: #DFFF00;
+  --color-acid: #DFFF00;
+}
+
+/* next-themes adds 'light' class to <html> when light mode is active */
+.light {
+  --background: #fafafa !important;
+  --foreground: #050505 !important;
+  --racing-red: #1D4ED8 !important;
+  --acid: #1D4ED8 !important;
+  --color-background: #fafafa !important;
+  --color-foreground: #050505 !important;
+  --color-racing-red: #1D4ED8 !important;
+  --color-acid: #1D4ED8 !important;
 }
 
 /* Base Styles */
@@ -55,22 +77,114 @@ section {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Accent color: maps to racing-red CSS var */
+/* === ACCENT COLOR SYSTEM ===
+ * Dark mode (default): lime yellow #DFFF00
+ * Light mode (html.light added by next-themes): blue #1D4ED8
+ * Using direct selectors + !important to bypass ANY CSS variable chain issues.
+ */
+
+/* Default (dark mode): lime yellow */
+.text-racing-red,
 .text-accent {
-  color: var(--racing-red);
+  color: #DFFF00;
   transition: color 0.3s ease;
 }
 
+.bg-racing-red,
 .bg-accent {
-  background-color: var(--racing-red);
+  background-color: #DFFF00;
   transition: background-color 0.3s ease;
 }
 
+.border-racing-red,
 .border-accent {
-  border-color: var(--racing-red);
+  border-color: #DFFF00;
   transition: border-color 0.3s ease;
 }
 
+/* Light mode override: blue #1D4ED8 — html.light is added by next-themes */
+html.light .text-racing-red,
+html.light .text-accent {
+  color: #1D4ED8 !important;
+}
+
+html.light .bg-racing-red,
+html.light .bg-accent {
+  background-color: #1D4ED8 !important;
+}
+
+html.light .border-racing-red,
+html.light .border-accent {
+  border-color: #1D4ED8 !important;
+}
+
+/* === ADDITIONAL LIGHT MODE OVERRIDES ===
+ * Precise selectors ONLY. Do NOT use [class*="bg-[#DFFF00]"] — it matches
+ * opacity variants like bg-[#DFFF00]/10 which breaks subtle glow effects.
+ */
+
+/* bg-[#DFFF00] exact class: BackToTop, LIVE DEMO button, Timeline NOW badge */
+html.light .bg-\[\#DFFF00\] {
+  background-color: #1D4ED8 !important;
+}
+
+/* Hover bg overrides in light mode */
+html.light .hover\:bg-\[\#DFFF00\]:hover {
+  background-color: #1D4ED8 !important;
+}
+
+/* hover text overrides in light mode */
+html.light .hover\:text-\[\#DFFF00\]:hover {
+  color: #1D4ED8 !important;
+}
+
+/* group-hover text in light mode */
+html.light .group:hover .group-hover\:text-\[\#DFFF00\] {
+  color: #1D4ED8 !important;
+}
+
+/* ring overrides (Timeline current item) */
+html.light .ring-\[\#DFFF00\] {
+  --tw-ring-color: #1D4ED8 !important;
+}
+
+/* SVG fills and strokes (AnimatedCollab, any SVG with fill="DFFF00") */
+html.light [fill="#DFFF00"] {
+  fill: #1D4ED8 !important;
+}
+
+html.light [stroke="#DFFF00"] {
+  stroke: #1D4ED8 !important;
+}
+
+/* Dynamic Shadows for SVGs and Text */
+.svg-shadow-racing {
+  filter: drop-shadow(0px 0px 15px rgba(223, 255, 0, 0.2));
+}
+
+html.light .svg-shadow-racing {
+  filter: drop-shadow(0px 0px 15px rgba(29, 78, 216, 0.4)) !important;
+}
+
+.text-shadow-racing {
+  text-shadow: 0px 10px 30px rgba(223, 255, 0, 0.3);
+}
+
+html.light .text-shadow-racing {
+  text-shadow: 0px 10px 30px rgba(29, 78, 216, 0.4) !important;
+}
+
+/* Neon Glow overrides in light mode */
+html.light .text-glow-neon {
+  text-shadow: 0 0 10px rgba(29, 78, 216, 0.5), 0 0 20px rgba(29, 78, 216, 0.3) !important;
+}
+
+/* About section & StorySection: WebkitTextStroke outline text */
+html.light [style*="1.5px #DFFF00"],
+html.light [style*="2px #DFFF00"],
+html.light [style*="DFFF00"] {
+  -webkit-text-stroke-color: #1D4ED8 !important;
+}
 
 /* Font Utility Classes */
 .font-lando {

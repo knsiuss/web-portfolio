@@ -98,7 +98,7 @@ export default function ContactSection() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="w-1.5 h-1.5 bg-[#DFFF00] rounded-full" />
+                  <div className="w-1.5 h-1.5 bg-racing-red rounded-full" />
                   <span className="font-tech text-foreground/70">{opp}</span>
                 </motion.div>
               ))}
@@ -109,7 +109,7 @@ export default function ContactSection() {
               <MagneticButton
                 href="mailto:kanisius@novar.me"
                 magneticStrength={0.2}
-                className="inline-flex items-center justify-center gap-2 bg-[#DFFF00] text-background font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:brightness-110 transition-all group"
+                className="inline-flex items-center justify-center gap-2 bg-racing-red text-background font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:brightness-110 transition-all group"
               >
                 <Mail className="w-4 h-4" />
                 Start a Conversation

@@ -17,27 +17,31 @@ while ((match = regex.exec(svg)) !== null) {
 const componentCode = `
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { useRef } from 'react';
 
 // Using the extracted paths from collab.svg
 const pathsData = ${JSON.stringify(pathsData)};
 
-export default function AnimatedCollab({ className = '' }: { className?: string }) {
+export default function AnimatedCollab({ className = '', scrollProgress }: { className?: string; scrollProgress?: any }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end center"]
     });
 
-    const draw = useTransform(scrollYProgress, [0, 1], [0, 1]);
-    const fillOpacity = useTransform(scrollYProgress, [0.8, 1], [0, 1]);
+    const fallbackValue = useMotionValue(0);
+    // Use the progress prop from parent, or fallback to internal scroll
+    const actualProgress = scrollProgress || scrollYProgress || fallbackValue;
+
+    const draw = useTransform(actualProgress, [0.1, 0.7], [0, 1]);
+    const fillOpacity = useTransform(actualProgress, [0.7, 0.9], [0, 1]);
 
     return (
         <div ref={containerRef} className={className}>
             <svg 
                 viewBox="0 0 1536 1024" 
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.2)]"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)]"
                 preserveAspectRatio="xMidYMid meet"
             >
                 {pathsData.map((p, i) => (

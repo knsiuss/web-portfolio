@@ -22,7 +22,7 @@ export default function FooterSection() {
             <h4 className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] mb-3 md:mb-4 opacity-60">Contact</h4>
             <a
               href="mailto:kanisius@novar.me"
-              className="font-tech text-sm md:text-base hover:text-[#DFFF00] transition-colors block mb-1.5 md:mb-2"
+              className="font-tech text-sm md:text-base hover:text-racing-red transition-colors block mb-1.5 md:mb-2"
             >
               kanisius@novar.me
             </a>
@@ -38,7 +38,7 @@ export default function FooterSection() {
                 href="https://github.com/knsiuss"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
+                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-racing-red hover:border-racing-red hover:text-background transition-all"
                 aria-label="GitHub"
               >
                 <Github size={16} className="md:w-[18px] md:h-[18px]" />
@@ -47,7 +47,7 @@ export default function FooterSection() {
                 href="https://linkedin.com/in/kanisiusbagas1212"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
+                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-racing-red hover:border-racing-red hover:text-background transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />

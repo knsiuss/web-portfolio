@@ -31,10 +31,10 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
       {/* RIGHT: Contact & Menu */}
       <div className="flex items-center gap-2 md:gap-4 pointer-events-auto">
         <MagneticButton
-          className="hidden sm:flex bg-[#DFFF00] px-4 md:px-6 py-2 md:py-3 rounded-md font-lando text-sm md:text-lg tracking-wide items-center gap-2 hover:brightness-110 transition-all"
+          className="hidden sm:flex bg-racing-red px-4 md:px-6 py-2 md:py-3 rounded-md font-lando text-sm md:text-lg tracking-wide items-center gap-2 hover:brightness-110 transition-all text-background"
           magneticStrength={0.2}
         >
-          <a href="mailto:kanisius@novar.me" className="flex items-center gap-2">
+          <a href="mailto:kanisius@novar.me" className="flex items-center gap-2 text-background">
             CONTACT
           </a>
         </MagneticButton>
@@ -42,10 +42,10 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
         {/* Mobile Contact Button (Icon only) */}
         <a
           href="mailto:kanisius@novar.me"
-          className="sm:hidden w-9 h-9 bg-[#DFFF00] rounded-md flex items-center justify-center"
+          className="sm:hidden w-9 h-9 bg-racing-red rounded-md flex items-center justify-center"
           aria-label="Contact"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-background">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
             <polyline points="22,6 12,13 2,6" />
           </svg>
