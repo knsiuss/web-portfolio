@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import useReducedMotion from '@/hooks/useReducedMotion';
 
 const stats = [
-  { number: '8', label: 'Open Source Repos', suffix: '+' },
-  { number: 'Top 100', label: 'GSA Rising Star', suffix: '' },
-  { number: '35', label: 'Tech Skills', suffix: '+' },
-  { number: '100', label: 'Students Trained', suffix: '+' },
+  { number: 'Top', label: 'GSA Rising Star — Google', suffix: '200' },
+  { number: '3', label: 'Production ML Pipelines', suffix: '+' },
+  { number: '35', label: 'Tech Skills & Tools', suffix: '+' },
+  { number: '100', label: 'Students Trained in AI', suffix: '+' },
 ];
 
 export default function StatsSection() {

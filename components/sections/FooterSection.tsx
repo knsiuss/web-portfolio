@@ -59,7 +59,7 @@ export default function FooterSection() {
 
         <div className="border-t border-foreground/20 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
           <p className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.2em] opacity-50 text-center md:text-left">
-            © 2026 Kanisius Bagaskara. All Rights Reserved.
+            © {new Date().getFullYear()} Kanisius Bagaskara. All Rights Reserved.
           </p>
           <p className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.2em] opacity-30">
             Built with Next.js • TypeScript • Tailwind
