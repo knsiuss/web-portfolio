@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#080906"/>
+  <!-- Banana shape: simple curved crescent -->
+  <path
+    d="M8 22 Q7 14 13 10 Q18 7 22 9 Q19 9 17 11 Q12 15 12 22 Z"
+    fill="#DFFF00"
+  />
+  <!-- Banana tip -->
+  <circle cx="22" cy="9" r="1.5" fill="#DFFF00"/>
+  <!-- Banana bottom tip -->
+  <circle cx="8" cy="22" r="1.5" fill="#DFFF00"/>
+</svg>

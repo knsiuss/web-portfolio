@@ -25,19 +25,19 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     // AUTO-ANIMATE (If scrollProgress is undefined - Loading/Hero)
     // ----------------------------------------------------
     const timeBasedVariants: any = {
-        hidden: { pathLength: 0, fill: "rgba(197, 245, 66, 0)", opacity: 0 },
+        hidden: { pathLength: 0, fillOpacity: 0, strokeOpacity: 0 },
         visible: (custom: number) => {
             const isMain = custom === 0;
             const duration = isMain ? 2.0 : 0.2;
             const delay = isMain ? 0.2 : custom === 1 ? 2.2 : 2.4;
             return {
                 pathLength: 1,
-                fill: "rgba(197, 245, 66, 1)",
-                opacity: 1,
+                fillOpacity: 1,
+                strokeOpacity: 1,
                 transition: {
                     pathLength: { duration, ease: "easeInOut", delay },
-                    opacity: { duration: 0.1, delay },
-                    fill: { duration: 0.5, ease: "easeIn", delay: delay + duration - 0.2 },
+                    strokeOpacity: { duration: 0.1, delay },
+                    fillOpacity: { duration: 0.5, ease: "easeIn", delay: delay + duration - 0.2 },
                 },
             };
         },
@@ -53,21 +53,17 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     // Maps 0.8 -> 0.9 of scroll to dot 2
     const drawDot2 = useTransform(actualProgress, [0.8, 0.9], [0, 1]);
 
-    // Fill color fades in exactly at the end (0.9 to 1.0)
-    const fillColor = useTransform(
-        actualProgress,
-        [0.9, 1],
-        ["rgba(197, 245, 66, 0)", "rgba(197, 245, 66, 1)"]
-    );
+    // Fill opacity fades in exactly at the end (0.9 to 1.0)
+    const fillOpacityVal = useTransform(actualProgress, [0.9, 1], [0, 1]);
 
     if (prefersReducedMotion) {
         return (
             <svg
                 viewBox="0 0 1536 1024"
-                className="w-full h-full drop-shadow-[0_0_20px_rgba(197,245,66,0.4)]"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)]"
                 preserveAspectRatio="xMidYMid meet"
             >
-                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="#C5F542" stroke="none">
+                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="none">
                     <path d={PATH_MAIN} />
                     <path d={PATH_DOT_1} />
                     <path d={PATH_DOT_2} />
@@ -81,34 +77,41 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
         return (
             <motion.svg
                 viewBox="0 0 1536 1024"
-                className="w-full h-full drop-shadow-[0_0_20px_rgba(197,245,66,0.4)] pointer-events-none"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
                 preserveAspectRatio="xMidYMid meet"
-                style={{ opacity: useTransform(actualProgress, [0, 0.1], [0, 1]) }}
+                style={{
+                    opacity: useTransform(actualProgress, [0, 0.1], [0, 1]),
+                    // Isolate this SVG on its own GPU layer so pathLength repaints
+                    // don't cause the rest of the page to repaint
+                    willChange: 'opacity, transform',
+                    transform: 'translateZ(0)',
+                }}
             >
-                <g transform="translate(0, 1024) scale(0.1, -0.1)">
+                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="var(--racing-red, #DFFF00)">
                     <motion.path
                         d={PATH_MAIN}
-                        style={{ pathLength: drawMain, fill: fillColor }}
-                        stroke="#C5F542"
+                        style={{ pathLength: drawMain, fillOpacity: fillOpacityVal }}
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        // Prevents stroke width from rescaling, reduces reflow
+                        vectorEffect="non-scaling-stroke"
                     />
                     <motion.path
                         d={PATH_DOT_1}
-                        style={{ pathLength: drawDot1, fill: fillColor }}
-                        stroke="#C5F542"
+                        style={{ pathLength: drawDot1, fillOpacity: fillOpacityVal }}
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        vectorEffect="non-scaling-stroke"
                     />
                     <motion.path
                         d={PATH_DOT_2}
-                        style={{ pathLength: drawDot2, fill: fillColor }}
-                        stroke="#C5F542"
+                        style={{ pathLength: drawDot2, fillOpacity: fillOpacityVal }}
                         strokeWidth="15"
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        vectorEffect="non-scaling-stroke"
                     />
                 </g>
             </motion.svg>
@@ -119,17 +122,16 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     return (
         <svg
             viewBox="0 0 1536 1024"
-            className="w-full h-full drop-shadow-[0_0_20px_rgba(197,245,66,0.4)] pointer-events-none"
+            className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
             preserveAspectRatio="xMidYMid meet"
         >
-            <g transform="translate(0, 1024) scale(0.1, -0.1)">
+            <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="var(--racing-red, #DFFF00)">
                 <motion.path
                     d={PATH_MAIN}
                     variants={timeBasedVariants}
                     initial="hidden"
                     animate="visible"
                     custom={0}
-                    stroke="#C5F542"
                     strokeWidth="15"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -140,7 +142,6 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                     initial="hidden"
                     animate="visible"
                     custom={1}
-                    stroke="#C5F542"
                     strokeWidth="15"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -151,7 +152,6 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                     initial="hidden"
                     animate="visible"
                     custom={2}
-                    stroke="#C5F542"
                     strokeWidth="15"
                     strokeLinecap="round"
                     strokeLinejoin="round"

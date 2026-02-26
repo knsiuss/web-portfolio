@@ -97,7 +97,7 @@ export default function ProjectsSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="projects" className="bg-[#050505] py-20 md:py-32 pointer-events-auto">
+    <section id="projects" className="bg-background py-20 md:py-32 pointer-events-auto">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <motion.div
@@ -107,13 +107,13 @@ export default function ProjectsSection() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="mb-12 md:mb-20"
         >
-          <span className="font-tech text-xs uppercase tracking-[0.3em] text-[#DFFF00] mb-4 block">
+          <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
             Selected Work
           </span>
           <h2 className="font-lando text-4xl md:text-6xl uppercase mb-4">
-            Featured <span className="text-transparent" style={{ WebkitTextStroke: '2px white' }}>Projects</span>
+            Featured <span className="text-transparent" style={{ WebkitTextStroke: '2px var(--color-foreground)' }}>Projects</span>
           </h2>
-          <p className="font-tech text-white/60 max-w-xl">
+          <p className="font-tech text-foreground/60 max-w-xl">
             Production-ready ML systems with real-world impact. Each project includes problem analysis,
             technical implementation, and measurable results.
           </p>
@@ -145,11 +145,11 @@ export default function ProjectsSection() {
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <span className="font-lando text-3xl md:text-4xl text-white/20">{project.number}</span>
+                        <span className="font-lando text-3xl md:text-4xl text-foreground/20">{project.number}</span>
                         <div className="h-[1px] flex-1 bg-white/10 md:hidden" />
                       </div>
-                      <h3 className="font-lando text-2xl md:text-4xl uppercase mb-2 text-white">{project.title}</h3>
-                      <p className="font-tech text-sm md:text-base text-white/60">{project.tagline}</p>
+                      <h3 className="font-lando text-2xl md:text-4xl uppercase mb-2 text-foreground">{project.title}</h3>
+                      <p className="font-tech text-sm md:text-base text-foreground/60">{project.tagline}</p>
                     </div>
                     <div className="flex gap-2">
                       {project.links.live && (
@@ -157,7 +157,7 @@ export default function ProjectsSection() {
                           href={project.links.live}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 bg-[#DFFF00] text-black font-tech text-xs uppercase px-4 py-2 rounded-full hover:brightness-110 transition-all"
+                          className="inline-flex items-center gap-1.5 bg-racing-red text-background font-tech text-xs uppercase px-4 py-2 rounded-full hover:brightness-110 transition-all"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                           Live Demo
@@ -167,7 +167,7 @@ export default function ProjectsSection() {
                         href={project.links.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 border border-white/20 text-white font-tech text-xs uppercase px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all"
+                        className="inline-flex items-center gap-1.5 border border-foreground/20 text-foreground font-tech text-xs uppercase px-4 py-2 rounded-full hover:bg-white hover:text-background transition-all"
                       >
                         <Github className="w-3.5 h-3.5" />
                         Code
@@ -180,24 +180,24 @@ export default function ProjectsSection() {
                     {/* Left Column */}
                     <div className="space-y-4">
                       {/* Problem */}
-                      <div className="bg-[#111] rounded-xl p-4">
+                      <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <Target className="w-4 h-4 text-[#DFFF00]" />
-                          <span className="font-tech text-xs uppercase tracking-wider text-white/40">The Problem</span>
+                          <Target className="w-4 h-4 text-racing-red" />
+                          <span className="font-tech text-xs uppercase tracking-wider text-foreground/40">The Problem</span>
                         </div>
-                        <p className="font-tech text-sm text-white/70">{project.problem}</p>
+                        <p className="font-tech text-sm text-foreground/70">{project.problem}</p>
                       </div>
 
                       {/* Solution */}
-                      <div className="bg-[#111] rounded-xl p-4">
+                      <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4">
                         <div className="flex items-center gap-2 mb-2">
-                          <Zap className="w-4 h-4 text-[#DFFF00]" />
-                          <span className="font-tech text-xs uppercase tracking-wider text-white/40">My Solution</span>
+                          <Zap className="w-4 h-4 text-racing-red" />
+                          <span className="font-tech text-xs uppercase tracking-wider text-foreground/40">My Solution</span>
                         </div>
                         <ul className="space-y-1.5">
                           {project.solution.map((item, i) => (
-                            <li key={i} className="font-tech text-sm text-white/70 flex items-start gap-2">
-                              <span className="text-[#DFFF00] mt-1">→</span>
+                            <li key={i} className="font-tech text-sm text-foreground/70 flex items-start gap-2">
+                              <span className="text-racing-red mt-1">→</span>
                               {item}
                             </li>
                           ))}
@@ -208,28 +208,28 @@ export default function ProjectsSection() {
                     {/* Right Column */}
                     <div className="space-y-4">
                       {/* Impact Metrics */}
-                      <div className="bg-[#111] rounded-xl p-4">
+                      <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4">
                         <div className="flex items-center gap-2 mb-3">
-                          <BarChart3 className="w-4 h-4 text-[#DFFF00]" />
-                          <span className="font-tech text-xs uppercase tracking-wider text-white/40">Impact</span>
+                          <BarChart3 className="w-4 h-4 text-racing-red" />
+                          <span className="font-tech text-xs uppercase tracking-wider text-foreground/40">Impact</span>
                         </div>
                         <div className="grid grid-cols-3 gap-3">
                           {project.impact.map((metric, i) => (
-                            <div key={i} className="text-center p-2 bg-[#222] rounded-lg">
-                              <div className="font-lando text-lg md:text-xl text-[#DFFF00]">{metric.value}</div>
-                              <div className="font-tech text-[10px] text-white/50">{metric.label}</div>
+                            <div key={i} className="text-center p-2 bg-foreground/5 dark:bg-foreground/10 rounded-lg">
+                              <div className="font-lando text-lg md:text-xl text-racing-red">{metric.value}</div>
+                              <div className="font-tech text-[10px] text-foreground/60">{metric.label}</div>
                             </div>
                           ))}
                         </div>
                       </div>
 
                       {/* Challenges */}
-                      <div className="bg-[#111] rounded-xl p-4">
-                        <span className="font-tech text-xs uppercase tracking-wider text-white/40 block mb-2">Challenges Solved</span>
+                      <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4">
+                        <span className="font-tech text-xs uppercase tracking-wider text-foreground/40 block mb-2">Challenges Solved</span>
                         <ul className="space-y-1">
                           {project.challenges.map((challenge, i) => (
-                            <li key={i} className="font-tech text-xs text-white/60 flex items-start gap-2">
-                              <span className="text-[#DFFF00]">•</span>
+                            <li key={i} className="font-tech text-xs text-foreground/60 flex items-start gap-2">
+                              <span className="text-racing-red">•</span>
                               {challenge}
                             </li>
                           ))}
@@ -239,12 +239,12 @@ export default function ProjectsSection() {
                   </div>
 
                   {/* Tech Stack */}
-                  <div className="mt-6 pt-6 border-t border-white/10">
+                  <div className="mt-6 pt-6 border-t border-foreground/10">
                     <div className="flex flex-wrap gap-2">
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="font-tech text-xs uppercase px-3 py-1 bg-[#111] text-white/70 rounded-full border border-white/10"
+                          className="font-tech text-xs uppercase px-3 py-1 bg-foreground/5 backdrop-blur-md border border-foreground/10 text-foreground/70 rounded-full border border-foreground/10"
                         >
                           {tech}
                         </span>
@@ -269,7 +269,7 @@ export default function ProjectsSection() {
             href="https://github.com/knsiuss"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-tech uppercase tracking-wider text-white/60 hover:text-[#DFFF00] transition-colors group"
+            className="inline-flex items-center gap-2 font-tech uppercase tracking-wider text-foreground/60 hover:text-[#DFFF00] transition-colors group"
           >
             View More on GitHub
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

@@ -91,7 +91,7 @@ export default function TimelineSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative bg-[#0a0a0a] py-20 md:py-32 overflow-hidden">
+    <section className="relative bg-foreground/5 dark:bg-background py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <motion.div
@@ -100,13 +100,13 @@ export default function TimelineSection() {
           viewport={{ once: true }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="font-tech text-xs uppercase tracking-[0.3em] text-[#DFFF00] mb-4 block">
+          <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
             My Journey
           </span>
           <h2 className="font-lando text-4xl md:text-6xl uppercase mb-4">
-            The Path <span className="text-[#DFFF00]">So Far</span>
+            The Path <span className="text-racing-red">So Far</span>
           </h2>
-          <p className="font-tech text-white/50 max-w-xl mx-auto">
+          <p className="font-tech text-foreground/50 max-w-xl mx-auto">
             From watching Iron Man to becoming a Google Ambassador—every step counts.
           </p>
         </motion.div>
@@ -124,15 +124,15 @@ export default function TimelineSection() {
             >
               {/* Year Header */}
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-10 h-10 bg-[#DFFF00]/10 border border-[#DFFF00]/30 rounded-full flex items-center justify-center text-[#DFFF00]">
+                <div className="w-10 h-10 bg-[#DFFF00]/10 border border-[#DFFF00]/30 rounded-full flex items-center justify-center text-racing-red">
                   {period.icon}
                 </div>
-                <span className="font-lando text-2xl md:text-3xl text-white">{period.year}</span>
+                <span className="font-lando text-2xl md:text-3xl text-foreground">{period.year}</span>
                 <div className="flex-1 h-[1px] bg-white/10" />
               </div>
 
               {/* Events */}
-              <div className="ml-5 pl-8 border-l border-white/10 space-y-4">
+              <div className="ml-5 pl-8 border-l border-foreground/10 space-y-4">
                 {period.events.map((event, eventIndex) => (
                   <motion.div
                     key={eventIndex}
@@ -142,7 +142,7 @@ export default function TimelineSection() {
                     transition={{ delay: 0.1 + eventIndex * 0.05 }}
                     className={`relative p-4 rounded-xl transition-all ${event.highlight
                       ? 'bg-[#DFFF00]/10 border border-[#DFFF00]/30'
-                      : 'bg-white/5 border border-white/10 hover:border-white/20'
+                      : 'bg-white/5 border border-foreground/10 hover:border-foreground/20'
                       } ${event.current ? 'ring-2 ring-[#DFFF00] ring-offset-2 ring-offset-black' : ''}`}
                   >
                     {/* Dot */}
@@ -153,13 +153,13 @@ export default function TimelineSection() {
 
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <h4 className={`font-tech text-sm md:text-base mb-1 ${event.highlight ? 'text-white' : 'text-white/80'}`}>
+                        <h4 className={`font-tech text-sm md:text-base mb-1 ${event.highlight ? 'text-foreground' : 'text-foreground/80'}`}>
                           {event.title}
                         </h4>
-                        <p className="font-tech text-xs text-white/50">{event.desc}</p>
+                        <p className="font-tech text-xs text-foreground/50">{event.desc}</p>
                       </div>
                       {event.current && (
-                        <span className="shrink-0 font-tech text-[10px] uppercase px-2 py-1 bg-[#DFFF00] text-black rounded-full">
+                        <span className="shrink-0 font-tech text-[10px] uppercase px-2 py-1 bg-[#DFFF00] text-background rounded-full">
                           Now
                         </span>
                       )}
@@ -178,10 +178,10 @@ export default function TimelineSection() {
           viewport={{ once: true }}
           className="max-w-2xl mx-auto mt-12 text-center"
         >
-          <p className="font-lando text-lg md:text-xl uppercase text-white/40 italic">
+          <p className="font-lando text-lg md:text-xl uppercase text-foreground/70 dark:text-foreground/40 italic">
             &ldquo;The journey of a thousand miles begins with a single step&rdquo;
           </p>
-          <p className="font-tech text-xs text-white/30 mt-2">— And a lot of Python debugging</p>
+          <p className="font-tech text-xs text-foreground/60 dark:text-foreground/30 mt-2">— And a lot of Python debugging</p>
         </motion.div>
       </div>
     </section>

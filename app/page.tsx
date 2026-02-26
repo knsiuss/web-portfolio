@@ -79,11 +79,11 @@ export default function Home() {
       {/* Main Content */}
       <main
         ref={containerRef}
-        className={`min-h-screen bg-transparent text-white font-sans relative ${isLoading ? 'overflow-hidden' : ''
+        className={`min-h-screen bg-transparent text-foreground font-sans relative ${isLoading ? 'overflow-hidden' : ''
           }`}
       >
         {/* CINEMATIC VIDEO BACKGROUND LAYER */}
-        <div className="fixed inset-0 z-0 overflow-hidden bg-[#050505]">
+        <div className="fixed inset-0 z-0 overflow-hidden bg-background">
           {/* Math & Physics WebGL Shader Background (Isolines) */}
           <ShaderBackground />
 
@@ -96,13 +96,13 @@ export default function Home() {
             style={{ y: glowY1 }}
           />
           <motion.div
-            className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-black opacity-5 blur-[100px] pointer-events-none"
+            className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-foreground opacity-5 blur-[100px] pointer-events-none"
             style={{ y: glowY2 }}
           />
         </div>
 
         {/* Background Pattern Mask */}
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,#050505_100%)] opacity-80 pointer-events-none z-0" />
+        <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-background)_100%)] opacity-80 pointer-events-none z-0" />
 
         {/* --- HEADER --- */}
         <Navigation onMenuOpen={() => setIsMenuOpen(true)} />

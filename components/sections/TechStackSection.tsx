@@ -19,7 +19,7 @@ const techRow2 = [
   { name: 'Seaborn', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', desc: 'Statistical Viz', color: '#4C72B0', bg: 'bg-[#4C72B0]/10' },
   { name: 'Plotly', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/plotly/plotly-original.svg', desc: 'Interactive', color: '#119DFF', bg: 'bg-[#119DFF]/10' },
   { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', desc: 'Containers', color: '#2496ED', bg: 'bg-[#2496ED]/10' },
-  { name: 'GitHub Actions', logo: 'https://github.githubassets.com/images/modules/site/features/actions-icon.svg', desc: 'CI/CD', color: '#2088FF', bg: 'bg-[#2088FF]/10' },
+  { name: 'GitHub Actions', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/githubactions/githubactions-original.svg', desc: 'CI/CD', color: '#2088FF', bg: 'bg-[#2088FF]/10' },
   { name: 'GitLab CI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/gitlab/gitlab-original.svg', desc: 'DevOps', color: '#FC6D26', bg: 'bg-[#FC6D26]/10' },
   { name: 'VS Code', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg', desc: 'Editor', color: '#007ACC', bg: 'bg-[#007ACC]/10' },
   { name: 'Google Colab', logo: 'https://colab.research.google.com/img/colab_favicon_256px.png', desc: 'Cloud', color: '#F9AB00', bg: 'bg-[#F9AB00]/10' },
@@ -57,7 +57,7 @@ interface TechCardProps {
 function TechCard({ tech, index, rowOffset }: TechCardProps) {
   return (
     <div
-      className="flex-shrink-0 w-[160px] sm:w-[200px] md:w-[260px] h-[200px] sm:h-[260px] md:h-[340px] bg-[#1a1a1a] rounded-xl md:rounded-2xl border border-white/10 p-4 md:p-6 flex flex-col justify-between group hover:border-[#DFFF00] transition-all hover:scale-[1.02] md:hover:scale-105 hover:-translate-y-1 md:hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(225,6,0,0.2)] md:hover:shadow-[0_0_30px_rgba(225,6,0,0.3)] duration-300"
+      className="flex-shrink-0 w-[160px] sm:w-[200px] md:w-[260px] h-[200px] sm:h-[260px] md:h-[340px] bg-foreground/5 rounded-xl md:rounded-2xl border border-foreground/10 p-4 md:p-6 flex flex-col justify-between group hover:border-[#DFFF00] transition-all hover:scale-[1.02] md:hover:scale-105 hover:-translate-y-1 md:hover:-translate-y-2 hover:shadow-[0_0_20px_rgba(225,6,0,0.2)] md:hover:shadow-[0_0_30px_rgba(225,6,0,0.3)] duration-300"
       style={{
         willChange: 'transform',
         contain: 'layout style paint',
@@ -76,13 +76,13 @@ function TechCard({ tech, index, rowOffset }: TechCardProps) {
               height="64"
             />
           </div>
-          <span className="font-lando text-xl sm:text-2xl md:text-4xl text-white/10 group-hover:text-[#DFFF00]/20 transition-colors">
+          <span className="font-lando text-xl sm:text-2xl md:text-4xl text-foreground/10 group-hover:text-[#DFFF00]/20 transition-colors">
             {String(index + 1 + rowOffset).padStart(2, '0')}
           </span>
         </div>
         <div>
           <h3 className="font-lando text-base sm:text-lg md:text-2xl uppercase mb-1 md:mb-2 group-hover:text-[#DFFF00] transition-colors">{tech.name}</h3>
-          <p className="font-tech text-[10px] sm:text-xs text-white/60 uppercase tracking-wider">{tech.desc}</p>
+          <p className="font-tech text-[10px] sm:text-xs text-foreground/60 uppercase tracking-wider">{tech.desc}</p>
           <div
             className="w-full h-0.5 md:h-1 mt-2 md:mt-3 rounded-full opacity-30 group-hover:opacity-100 transition-opacity"
             style={{ backgroundColor: tech.color }}
@@ -109,7 +109,7 @@ export default function TechStackSection() {
   const shouldAnimate = !prefersReducedMotion && !isTouchDevice;
 
   return (
-    <section className="bg-[#111] text-white py-12 md:py-20 overflow-hidden">
+    <section className="bg-foreground/5 backdrop-blur-md border border-foreground/10 text-foreground py-12 md:py-20 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 mb-8 md:mb-12">
         <motion.div
           initial={prefersReducedMotion ? {} : { opacity: 0, y: 100, skewY: 5 }}
@@ -120,7 +120,7 @@ export default function TechStackSection() {
         >
           <h2 className="font-lando text-3xl sm:text-5xl md:text-7xl uppercase">
             Tech<br />
-            <span className="text-[#DFFF00]">Stack</span>
+            <span className="text-racing-red">Stack</span>
           </h2>
           <p className="font-tech text-xs uppercase tracking-wider opacity-60 hidden md:block">
             Hover to pause →

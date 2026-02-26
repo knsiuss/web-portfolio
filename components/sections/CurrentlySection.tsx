@@ -40,10 +40,10 @@ export default function CurrentlySection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative bg-[#0a0a0a] py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-background py-16 md:py-24 overflow-hidden">
       {/* Background Accent */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-[#DFFF00]/5 rounded-full blur-[60px] md:blur-[100px]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] md:w-[600px] h-[150px] md:h-[300px] bg-racing-red/10 dark:bg-[#DFFF00]/5 rounded-full blur-[60px] md:blur-[100px]" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -104,17 +104,17 @@ export default function CurrentlySection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 pt-6 md:pt-8 border-t border-white/10"
+          className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 pt-6 md:pt-8 border-t border-foreground/10"
         >
-          <div className="flex items-center gap-2 text-white/40">
+          <div className="flex items-center gap-2 text-foreground/40">
             <Clock className="w-3 h-3 md:w-4 md:h-4" />
             <span className="font-tech text-[10px] md:text-xs uppercase tracking-wider">
               Last updated: {lastUpdated}
             </span>
           </div>
-          
-          <p className="font-tech text-[10px] md:text-xs text-white/30 text-center md:text-right">
-            This section auto-updates with my latest activities
+
+          <p className="font-tech text-[10px] md:text-xs text-foreground/30 text-center md:text-right">
+            {/* Removed misleading auto-update claim */}
           </p>
         </motion.div>
       </div>
@@ -134,27 +134,27 @@ interface Activity {
 
 function ActivityCard({ activity }: { activity: Activity }) {
   return (
-    <div 
+    <div
       className={`relative h-full bg-gradient-to-br ${activity.color} border ${activity.borderColor} rounded-xl md:rounded-2xl p-5 md:p-6 group-hover:border-opacity-60 transition-all duration-300 hover:scale-[1.01] md:hover:scale-[1.02]`}
     >
       {/* Icon & Label */}
       <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-        <div className={`w-8 h-8 md:w-10 md:h-10 ${activity.iconBg} rounded-lg flex items-center justify-center text-white`}>
+        <div className={`w-8 h-8 md:w-10 md:h-10 ${activity.iconBg} rounded-lg flex items-center justify-center text-foreground`}>
           {activity.icon}
         </div>
-        <span className="font-tech text-[10px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.15em] text-white/50">
+        <span className="font-tech text-[10px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.15em] text-foreground/50">
           {activity.label}
         </span>
       </div>
 
       {/* Content */}
-      <p className="font-tech text-sm md:text-base text-white/90 leading-relaxed mb-3 md:mb-4">
+      <p className="font-tech text-sm md:text-base text-foreground/90 leading-relaxed mb-3 md:mb-4">
         {activity.content}
       </p>
 
       {/* Link Indicator */}
       {activity.link && (
-        <div className="flex items-center gap-1.5 md:gap-2 text-white/40 group-hover:text-[#DFFF00] transition-colors">
+        <div className="flex items-center gap-1.5 md:gap-2 text-foreground/40 group-hover:text-[#DFFF00] transition-colors">
           <span className="font-tech text-[10px] md:text-xs uppercase tracking-wider">
             View
           </span>
@@ -163,7 +163,7 @@ function ActivityCard({ activity }: { activity: Activity }) {
       )}
 
       {/* Corner Decoration */}
-      <div className="absolute top-3 right-3 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 border-t border-r border-white/10 rounded-tr-md md:rounded-tr-lg opacity-50" />
+      <div className="absolute top-3 right-3 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 border-t border-r border-foreground/10 rounded-tr-md md:rounded-tr-lg opacity-50" />
     </div>
   );
 }

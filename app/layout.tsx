@@ -1,5 +1,7 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { GoogleAnalytics } from "@/components/Analytics";
+import BackToTop from "@/components/ui/BackToTop";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { Anton, Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 
@@ -24,50 +26,38 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-  description: "Machine Learning Engineer building real-time F1 analytics and production ML systems. Google Student Ambassador, Stanford ML Certified, passionate about AI education.",
+  description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
   keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
-  publisher: "Kanisius Bagaskara",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kanisiusbagas.vercel.app",
+    url: "https://kanisius.dev",
     siteName: "Kanisius Bagaskara Portfolio",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Building real-time F1 analytics and production ML systems. Google Student Ambassador, Stanford ML Certified.",
+    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
     images: [
       {
-        url: "/assets/og-image.jpg",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Kanisius Bagaskara - ML Engineer Portfolio",
+        alt: "Kanisius Bagaskara - Machine Learning Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Building real-time F1 analytics and production ML systems. Google Student Ambassador.",
-    images: ["/assets/og-image.jpg"],
+    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures.",
+    images: ["/og-image.jpg"],
     creator: "@maxquincy18",
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "hqAZ8rtWx92tpMkiCwDi6imswCTZ7WLBq_lVDUnlpJE",
   },
   alternates: {
-    canonical: "https://kanisiusbagas.vercel.app",
+    canonical: "https://kanisius.dev",
   },
   category: "technology",
 };
@@ -85,14 +75,14 @@ const structuredData = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://kanisiusbagas.vercel.app/#person",
+      "@id": "https://kanisius.dev/#person",
       name: "Kanisius Bagaskara",
       givenName: "Kanisius",
       familyName: "Bagaskara",
       jobTitle: "Machine Learning Engineer",
       description: "Machine Learning Engineer building real-time F1 analytics and production ML systems. Google Student Ambassador.",
-      url: "https://kanisiusbagas.vercel.app",
-      image: "https://kanisiusbagas.vercel.app/assets/profile.jpg",
+      url: "https://kanisius.dev",
+      image: "https://kanisius.dev/assets/profile.jpg",
       email: "mailto:maxvy1218@gmail.com",
       telephone: "+6285183268643",
       address: {
@@ -137,24 +127,24 @@ const structuredData = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://kanisiusbagas.vercel.app/#website",
-      url: "https://kanisiusbagas.vercel.app",
+      "@id": "https://kanisius.dev/#website",
+      url: "https://kanisius.dev",
       name: "Kanisius Bagaskara Portfolio",
       description: "Portfolio of Kanisius Bagaskara - ML Engineer & Data Scientist",
       publisher: {
-        "@id": "https://kanisiusbagas.vercel.app/#person",
+        "@id": "https://kanisius.dev/#person",
       },
     },
     {
       "@type": "WebPage",
-      "@id": "https://kanisiusbagas.vercel.app/#webpage",
-      url: "https://kanisiusbagas.vercel.app",
+      "@id": "https://kanisius.dev/#webpage",
+      url: "https://kanisius.dev",
       name: "Kanisius Bagaskara | ML Engineer & Data Scientist",
       isPartOf: {
-        "@id": "https://kanisiusbagas.vercel.app/#website",
+        "@id": "https://kanisius.dev/#website",
       },
       about: {
-        "@id": "https://kanisiusbagas.vercel.app/#person",
+        "@id": "https://kanisius.dev/#person",
       },
     },
   ],
@@ -169,17 +159,23 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${anton.variable} ${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
+      suppressHydrationWarning
     >
       <head>
+        <meta name="google-site-verification" content="hqAZ8rtWx92tpMkiCwDi6imswCTZ7WLBq_lVDUnlpJE" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className="antialiased bg-[#050505] text-white overflow-x-hidden">
-        {children}
-        <GoogleAnalytics />
+      <body className="antialiased bg-background text-foreground overflow-x-hidden transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          {children}
+          <BackToTop />
+          <GoogleAnalytics />
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
