@@ -18,14 +18,23 @@ export default function Navigation({ onMenuOpen }: NavigationProps) {
         data-cursor
         data-cursor-text="Home"
       >
-        <motion.h1
+        <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-          className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-racing-red transition-colors hover-glitch"
+          className="flex items-center gap-2 sm:gap-3 group"
         >
-          <StaggerText text="KANISIUS" delay={0.2} />
-        </motion.h1>
+          {/* Logo Icon */}
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-foreground rounded-full flex items-center justify-center transition-transform group-hover:scale-110 group-hover:bg-racing-red">
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-background fill-current">
+              <path d="M12 4L22 20H2L12 4Z" />
+            </svg>
+          </div>
+          {/* Logo Text */}
+          <div className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-4xl tracking-tight text-foreground transition-colors group-hover:text-racing-red group-hover:glitch">
+            <StaggerText text="KANISIUS" delay={0.2} />
+          </div>
+        </motion.div>
       </motion.div>
 
       {/* RIGHT: Contact & Menu */}
