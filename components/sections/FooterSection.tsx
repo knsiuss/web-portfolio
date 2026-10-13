@@ -1,6 +1,6 @@
 'use client';
 
-import { Github, Linkedin } from 'lucide-react';
+import { Github, Linkedin, Instagram } from 'lucide-react';
 
 export default function FooterSection() {
   return (
@@ -13,7 +13,7 @@ export default function FooterSection() {
             <h3 className="font-lando text-2xl md:text-3xl mb-3 md:mb-4">BAGASKARA</h3>
             <p className="font-tech text-[10px] md:text-xs uppercase tracking-wider opacity-60">
               Machine Learning Engineer<br />
-              Google Student Ambassador
+              AI for Physical World
             </p>
           </div>
 
@@ -51,6 +51,15 @@ export default function FooterSection() {
                 aria-label="LinkedIn"
               >
                 <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
+              </a>
+              <a
+                href="https://www.instagram.com/p_knsss/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-racing-red hover:border-racing-red hover:text-background transition-all"
+                aria-label="Instagram"
+              >
+                <Instagram size={16} className="md:w-[18px] md:h-[18px]" />
               </a>
 
             </div>

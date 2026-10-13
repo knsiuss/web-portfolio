@@ -16,6 +16,12 @@ interface HeroSectionProps {
   onMenuOpen: () => void;
 }
 
+// Role tags shown under the name; kept as data so the row stays a simple map.
+const HERO_ROLES = [
+  "ML Engineer"
+
+];
+
 export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
@@ -72,20 +78,21 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-4 md:mt-10 flex flex-col items-center gap-1.5 md:gap-3"
         >
-          <div className="flex justify-center items-center gap-2 md:gap-4">
-            <span className="w-8 md:w-16 h-[1.5px] bg-foreground" />
-            <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.15em] md:tracking-[0.3em] text-foreground">
-              Google Student Ambassador
-            </span>
-            <span className="w-8 md:w-16 h-[1.5px] bg-foreground" />
-          </div>
-          <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-foreground/60">
-            Jakarta, Indonesia • Machine Learning Engineer
+          <span className="flex flex-wrap justify-center items-center gap-x-2 md:gap-x-3 gap-y-1">
+            {HERO_ROLES.map((role, index) => (
+              <span key={role} className="flex items-center gap-x-2 md:gap-x-3">
+                <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.15em] md:tracking-[0.3em] text-foreground">
+                  {role}
+                </span>
+                {index < HERO_ROLES.length - 1 && (
+                  <span className="font-tech text-[10px] md:text-sm text-foreground/30">/</span>
+                )}
+              </span>
+            ))}
           </span>
-          <div className="mt-2 md:mt-4 inline-flex items-center gap-2 px-3 max-md:py-1 py-1.5 rounded-full border border-racing-red/50 bg-racing-red/10 backdrop-blur-md shadow-[0_0_15px_var(--color-racing-red)]" style={{ '--tw-shadow-color': 'var(--color-racing-red)', '--tw-shadow': 'var(--tw-shadow-color) 0px 0px 15px 0px inset' } as React.CSSProperties}>
-            <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-racing-red animate-pulse" style={{ boxShadow: "0 0 8px var(--color-racing-red)" }}></span>
-            <span className="font-tech text-[9px] md:text-xs text-racing-red uppercase tracking-wider font-bold">Open to Work</span>
-          </div>
+          <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-foreground/60">
+            Jakarta, Indonesia
+          </span>
         </motion.div>
       </motion.div>
 
@@ -177,7 +184,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
       {/* WIDGET: CURRENT FOCUS - Hidden on mobile, show on md+ */}
       <div className="fixed bottom-6 md:bottom-12 left-4 md:left-12 z-40 hidden md:flex flex-col gap-2 pointer-events-auto">
         <span className="font-tech text-glow-neon text-[9px] md:text-[10px] uppercase tracking-widest text-racing-red ml-3">
-          Current Focus
+          AI for Physical World
         </span>
 
         <div className="w-32 md:w-40 h-48 md:h-64 border border-foreground/10 rounded-lg bg-white/[0.02] backdrop-blur-md hover:bg-[#DFFF00]/10 hover:border-[#DFFF00]/50 transition-all cursor-pointer group flex flex-col items-center p-3 md:p-4 relative skew-racing overflow-hidden hover:shadow-[0_0_30px_rgba(223,255,0,0.15)]">

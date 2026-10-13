@@ -26,8 +26,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-  description: "ML Engineer & Data Scientist specializing in real-time F1 analytics, deep learning, and production MLOps pipelines. Google Student Ambassador Top 200. Based in Jakarta, Indonesia.",
-  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Google Student Ambassador", "Python", "PyTorch", "TensorFlow", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
+  description: "ML Engineer & Data Scientist specializing in real-time F1 analytics, deep learning, and production MLOps pipelines. Based in Jakarta, Indonesia.",
+  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Python", "PyTorch", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
   icons: {
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     url: "https://kanisius.dev",
     siteName: "Kanisius Bagaskara Portfolio",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher, Google Student Ambassador, and AI educator.",
+    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher and AI educator.",
     images: [
       {
         url: "/og-image.jpg",
@@ -54,7 +54,6 @@ export const metadata: Metadata = {
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
     description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures.",
     images: ["/og-image.jpg"],
-    creator: "@maxquincy18",
   },
   verification: {
     google: "hqAZ8rtWx92tpMkiCwDi6imswCTZ7WLBq_lVDUnlpJE",
@@ -83,7 +82,7 @@ const structuredData = {
       givenName: "Kanisius",
       familyName: "Bagaskara",
       jobTitle: "Machine Learning Engineer",
-      description: "Machine Learning Engineer building real-time F1 analytics and production ML systems. Google Student Ambassador.",
+      description: "Machine Learning Engineer building real-time F1 analytics and production ML systems.",
       url: "https://kanisius.dev",
       image: "https://kanisius.dev/assets/profile.jpg",
       email: "mailto:maxvy1218@gmail.com",
@@ -100,15 +99,10 @@ const structuredData = {
           sameAs: "https://www.stanford.edu",
         },
       ],
-      worksFor: {
-        "@type": "Organization",
-        name: "Google",
-        sameAs: "https://www.google.com",
-      },
       sameAs: [
         "https://github.com/knsiuss",
         "https://linkedin.com/in/kanisiusbagas1212",
-        "https://x.com/maxquincy18",
+        "https://www.instagram.com/p_knsss/",
       ],
       knowsAbout: [
         "Machine Learning",
@@ -123,7 +117,7 @@ const structuredData = {
         "Natural Language Processing",
       ],
       award: [
-        "Google Student Ambassador Top 200",
+        "Rising Star Top 100",
         "Stanford Machine Learning Specialization",
         "Google Gemini Certified Educator",
       ],

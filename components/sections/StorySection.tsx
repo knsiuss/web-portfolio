@@ -73,8 +73,8 @@ export default function StorySection() {
                 From Bedroom to Stage
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
-                Used to be just some kid coding alone in my room. Next thing I know, I'm a Google Student Ambassador.
-                I was the guy who got nervous talking to 5 people. Now I can teach workshops with 100+ people.
+                Used to be just some kid coding alone in my room. I was the guy who got nervous
+                talking to 5 people. Now I can teach workshops with 100+ people.
                 Didn't see that coming, but turns out teaching is fun—it actually makes me understand stuff better.
               </p>
             </div>

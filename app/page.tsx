@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 
 // Hooks
@@ -8,7 +9,13 @@ import useLenis from '@/hooks/useLenis';
 
 // UI Components
 import LoadingScreen from '@/components/ui/LoadingScreen';
-import ShaderBackground from '@/components/ui/ShaderBackground';
+
+// Background canvas dimuat setelah hydration: LoadingScreen sudah menutupi
+// layar saat ini, sehingga three.js pergi dari critical path tanpa beda visual.
+const ShaderBackground = dynamic(
+  () => import('@/components/ui/ShaderBackground'),
+  { ssr: false },
+);
 
 // Feature Components
 import EasterEgg from '@/components/EasterEgg';
@@ -20,7 +27,6 @@ import HeroSection from '@/components/sections/HeroSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import TechStackSection from '@/components/sections/TechStackSection';
 import AchievementsSection from '@/components/sections/AchievementsSection';
-import TimelineSection from '@/components/sections/TimelineSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
 import AboutSection from '@/components/sections/AboutSection';
 import StorySection from '@/components/sections/StorySection';
@@ -123,9 +129,6 @@ export default function Home() {
 
           {/* Achievements Section */}
           <AchievementsSection />
-
-          {/* Timeline Section */}
-          <TimelineSection />
 
           {/* Certifications Section */}
           <CertificationsSection />

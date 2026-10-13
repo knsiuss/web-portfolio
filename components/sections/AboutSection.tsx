@@ -29,12 +29,12 @@ const expertise = [
   {
     icon: <Users className="w-6 h-6" />,
     title: "Leadership",
-    desc: "Google Student Ambassador, Tech Overviews",
+    desc: "AI Workshops, Mentoring",
   },
 ];
 
 const highlights = [
-  { icon: <Trophy className="w-4 h-4 text-racing-red" />, text: "GSA Rising Star + Top 100" },
+  { icon: <Trophy className="w-4 h-4 text-racing-red" />, text: "Rising Star Top 100" },
   { icon: <Rocket className="w-4 h-4 text-racing-red" />, text: "Stanford ML Specialization" },
   { icon: <Code2 className="w-4 h-4 text-racing-red" />, text: "8+ Open Source Projects" },
   { icon: <Users className="w-4 h-4 text-racing-red" />, text: "100+ Students Trained" },
@@ -78,8 +78,6 @@ export default function AboutSection() {
                 weather integration using Python, FastF1 API, and XGBoost.
               </p>
               <p>
-                As a{" "}
-                <span className="text-foreground">Google Student Ambassador Rising Star + Top 100</span>,
                 I&apos;ve conducted AI workshops for 100+ students, making complex AI concepts
                 accessible through hands-on learning.
               </p>
@@ -91,7 +89,7 @@ export default function AboutSection() {
               </p>
             </div>
 
-            {/* GSA Highlight Card (Photo) */}
+            {/* Profile Card (Photo) */}
             <motion.div
               initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95, y: 30 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -116,12 +114,6 @@ export default function AboutSection() {
 
                   {/* Racing overlay line */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-
-                  {/* Badge Overlay */}
-                  <div className="absolute bottom-3 left-3 bg-[#DFFF00] text-background font-lando uppercase text-xs px-2 py-1 flex items-center gap-1 leading-none rounded-sm">
-                    <Trophy className="w-3 h-3" />
-                    GSA '25
-                  </div>
                 </div>
 
                 {/* Caption */}
