@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description:
         'Case study: Real-time F1 telemetry dashboard with XGBoost ML model predicting optimal pit stop windows at 92% accuracy. Built with FastF1, FastAPI, and Streamlit.',
     openGraph: {
-        title: 'F1 2025 Analytics Dashboard — Case Study',
+        title: 'F1 Dashboard Analytics',
         description: 'Real-time ML-powered F1 strategy predictions. 92% model accuracy, <50ms API response.',
         url: 'https://kanisius.dev/projects/f1-dashboard',
     },

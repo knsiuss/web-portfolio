@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useMemo, useEffect, useCallback } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import { extend } from '@react-three/fiber';
@@ -91,8 +91,45 @@ declare global {
   }
 }
 
+// Animasi shader bergerak lambat, jadi 30fps vs 60fps tidak terlihat beda
+// sementara biaya GPU render turun setengah.
+const RENDER_INTERVAL_MS = 33;
+
+// Canvas jalan mode demand: render hanya saat di-invalidate, sehingga throttle
+// dan pause saat tab tersembunyi duduk di satu tempat alih-alih loop tanpa henti.
+function RenderDriver() {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    let timer: number;
+
+    const schedule = () => {
+      timer = window.setTimeout(() => {
+        invalidate();
+        schedule();
+      }, RENDER_INTERVAL_MS);
+    };
+
+    const onVisibilityChange = () => {
+      window.clearTimeout(timer);
+      if (!document.hidden) schedule();
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    schedule();
+
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+    };
+  }, [invalidate]);
+
+  return null;
+}
+
 // Receives isDark so it can update the WebGL uniforms when theme changes
 function ShaderPlane({ isDark }: { isDark: boolean }) {
+  const invalidate = useThree((state) => state.invalidate);
   const materialRef = useRef<any>(null);
 
   // Cache resolution in a ref — updated only on resize, NOT every frame
@@ -117,8 +154,9 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
     if (materialRef.current) {
       materialRef.current.u_colorBg = new THREE.Color(isDark ? '#0a110a' : '#e8f0e8');
       materialRef.current.u_colorLine = new THREE.Color(isDark ? '#dfff00' : '#5a8a00');
+      invalidate();
     }
-  }, [isDark]);
+  }, [isDark, invalidate]);
 
   useFrame((state) => {
     if (materialRef.current) {
@@ -154,10 +192,11 @@ export default function ShaderBackground() {
         dpr={Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 1)}
         // Prevents R3F from triggering layout reads on scroll
         resize={{ scroll: false, debounce: { scroll: 0, resize: 200 } }}
-        // frameloop='demand' would stop rendering when idle — but shader is animated
-        // so we keep 'always', just with reduced overhead
-        frameloop="always"
+        // frameloop='demand' + RenderDriver above keeps the same animation
+        // but lets us skip frames and pause when the tab is hidden
+        frameloop="demand"
       >
+        <RenderDriver />
         <ShaderPlane isDark={isDark} />
       </Canvas>
     </div>
