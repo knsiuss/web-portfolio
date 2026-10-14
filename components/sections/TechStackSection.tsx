@@ -1,6 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Code2, BarChart3, Sparkles, Rocket, Wrench } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
@@ -161,14 +162,12 @@ export default function TechStackSection() {
                       key={tool.name}
                       className="rounded-xl border border-foreground/10 bg-foreground/5 p-3 flex items-center gap-3 hover:border-[#DFFF00]/40 transition-colors"
                     >
-                      <img
+                      <Image
                         src={tool.logo}
                         alt=""
-                        className="w-7 h-7 object-contain shrink-0"
-                        loading="lazy"
-                        decoding="async"
-                        width="28"
-                        height="28"
+                        width={28}
+                        height={28}
+                        className="object-contain shrink-0"
                       />
                       <div className="min-w-0">
                         <div className="font-tech text-xs text-foreground leading-tight">{tool.name}</div>

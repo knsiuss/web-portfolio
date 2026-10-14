@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useGLTF, Environment, ContactShadows, PresentationControls } from '@react-three/drei';
+import { Environment, ContactShadows, PresentationControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 // 3D Helmet Model Component

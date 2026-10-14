@@ -45,7 +45,7 @@ const projects: Project[] = [
     tech: ["Python", "Streamlit", "FastF1", "XGBoost", "FastAPI"],
     links: {
       live: "https://f1-lab.streamlit.app/",
-      github: "https://github.com/knsiuss",
+      github: "https://github.com/knsiuss/f1lab",
       caseStudy: "/projects/f1-dashboard",
     },
     color: "from-[#DFFF00]/20 to-orange-600/10",

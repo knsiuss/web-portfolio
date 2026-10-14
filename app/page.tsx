@@ -46,7 +46,6 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const glowY1 = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
   const glowY2 = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']);
 

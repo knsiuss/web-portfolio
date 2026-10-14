@@ -51,8 +51,8 @@ export default function StorySection() {
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
                 Honestly? I got into Data Science because of Iron Man. Watching JARVIS talk, analyze data in real-time,
-                help Tony make decisions—I thought, "Damn, I wanna build something like that." Started learning Python,
-                fell into ML, and now I'm stuck here (in a good way).
+                help Tony make decisions—I thought, &ldquo;Damn, I wanna build something like that.&rdquo; Started learning Python,
+                fell into ML, and now I&apos;m stuck here (in a good way).
               </p>
             </div>
           </motion.div>
@@ -75,7 +75,7 @@ export default function StorySection() {
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
                 Used to be just some kid coding alone in my room. I was the guy who got nervous
                 talking to 5 people. Now I can teach workshops with 100+ people.
-                Didn't see that coming, but turns out teaching is fun—it actually makes me understand stuff better.
+                Didn&apos;t see that coming, but turns out teaching is fun—it actually makes me understand stuff better.
               </p>
             </div>
           </motion.div>
@@ -97,7 +97,7 @@ export default function StorySection() {
               </h3>
               <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed">
                 I never aim to be the best. I just know that when I have a target, I chase it until I get it.
-                Like F1—it's not about being perfect, it's about improving every single lap. Code broke? Fix it.
+                Like F1—it&apos;s not about being perfect, it&apos;s about improving every single lap. Code broke? Fix it.
                 Algorithm failed? Try again. Just keep moving forward.
               </p>
             </div>
@@ -119,10 +119,10 @@ export default function StorySection() {
           <div className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 text-center">
             <blockquote>
               <p className="font-lando text-xl sm:text-2xl md:text-3xl lg:text-5xl uppercase leading-tight mb-4 md:mb-6">
-                <span className="text-foreground">I'm not perfect, </span>
+                <span className="text-foreground">I&apos;m not perfect, </span>
                 <span className="text-foreground/40">but when I have a goal,</span>
                 <br />
-                <span className="text-racing-red">I DON'T STOP UNTIL I GET IT.</span>
+                <span className="text-racing-red">I DON&apos;T STOP UNTIL I GET IT.</span>
               </p>
             </blockquote>
 

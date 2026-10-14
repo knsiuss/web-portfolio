@@ -22,7 +22,7 @@ const HERO_ROLES = [
 
 ];
 
-export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
+export default function HeroSection({}: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const prefersReducedMotion = useReducedMotion();
@@ -31,6 +31,11 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
   const textScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.1]);
   const opacity = useTransform(scrollYProgress, [0.2, 0.5], [1, 0]);
+  // Hoisted so every hook runs unconditionally on each render.
+  const textX = useTransform(mouseX, [-1, 1], [-5, 5]);
+  const bgTextY = useTransform(scrollYProgress, [0, 0.5], [0, -30]);
+  const bgTextOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const starY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (prefersReducedMotion) return;
@@ -52,7 +57,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
           y: prefersReducedMotion ? 0 : textY,
           scale: prefersReducedMotion ? 1 : textScale,
           opacity: prefersReducedMotion ? 1 : opacity,
-          x: prefersReducedMotion ? 0 : useTransform(mouseX, [-1, 1], [-5, 5]),
+          x: prefersReducedMotion ? 0 : textX,
         }}
         className="absolute top-[20%] md:top-[12%] w-full flex flex-col items-center justify-center z-20 px-4"
       >
@@ -99,12 +104,8 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
       {/* BACKGROUND TEXT - Pushed to the very back, extremely subtle */}
       <motion.div
         style={{
-          y: prefersReducedMotion
-            ? 0
-            : useTransform(scrollYProgress, [0, 0.5], [0, -30]),
-          opacity: prefersReducedMotion
-            ? 1
-            : useTransform(scrollYProgress, [0, 0.3], [1, 0]),
+          y: prefersReducedMotion ? 0 : bgTextY,
+          opacity: prefersReducedMotion ? 1 : bgTextOpacity,
         }}
         className="absolute top-[40%] md:top-[35%] left-0 w-full z-0 pointer-events-none hidden sm:flex items-center justify-center overflow-hidden"
       >
@@ -143,9 +144,7 @@ export default function HeroSection({ onMenuOpen }: HeroSectionProps) {
       {/* Floating Star - Smaller on mobile */}
       <motion.div
         style={{
-          y: prefersReducedMotion
-            ? 0
-            : useTransform(scrollYProgress, [0, 1], [0, -150]),
+          y: prefersReducedMotion ? 0 : starY,
         }}
         className="absolute right-4 md:right-10 top-1/2 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center pointer-events-none"
       >

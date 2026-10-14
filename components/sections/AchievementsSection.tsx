@@ -10,8 +10,8 @@ const achievements = [
     icon: <GitFork className="w-5 h-5" />,
     items: [
       { metric: "4+", label: "Advanced ML Projects", desc: "Focusing on predictive analytics" },
-      { metric: "100k+", label: "Data Points Analyzed", desc: "In F1 telemetry research" },
-      { metric: "92%", label: "Peak Accuracy", desc: "F1 tire degradation predictor" },
+      { metric: "10M+", label: "Telemetry Frames", desc: "Processed in F1 analytics" },
+      { metric: "92%", label: "Pit-Window Accuracy", desc: "F1 strategy model" },
     ],
   },
   {
@@ -80,7 +80,7 @@ export default function AchievementsSection() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16"
         >
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4 md:p-6 text-center hover:border-[#DFFF00]/30 transition-colors"

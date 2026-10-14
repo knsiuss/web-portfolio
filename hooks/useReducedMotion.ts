@@ -3,11 +3,16 @@
 import { useState, useEffect } from 'react';
 
 export default function useReducedMotion(): boolean {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  // Seed from the media query directly so the first render is already correct
+  // on devices that ask for reduced motion — no cascading setState on mount.
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
 
     const handler = (e: MediaQueryListEvent) => {
       setPrefersReducedMotion(e.matches);

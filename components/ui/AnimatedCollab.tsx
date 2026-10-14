@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useMotionValue, useMotionValueEvent } from 'framer-motion';
+import { useScroll, useMotionValue, useMotionValueEvent, MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 
 // Using the extracted paths from collab.svg
@@ -8,7 +8,7 @@ const pathsData = [{ "fill": "#080906", "opacity": "1.000000", "stroke": "none",
 
 
 
-export default function AnimatedCollab({ className = '', scrollProgress }: { className?: string; scrollProgress?: any }) {
+export default function AnimatedCollab({ className = '', scrollProgress }: { className?: string; scrollProgress?: MotionValue<number> }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,

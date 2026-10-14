@@ -4,11 +4,9 @@ import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import AnimatedSignature from "@/components/ui/AnimatedSignature";
 import AnimatedCollab from "@/components/ui/AnimatedCollab";
-import useReducedMotion from "@/hooks/useReducedMotion";
 
 export default function SignatureSection() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const prefersReducedMotion = useReducedMotion();
 
     // Scroll progress scoped to this section — drives the handwriting animation
     const { scrollYProgress } = useScroll({

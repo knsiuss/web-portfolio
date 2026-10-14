@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Database, Brain, Users, Trophy, Rocket, ExternalLink, LineChart, Github, Bot } from 'lucide-react';
+import { Code2, Database, Users, Trophy, Rocket, ExternalLink, LineChart, Github, Bot } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Image from 'next/image';
 
@@ -73,9 +73,11 @@ export default function AboutSection() {
             <div className="space-y-4 font-tech text-foreground/70 leading-relaxed">
               <p>
                 Machine Learning Engineer focused on building production-ready ML systems
-                and real-time analytics. Currently developing an{" "}
-                <span className="text-racing-red">F1 tire degradation predictor</span> with
-                weather integration using Python, FastF1 API, and XGBoost.
+                and real-time analytics. Shipped an{" "}
+                <span className="text-racing-red">F1 analytics dashboard</span> with ML
+                pit-window predictions across all 23 races, and now building{" "}
+                <span className="text-racing-red">progressive live 3D reconstruction</span> —
+                phone camera in, 3D model out.
               </p>
               <p>
                 I&apos;ve conducted AI workshops for 100+ students, making complex AI concepts

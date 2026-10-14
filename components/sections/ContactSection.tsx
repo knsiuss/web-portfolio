@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Instagram, MessageCircle, Calendar, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, Linkedin, Github, Instagram, Calendar, Download, ArrowUpRight } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import MagneticButton from '@/components/ui/MagneticButton';
 

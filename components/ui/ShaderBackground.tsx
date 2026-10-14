@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo, useEffect, useCallback } from 'react';
+import { useRef, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { shaderMaterial } from '@react-three/drei';
 import * as THREE from 'three';
@@ -83,13 +83,18 @@ const TopographicMaterial = shaderMaterial(
 
 extend({ TopographicMaterial });
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      topographicMaterial: any;
-    }
-  }
-}
+// R3F injects the element at runtime via extend(), but its types don't know
+// about the custom uniforms — describe them once and go through a cast.
+type TopographicMaterialImpl = InstanceType<typeof TopographicMaterial> & {
+  u_resolution: THREE.Vector2;
+  u_colorBg: THREE.Color;
+  u_colorLine: THREE.Color;
+  u_time: number;
+};
+
+const TopographicMaterialElement = 'topographicMaterial' as unknown as React.FC<{
+  ref?: React.Ref<TopographicMaterialImpl | null>;
+}>;
 
 // Animasi shader bergerak lambat, jadi 30fps vs 60fps tidak terlihat beda
 // sementara biaya GPU render turun setengah.
@@ -130,7 +135,7 @@ function RenderDriver() {
 // Receives isDark so it can update the WebGL uniforms when theme changes
 function ShaderPlane({ isDark }: { isDark: boolean }) {
   const invalidate = useThree((state) => state.invalidate);
-  const materialRef = useRef<any>(null);
+  const materialRef = useRef<TopographicMaterialImpl | null>(null);
 
   // Cache resolution in a ref — updated only on resize, NOT every frame
   const resolutionRef = useRef(new THREE.Vector2(
@@ -139,14 +144,16 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
   ));
 
   useEffect(() => {
-    const handleResize = () => {
+    const applyResolution = () => {
       resolutionRef.current.set(window.innerWidth, window.innerHeight);
       if (materialRef.current) {
         materialRef.current.u_resolution.copy(resolutionRef.current);
       }
     };
-    window.addEventListener('resize', handleResize, { passive: true });
-    return () => window.removeEventListener('resize', handleResize);
+
+    applyResolution();
+    window.addEventListener('resize', applyResolution, { passive: true });
+    return () => window.removeEventListener('resize', applyResolution);
   }, []);
 
   // Switch shader colors when theme changes
@@ -168,8 +175,7 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
   return (
     <mesh>
       <planeGeometry args={[2, 2]} />
-      {/* @ts-ignore */}
-      <topographicMaterial ref={materialRef} u_resolution={resolutionRef.current} />
+      <TopographicMaterialElement ref={materialRef} />
     </mesh>
   );
 }

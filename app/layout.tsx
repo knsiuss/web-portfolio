@@ -25,6 +25,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://kanisius.dev'),
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
   description: "ML Engineer & Data Scientist specializing in real-time F1 analytics, deep learning, and production MLOps pipelines. Based in Jakarta, Indonesia.",
   keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Python", "PyTorch", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
@@ -85,7 +86,7 @@ const structuredData = {
       description: "Machine Learning Engineer building real-time F1 analytics and production ML systems.",
       url: "https://kanisius.dev",
       image: "https://kanisius.dev/assets/profile.jpg",
-      email: "mailto:maxvy1218@gmail.com",
+      email: "mailto:kanisius@novar.me",
       telephone: "+6285183268643",
       address: {
         "@type": "PostalAddress",
