@@ -26,7 +26,7 @@ export default function MagneticButton({
   rel,
   download
 }: MagneticButtonProps) {
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLAnchorElement & HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 

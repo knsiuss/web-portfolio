@@ -10,15 +10,15 @@ const achievements = [
     icon: <GitFork className="w-5 h-5" />,
     items: [
       { metric: "4+", label: "Advanced ML Projects", desc: "Focusing on predictive analytics" },
-      { metric: "100k+", label: "Data Points Analyzed", desc: "In F1 telemetry research" },
-      { metric: "92%", label: "Peak Accuracy", desc: "F1 tire degradation predictor" },
+      { metric: "10M+", label: "Telemetry Frames", desc: "Processed in F1 analytics" },
+      { metric: "92%", label: "Pit-Window Accuracy", desc: "F1 strategy model" },
     ],
   },
   {
     category: "Education & Teaching",
     icon: <Users className="w-5 h-5" />,
     items: [
-      { metric: "Top 100", label: "GSA Rising Star", desc: "Fully funded graduation invite" },
+      { metric: "Top 100", label: "Rising Star Award", desc: "Fully funded graduation invite" },
       { metric: "5+", label: "AI Workshops", desc: "Conducted for students" },
       { metric: "100+", label: "Students Trained", desc: "In AI and data science" },
     ],
@@ -36,9 +36,9 @@ const achievements = [
 
 const stats = [
   { value: "8+", label: "Repositories", icon: <GitFork className="w-4 h-4" /> },
-  { value: "Top 100", label: "GSA Rising Star", icon: <Trophy className="w-4 h-4" /> },
-  { value: "10+", label: "Tech Stack", icon: <Star className="w-4 h-4" /> },
-  { value: "3", label: "Major Projects", icon: <Rocket className="w-4 h-4" /> },
+  { value: "Top 100", label: "Rising Star Award", icon: <Trophy className="w-4 h-4" /> },
+  { value: "23", label: "Tech Stack", icon: <Star className="w-4 h-4" /> },
+  { value: "5", label: "Major Projects", icon: <Rocket className="w-4 h-4" /> },
 ];
 
 export default function AchievementsSection() {
@@ -80,7 +80,7 @@ export default function AchievementsSection() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12 md:mb-16"
         >
-          {stats.map((stat, index) => (
+          {stats.map((stat) => (
             <div
               key={stat.label}
               className="bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl p-4 md:p-6 text-center hover:border-[#DFFF00]/30 transition-colors"

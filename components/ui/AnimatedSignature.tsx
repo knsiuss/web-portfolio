@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useTransform, MotionValue, useMotionValue } from "framer-motion";
+import { motion, useTransform, MotionValue, useMotionValue, Variants } from "framer-motion";
 import useReducedMotion from "@/hooks/useReducedMotion";
 
 interface AnimatedSignatureProps {
@@ -24,7 +24,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     // ----------------------------------------------------
     // AUTO-ANIMATE (If scrollProgress is undefined - Loading/Hero)
     // ----------------------------------------------------
-    const timeBasedVariants: any = {
+    const timeBasedVariants: Variants = {
         hidden: { pathLength: 0, fillOpacity: 0, strokeOpacity: 0 },
         visible: (custom: number) => {
             const isMain = custom === 0;
@@ -56,6 +56,9 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     // Fill opacity fades in exactly at the end (0.9 to 1.0)
     const fillOpacityVal = useTransform(actualProgress, [0.9, 1], [0, 1]);
 
+    // Fade the whole signature in during the first 10% of scroll
+    const signatureOpacity = useTransform(actualProgress, [0, 0.1], [0, 1]);
+
     if (prefersReducedMotion) {
         return (
             <svg
@@ -80,7 +83,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                 className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
                 preserveAspectRatio="xMidYMid meet"
                 style={{
-                    opacity: useTransform(actualProgress, [0, 0.1], [0, 1]),
+                    opacity: signatureOpacity,
                     // Isolate this SVG on its own GPU layer so pathLength repaints
                     // don't cause the rest of the page to repaint
                     willChange: 'opacity, transform',

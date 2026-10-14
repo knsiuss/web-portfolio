@@ -98,13 +98,13 @@ export default async function OGImage() {
                         marginBottom: '48px',
                     }}
                 >
-                    ML Engineer · Data Scientist · Google Student Ambassador
+                    ML Engineer · Data Scientist · AI for Physical World
                 </div>
 
                 {/* Stats row */}
                 <div style={{ display: 'flex', gap: '48px' }}>
                     {[
-                        { num: 'Top 200', label: 'Google GSA' },
+                        { num: '92%', label: 'Model Accuracy' },
                         { num: '3+', label: 'ML Pipelines' },
                         { num: '100+', label: 'Students Trained' },
                     ].map((s) => (

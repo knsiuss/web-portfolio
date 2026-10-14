@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Twitter, MessageCircle, Calendar, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, Linkedin, Github, Instagram, Calendar, Download, ArrowUpRight } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import MagneticButton from '@/components/ui/MagneticButton';
 
@@ -31,11 +31,11 @@ const contactMethods = [
     description: "See my code",
   },
   {
-    icon: <Twitter className="w-5 h-5" />,
-    label: "Twitter",
-    value: "@maxquincy18",
-    href: "https://x.com/maxquincy18",
-    color: "hover:bg-sky-500/20 hover:border-sky-500/50",
+    icon: <Instagram className="w-5 h-5" />,
+    label: "Instagram",
+    value: "instagram.com/p_knsss",
+    href: "https://www.instagram.com/p_knsss/",
+    color: "hover:bg-pink-500/20 hover:border-pink-500/50",
     description: "Follow my updates",
   },
 ];

@@ -263,43 +263,6 @@ html.light [style*="DFFF00"] {
   background-clip: text;
 }
 
-/* 120 FPS Marquee Animations */
-@keyframes marquee-left {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes marquee-right {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.marquee-left {
-  animation: marquee-left 30s linear infinite;
-  will-change: transform;
-}
-
-.marquee-right {
-  animation: marquee-right 35s linear infinite;
-  will-change: transform;
-}
-
-/* Pause marquee on hover */
-.marquee-left:hover,
-.marquee-right:hover {
-  animation-play-state: paused;
-}
-
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
 
@@ -310,11 +273,6 @@ html.light [style*="DFFF00"] {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .marquee-left,
-  .marquee-right {
-    animation: none !important;
   }
 }
 

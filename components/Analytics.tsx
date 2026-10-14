@@ -5,6 +5,14 @@ import Script from 'next/script';
 // Google Analytics 4
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-XXXXXXXXXX';
 
+type GtagFn = (...args: unknown[]) => void;
+
+// gtag is injected by the GA script, so it only exists at runtime after load.
+function getGtag(): GtagFn | undefined {
+  if (typeof window === 'undefined') return undefined;
+  return (window as unknown as { gtag?: GtagFn }).gtag;
+}
+
 export function GoogleAnalytics() {
   if (process.env.NODE_ENV !== 'production') return null;
 
@@ -35,9 +43,9 @@ export function trackEvent(
   eventName: string,
   params?: Record<string, string | number | boolean>
 ) {
-  if (typeof window !== 'undefined' && (window as unknown as { gtag?: Function }).gtag) {
-    (window as unknown as { gtag: Function }).gtag('event', eventName, params);
-  }
+  const gtag = getGtag();
+  if (!gtag) return;
+  gtag('event', eventName, params);
 }
 
 // Predefined events

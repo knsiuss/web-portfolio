@@ -1,9 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Award } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
-import Image from 'next/image';
 
 const certificates = [
   {
@@ -113,7 +112,7 @@ export default function CertificationsSection() {
 
           {/* Left Column: Stanford (Large) */}
           <div className="lg:col-span-7 flex flex-col h-full">
-            {certificates.filter(c => c.isLarge).map((cert, index) => (
+            {certificates.filter(c => c.isLarge).map((cert) => (
               <motion.div
                 key={cert.title}
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
@@ -156,7 +155,7 @@ export default function CertificationsSection() {
                           </span>
                         </div>
                         <p className="font-tech text-xs text-foreground/40 ml-7 italic">
-                          "{course.desc}"
+                          &ldquo;{course.desc}&rdquo;
                         </p>
                       </a>
                     ))}
@@ -208,7 +207,7 @@ export default function CertificationsSection() {
 
                   {/* Description Quote */}
                   <p className="font-tech text-xs text-foreground/40 italic mb-8 relative z-10">
-                    "{cert.courses[0].desc}"
+                    &ldquo;{cert.courses[0].desc}&rdquo;
                   </p>
                 </div>
 

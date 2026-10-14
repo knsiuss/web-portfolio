@@ -17,8 +17,8 @@ const currentActivities = [
   {
     icon: <Wrench className="w-4 h-4 md:w-5 md:h-5" />,
     label: "Building",
-    content: "Real-time F1 tire degradation predictor with weather integration",
-    link: "https://github.com/knsiuss",
+    content: "Progressive live 3D reconstruction — phone to laptop, Gaussian Splatting",
+    link: "https://github.com/knsiuss/progressive-live-3d-reconstruction",
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
     iconBg: "bg-[#DFFF00]/20",
