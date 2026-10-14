@@ -8,6 +8,7 @@ const pathsData = [{ "fill": "#080906", "opacity": "1.000000", "stroke": "none",
 
 
 
+
 export default function AnimatedCollab({ className = '', scrollProgress }: { className?: string; scrollProgress?: MotionValue<number> }) {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
