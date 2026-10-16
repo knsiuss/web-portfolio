@@ -36,7 +36,7 @@ const expertise = [
 const highlights = [
   { icon: <Trophy className="w-4 h-4 text-racing-red" />, text: "Rising Star Top 100" },
   { icon: <Rocket className="w-4 h-4 text-racing-red" />, text: "Stanford ML Specialization" },
-  { icon: <Code2 className="w-4 h-4 text-racing-red" />, text: "8+ Open Source Projects" },
+  { icon: <Code2 className="w-4 h-4 text-racing-red" />, text: "11+ Open Source Projects" },
   { icon: <Users className="w-4 h-4 text-racing-red" />, text: "100+ Students Trained" },
 ];
 
@@ -120,7 +120,7 @@ export default function AboutSection() {
 
                 {/* Caption */}
                 <div className="mt-3 flex items-center justify-between px-1">
-                  <p className="font-tech text-xs uppercase tracking-wider text-foreground/50">Official Representation</p>
+                  <p className="font-tech text-xs uppercase tracking-wider text-foreground/50">Kanisius Bagaskara</p>
                   <ExternalLink className="w-4 h-4 text-foreground/30 group-hover:text-[#DFFF00] transition-colors" />
                 </div>
               </motion.div>

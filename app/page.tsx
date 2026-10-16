@@ -83,6 +83,7 @@ export default function Home() {
 
       {/* Main Content */}
       <main
+        id="main"
         ref={containerRef}
         className={`min-h-screen bg-transparent text-foreground font-sans relative ${isLoading ? 'overflow-hidden' : ''
           }`}

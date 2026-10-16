@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Trophy, Users, Star, GitFork, Award, Rocket } from 'lucide-react';
+import { Trophy, Users, Star, GitFork, Rocket } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 
 const achievements = [
@@ -9,7 +9,7 @@ const achievements = [
     category: "Technical Impact",
     icon: <GitFork className="w-5 h-5" />,
     items: [
-      { metric: "4+", label: "Advanced ML Projects", desc: "Focusing on predictive analytics" },
+      { metric: "5", label: "Portfolio Projects", desc: "3 featured on the homepage" },
       { metric: "10M+", label: "Telemetry Frames", desc: "Processed in F1 analytics" },
       { metric: "92%", label: "Pit-Window Accuracy", desc: "F1 strategy model" },
     ],
@@ -23,19 +23,10 @@ const achievements = [
       { metric: "100+", label: "Students Trained", desc: "In AI and data science" },
     ],
   },
-  {
-    category: "Recognition",
-    icon: <Award className="w-5 h-5" />,
-    items: [
-      { metric: "Stanford", label: "ML Specialization", desc: "3 courses completed" },
-      { metric: "Google", label: "Gemini Certified", desc: "Educator & Student" },
-      { metric: "IBM", label: "Data Science", desc: "Professional certificate" },
-    ],
-  },
 ];
 
 const stats = [
-  { value: "8+", label: "Repositories", icon: <GitFork className="w-4 h-4" /> },
+  { value: "11+", label: "Repositories", icon: <GitFork className="w-4 h-4" /> },
   { value: "Top 100", label: "Rising Star Award", icon: <Trophy className="w-4 h-4" /> },
   { value: "23", label: "Tech Stack", icon: <Star className="w-4 h-4" /> },
   { value: "5", label: "Major Projects", icon: <Rocket className="w-4 h-4" /> },
@@ -95,7 +86,7 @@ export default function AchievementsSection() {
         </motion.div>
 
         {/* Achievement Categories */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {achievements.map((category, catIndex) => (
             <motion.div
               key={category.category}

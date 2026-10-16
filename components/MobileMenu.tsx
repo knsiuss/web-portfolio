@@ -14,7 +14,6 @@ import { ThemeToggle } from './ui/ThemeToggle';
 const menuItems = [
   { label: 'Home', href: '#home' },
   { label: 'Projects', href: '#projects' },
-  { label: 'Blog', href: '/blog' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];

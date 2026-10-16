@@ -167,6 +167,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-background text-foreground overflow-x-hidden transition-colors duration-300">
+        <a href="#main" className="skip-link">Skip to content</a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
           <BackToTop />

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Instagram, Calendar, Download, ArrowUpRight } from 'lucide-react';
+import { Mail, Linkedin, Github, Instagram, Calendar, ArrowUpRight } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import MagneticButton from '@/components/ui/MagneticButton';
 
@@ -115,14 +115,6 @@ export default function ContactSection() {
                 Start a Conversation
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </MagneticButton>
-              <a
-                href="/assets/resume-kanisius-bagaskara.pdf"
-                download
-                className="inline-flex items-center justify-center gap-2 border border-foreground/20 text-foreground font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:bg-white/10 transition-all"
-              >
-                <Download className="w-4 h-4" />
-                Download CV
-              </a>
             </div>
 
             {/* Response Time */}

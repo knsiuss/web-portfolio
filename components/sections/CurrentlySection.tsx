@@ -17,8 +17,8 @@ const currentActivities = [
   {
     icon: <Wrench className="w-4 h-4 md:w-5 md:h-5" />,
     label: "Building",
-    content: "Progressive live 3D reconstruction — phone to laptop, Gaussian Splatting",
-    link: "https://github.com/knsiuss/progressive-live-3d-reconstruction",
+    content: "Spotify Downloader — WAV/FLAC pipeline from playlist links, MVP E2E",
+    link: "https://github.com/knsiuss/spotify-downloader",
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
     iconBg: "bg-[#DFFF00]/20",
@@ -34,7 +34,7 @@ const currentActivities = [
   },
 ];
 
-const lastUpdated = "February 2026";
+const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
 export default function CurrentlySection() {
   const prefersReducedMotion = useReducedMotion();
