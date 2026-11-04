@@ -1,35 +1,35 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Database, Users, Trophy, Rocket, ExternalLink, LineChart, Github, Bot } from 'lucide-react';
+import { Code2, Database, Users, Trophy, Rocket, ExternalLink, LineChart, Bot } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Image from 'next/image';
 
 const expertise = [
   {
     icon: <Bot className="w-6 h-6" />,
-    title: "AI Integration",
-    desc: "Claude AI, OpenAI Codex, LLM Prompting",
+    title: "Machine Learning",
+    desc: "XGBoost, scikit-learn, model evaluation",
   },
   {
     icon: <LineChart className="w-6 h-6" />,
-    title: "Data Research",
-    desc: "First Principles Thinking, Statistical Modeling",
+    title: "Deep Learning",
+    desc: "PyTorch, neural networks",
+  },
+  {
+    icon: <Bot className="w-6 h-6" />,
+    title: "Gen AI",
+    desc: "LLM prompting, Claude, OpenAI",
   },
   {
     icon: <Database className="w-6 h-6" />,
-    title: "MLOps",
-    desc: "Docker, CI/CD, Model Deployment",
-  },
-  {
-    icon: <Github className="w-6 h-6" />,
-    title: "Data Engineering",
-    desc: "FastF1 API, Version Control, Pipelines",
+    title: "Web & Data",
+    desc: "Next.js, TypeScript, Pandas, FastF1 API",
   },
   {
     icon: <Users className="w-6 h-6" />,
-    title: "Leadership",
-    desc: "AI Workshops, Mentoring",
+    title: "Teaching",
+    desc: "AI workshops, mentoring",
   },
 ];
 
@@ -44,50 +44,45 @@ export default function AboutSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="about" className="relative bg-foreground py-20 md:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#DFFF00]/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#DFFF00]/5 rounded-full blur-[150px]" />
-      </div>
+    <section id="about" className="relative bg-background py-20 md:py-32 overflow-hidden">
+      {/* Accent line */}
+      <div className="absolute inset-x-0 top-0 h-px bg-[#DFFF00]/40" aria-hidden="true" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Column - Main Content */}
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 100, skewY: 5 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 80, skewY: 4, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
               About Me
             </span>
             <h2 className="font-lando text-4xl md:text-6xl uppercase mb-6">
-              Turning Data Into{" "}
+              I build ML that{" "}
               <span className="text-transparent" style={{ WebkitTextStroke: '2px var(--racing-red)' }}>
-                Racing Insights
+                actually runs
               </span>
             </h2>
 
             <div className="space-y-4 font-tech text-foreground/70 leading-relaxed">
               <p>
-                Machine Learning Engineer focused on building production-ready ML systems
-                and real-time analytics. Shipped an{" "}
-                <span className="text-racing-red">F1 analytics dashboard</span> with ML
-                pit-window predictions across all 23 races, and now building{" "}
-                <span className="text-racing-red">progressive live 3D reconstruction</span> —
-                phone camera in, 3D model out.
+                ML engineer from Jakarta. I make data tools and machine
+                learning things that run for real — most recently an{" "}
+                <span className="text-racing-red">F1 dashboard</span> that
+                predicts pit windows across 23 races, and a project that
+                turns phone video into a{" "}
+                <span className="text-racing-red">3D model</span>.
               </p>
               <p>
-                I&apos;ve conducted AI workshops for 100+ students, making complex AI concepts
-                accessible through hands-on learning.
+                I also run AI workshops, trying to explain this stuff
+                in a way that actually makes sense.
               </p>
               <p>
-                My approach combines rigorous data research analysis with{" "}
-                <span className="text-racing-red">First Principles Thinking</span>{" "}
-                —stripping complex problems down to their fundamental truths
-                before building scalable ML architectures.
+                Usually I start by breaking a problem down to the
+                basics, then build the simplest thing that works.
               </p>
             </div>
 
@@ -102,12 +97,12 @@ export default function AboutSection() {
               <motion.div
                 whileHover={prefersReducedMotion ? {} : { y: -8 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="relative rounded-2xl overflow-hidden border border-foreground/20 bg-foreground/5 backdrop-blur-md border border-foreground/10 p-3 shadow-2xl group-hover:border-[#DFFF00]/50 transition-colors"
+                className="relative overflow-hidden border border-foreground/10 bg-foreground/5 p-3 group-hover:border-[#DFFF00]/50 transition-colors"
               >
                 {/* Photo Wrapper */}
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-white/5">
+                <div className="relative aspect-[4/3] overflow-hidden bg-white/5">
                   <Image
-                    src="/images/profile-kanisius.jpeg"
+                    src="/images/kanisius.jpg"
                     alt="Kanisius Bagaskara"
                     fill
                     className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1]"
@@ -120,7 +115,7 @@ export default function AboutSection() {
 
                 {/* Caption */}
                 <div className="mt-3 flex items-center justify-between px-1">
-                  <p className="font-tech text-xs uppercase tracking-wider text-foreground/50">Official Representation</p>
+                  <p className="font-tech text-xs uppercase tracking-wider text-foreground/50">Kanisius Bagaskara</p>
                   <ExternalLink className="w-4 h-4 text-foreground/30 group-hover:text-[#DFFF00] transition-colors" />
                 </div>
               </motion.div>
@@ -146,10 +141,10 @@ export default function AboutSection() {
 
           {/* Right Column - Expertise Grid */}
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 100, skewY: 5 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 80, skewY: 4, scale: 0.97 }}
+            whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
             className="space-y-4"
           >
             <h3 className="font-lando text-2xl uppercase mb-6">Core Expertise</h3>
@@ -165,41 +160,40 @@ export default function AboutSection() {
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + (index * 0.1) }}
                   className="group relative cursor-default"
                 >
-                  {/* Subtle Top Metadata */}
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E50000] group-hover:bg-[#DFFF00] transition-colors duration-300 shadow-[0_0_8px_rgba(229,0,0,0.5)] group-hover:shadow-[0_0_12px_rgba(223,255,0,0.5)]" />
-                    <p className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-[#888888] group-hover:text-foreground transition-colors duration-300">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  {/* Main Title - Italicized Lando Style */}
+                  {/* Main Title first — read the category, then the tools */}
                   <div className="overflow-hidden">
                     <h4 className="font-lando text-3xl md:text-5xl text-racing-red uppercase leading-[0.85] tracking-tight italic transform group-hover:translate-x-4 transition-transform duration-700 ease-[0.16,1,0.3,1] opacity-90 group-hover:opacity-100">
                       {item.title}
                     </h4>
                   </div>
+
+                  <div className="flex items-center gap-3 mt-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#DFFF00] transition-colors duration-300" />
+                    <p className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/50 group-hover:text-foreground transition-colors duration-300">
+                      {item.desc}
+                    </p>
+                  </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Availability Badge */}
-            <motion.div
-              initial={prefersReducedMotion ? {} : { opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.7 }}
-              className="mt-6 flex items-center gap-3 bg-green-500/10 border border-green-500/20 rounded-xl p-4"
-            >
-              <div className="relative">
-                <div className="w-3 h-3 bg-green-500 rounded-full" />
-                <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping" />
-              </div>
-              <div>
-                <span className="font-tech text-sm text-green-400">Open for Opportunities</span>
-                <p className="font-tech text-xs text-foreground/40">ML Engineering internships & freelance projects</p>
-              </div>
-            </motion.div>
+            {/* Skills marquee — loops continuously, never breaks */}
+            <div className="mt-10 overflow-hidden border-t border-foreground/10 pt-5" aria-hidden="true">
+              <motion.div
+                animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+                className="flex w-max whitespace-nowrap will-change-transform"
+              >
+                {[0, 1].map((copy) => (
+                  <span
+                    key={copy}
+                    className="font-lando text-2xl md:text-4xl uppercase leading-none text-foreground/80 pr-8"
+                  >
+                    Machine Learning Deep Learning Gen AI LLM Prompting Claude OpenAI Machine Learning Deep Learning Gen AI&nbsp;
+                  </span>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div >

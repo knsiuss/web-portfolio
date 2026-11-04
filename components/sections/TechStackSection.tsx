@@ -261,7 +261,7 @@ export default function TechStackSection() {
                 key={copy}
                 className="font-lando text-4xl md:text-6xl uppercase leading-none text-foreground/80 pr-10"
               >
-                Exploring Building Improving&nbsp;
+                Exploring Building Improving Exploring Building Improving&nbsp;
               </span>
             ))}
           </motion.div>

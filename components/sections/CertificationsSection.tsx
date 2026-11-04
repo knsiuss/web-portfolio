@@ -273,7 +273,7 @@ export default function CertificationsSection() {
                 key={copy}
                 className="font-lando text-4xl md:text-6xl uppercase leading-none text-foreground/80 pr-10"
               >
-                Stanford IBM Google&nbsp;
+                Stanford IBM Google Stanford IBM Google Stanford IBM Google&nbsp;
               </span>
             ))}
           </motion.div>

@@ -18,7 +18,7 @@ const currentActivities = [
     icon: <Wrench className="w-4 h-4 md:w-5 md:h-5" />,
     label: "Building",
     content: "StarsTask — class tasks, sessions & GPS attendance for Indonesian campuses",
-    link: "https://github.com/knsiuss/starstask",
+    link: "https://starstask.vercel.app/",
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
     iconBg: "bg-[#DFFF00]/20",
