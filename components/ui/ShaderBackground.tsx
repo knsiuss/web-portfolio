@@ -96,9 +96,9 @@ const TopographicMaterialElement = 'topographicMaterial' as unknown as React.FC<
   ref?: React.Ref<TopographicMaterialImpl | null>;
 }>;
 
-// Animasi shader bergerak lambat, jadi 30fps vs 60fps tidak terlihat beda
-// sementara biaya GPU render turun setengah.
-const RENDER_INTERVAL_MS = 33;
+// Animasi shader bergerak lambat, jadi 20fps vs 60fps tidak terlihat beda
+// sementara biaya GPU render turun sepertiga dari 30fps.
+const RENDER_INTERVAL_MS = 50;
 
 // Canvas jalan mode demand: render hanya saat di-invalidate, sehingga throttle
 // dan pause saat tab tersembunyi duduk di satu tempat alih-alih loop tanpa henti.

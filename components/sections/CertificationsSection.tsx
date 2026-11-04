@@ -1,17 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'framer-motion';
+import { ChevronDown, ExternalLink } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 
 const certificates = [
   {
     issuer: "Stanford University",
     title: "Machine Learning Specialization",
-    color: "bg-[#8C1515]", // Stanford Red
-    textColor: "text-[#8C1515]",
-    borderColor: "group-hover:border-[#8C1515]/50",
-    glow: "group-hover:shadow-[0_0_30px_rgba(140,21,21,0.15)]",
     date: "Jan 2026",
     link: "/assets/certificates/stanford-supervised-learning-2026.pdf",
     isLarge: true,
@@ -36,16 +33,12 @@ const certificates = [
   {
     issuer: "IBM",
     title: "Python for Data Science",
-    color: "bg-[#0530AD]", // IBM Blue
-    textColor: "text-[#0530AD]",
-    borderColor: "group-hover:border-[#0530AD]/50",
-    glow: "group-hover:shadow-[0_0_30px_rgba(5,48,173,0.15)]",
     date: "Aug 2025",
     link: "/assets/certificates/ibm-python-data-science-2025.pdf",
     isLarge: false,
     courses: [
       {
-        name: "", // Not needed for small card, but we use desc
+        name: "",
         desc: "The foundation. Where it all started.",
         link: "/assets/certificates/ibm-python-data-science-2025.pdf"
       }
@@ -54,10 +47,6 @@ const certificates = [
   {
     issuer: "Google for Education",
     title: "Gemini Certified Educator",
-    color: "bg-[#4285F4]", // Google Blue
-    textColor: "text-[#4285F4]",
-    borderColor: "group-hover:border-[#4285F4]/50",
-    glow: "group-hover:shadow-[0_0_30px_rgba(66,133,244,0.15)]",
     date: "Sep 2025",
     link: "/assets/certificates/google-gemini-educator-2025.pdf",
     isLarge: false,
@@ -68,163 +57,226 @@ const certificates = [
         link: "/assets/certificates/google-gemini-educator-2025.pdf"
       }
     ]
-  }
+  },
 ];
+
+// Cinematic cascade for the course list inside an opened certificate.
+const courseList: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
+};
+
+const courseItem: Variants = {
+  hidden: { opacity: 0, x: -32, scale: 0.9, rotate: -3 },
+  show: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    rotate: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export default function CertificationsSection() {
   const prefersReducedMotion = useReducedMotion();
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+  // Parallax layers drift at different speeds as the section scrolls past.
+  const bgX = useTransform(scrollYProgress, [0, 1], [40, -160]);
+  const headerX = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
-    <section id="certifications" className="relative bg-foreground py-20 md:py-32 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
-        {/* Header - Storytelling */}
-        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16">
-          <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="md:w-1/2"
-          >
+    <section ref={sectionRef} id="certifications" className="relative overflow-hidden bg-background py-20 md:py-32 pointer-events-auto">
+      {/* Giant parallax watermark behind everything */}
+      <motion.span
+        style={prefersReducedMotion ? undefined : { x: bgX }}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-10 left-0 font-lando text-[20vw] leading-none uppercase text-transparent opacity-[0.04] select-none whitespace-nowrap"
+      >
+        Certified Certified
+      </motion.span>
+
+      <div className="relative container mx-auto px-4 md:px-6 max-w-6xl">
+        {/* Header — cinematic parallax + skew entrance */}
+        <motion.div
+          style={prefersReducedMotion ? undefined : { x: headerX }}
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 120, skewY: 6, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16 will-change-transform"
+        >
+          <div className="md:w-1/2">
             <span className="font-tech text-xs uppercase tracking-[0.4em] text-racing-red mb-4 block">
               Continuous Learning
             </span>
-            <h2 className="font-lando text-4xl md:text-5xl lg:text-7xl uppercase leading-none mb-6">
-              Certifications
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="md:w-1/2 md:mt-12"
-          >
-            <p className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6">
-              Every certificate here was earned to solve a real problem — not just to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* 2-Column Card Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-          {/* Left Column: Stanford (Large) */}
-          <div className="lg:col-span-7 flex flex-col h-full">
-            {certificates.filter(c => c.isLarge).map((cert) => (
-              <motion.div
-                key={cert.title}
-                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className={`group relative flex-1 flex flex-col justify-between p-8 md:p-10 rounded-2xl bg-foreground/5 dark:bg-background border border-foreground/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
+            <span className="overflow-hidden block">
+              <motion.h2
+                initial={prefersReducedMotion ? {} : { y: '110%' }}
+                whileInView={{ y: '0%' }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                className="font-lando text-4xl md:text-5xl lg:text-7xl uppercase leading-none mb-6"
               >
-                {/* Subtle background glow on hover */}
-                <div className={`absolute top-0 right-0 w-64 h-64 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[100px] transition-opacity duration-700 pointer-events-none`} />
-
-                <div>
-                  {/* Issuer Badge */}
-                  <div className="flex items-center gap-3 mb-8">
-                    <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
-                    <span className="font-tech text-xs md:text-sm uppercase tracking-widest text-foreground/50">
-                      {cert.issuer}
-                    </span>
-                  </div>
-
-                  {/* Main Title */}
-                  <h3 className="font-lando text-3xl md:text-4xl text-foreground mb-10 group-hover:text-foreground transition-colors">
-                    {cert.title}
-                  </h3>
-
-                  {/* Courses List */}
-                  <div className="space-y-6 mb-12 relative z-10">
-                    {cert.courses.map((course) => (
-                      <a
-                        key={course.name}
-                        href={course.link}
-                        download
-                        className="flex flex-col gap-1 group/course block p-3 -m-3 rounded-lg hover:bg-white/5 transition-colors"
-                      >
-                        <div className="flex items-start gap-3">
-                          <span className={`text-lg mt-0.5 ${cert.textColor} group-hover/course:scale-125 transition-transform`}>✦</span>
-                          <span className="font-tech text-foreground/90 text-sm md:text-base uppercase tracking-wide group-hover/course:text-racing-red transition-colors flex items-center gap-3">
-                            {course.name}
-                            <ExternalLink className="w-3 h-3 opacity-0 group-hover/course:opacity-100 transition-opacity" />
-                          </span>
-                        </div>
-                        <p className="font-tech text-xs text-foreground/40 ml-7 italic">
-                          &ldquo;{course.desc}&rdquo;
-                        </p>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Footer: Date & Verify */}
-                <div className="flex items-center justify-between pt-6 border-t border-foreground/10 mt-auto">
-                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/40">
-                    {cert.date}
-                  </span>
-                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-foreground/60">
-                    <span>Click individual courses to verify</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                Certifications
+              </motion.h2>
+            </span>
           </div>
 
-          {/* Right Column: IBM & Google (Compact) */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
-            {certificates.filter(c => !c.isLarge).map((cert, index) => (
-              <motion.a
-                href={cert.link}
-                download
+          <motion.p
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
+            className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6 md:w-1/2 md:mt-12"
+          >
+            Every certificate here was earned to solve a real problem — not just to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
+          </motion.p>
+        </motion.div>
+
+        {/* Editorial list — one row per certificate, details on demand */}
+        <div className="border-t border-foreground/10">
+          {certificates.map((cert, index) => {
+            const number = String(index + 1).padStart(2, '0');
+            const isOpen = expanded === cert.title;
+            return (
+              <motion.article
                 key={cert.title}
-                initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 * (index + 1) }}
-                className={`group relative flex-1 flex flex-col justify-between p-8 rounded-2xl bg-foreground/5 dark:bg-background border border-foreground/5 transition-all duration-500 ease-out ${cert.borderColor} ${cert.glow} overflow-hidden`}
+                initial={prefersReducedMotion ? {} : { opacity: 0, y: 80, skewY: 4, scale: 0.97 }}
+                whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: Math.min(index * 0.08, 0.24) }}
+                className="group relative border-b border-foreground/10 py-8 md:py-10 grid gap-6 md:grid-cols-[110px_1fr_auto]"
               >
-                {/* Subtle background glow on hover */}
-                <div className={`absolute top-0 right-0 w-48 h-48 ${cert.color} opacity-0 group-hover:opacity-[0.03] blur-[80px] transition-opacity duration-700`} />
+                {/* Accent line grows left-to-right as the row enters */}
+                <motion.div
+                  initial={prefersReducedMotion ? {} : { scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+                  className="absolute inset-x-0 top-0 h-px origin-left bg-[#DFFF00]/70"
+                  aria-hidden="true"
+                />
 
-                <div>
-                  {/* Issuer Badge */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <span className={`w-3 h-3 rounded-full ${cert.color} shadow-[0_0_10px_currentColor]`} />
-                    <span className="font-tech text-xs uppercase tracking-widest text-foreground/50">
-                      {cert.issuer}
-                    </span>
-                  </div>
+                <motion.span
+                  initial={prefersReducedMotion ? {} : { opacity: 0, x: -80, scale: 1.4, rotate: -6 }}
+                  whileInView={{ opacity: 1, x: 0, scale: 1, rotate: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                  className="font-lando text-6xl md:text-7xl leading-none text-transparent"
+                  style={{ WebkitTextStroke: '1.5px var(--color-foreground)' }}
+                  aria-hidden="true"
+                >
+                  {number}
+                </motion.span>
 
-                  {/* Main Title */}
-                  <h3 className="font-lando text-2xl md:text-3xl text-foreground mb-4">
-                    {cert.title}
-                  </h3>
-
-                  {/* Description Quote */}
-                  <p className="font-tech text-xs text-foreground/40 italic mb-8 relative z-10">
+                <div className="min-w-0">
+                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/50">
+                    {cert.issuer}
+                  </span>
+                  <span className="overflow-hidden block mt-2">
+                    <motion.h3
+                      initial={prefersReducedMotion ? {} : { y: '110%' }}
+                      whileInView={{ y: '0%' }}
+                      viewport={{ once: true, margin: '-80px' }}
+                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+                      className="font-lando text-2xl md:text-4xl uppercase leading-none"
+                    >
+                      {cert.title}
+                    </motion.h3>
+                  </span>
+                  <p className="font-tech text-xs text-foreground/40 italic mt-3">
                     &ldquo;{cert.courses[0].desc}&rdquo;
                   </p>
+
+                  <button
+                    type="button"
+                    onClick={() => setExpanded(isOpen ? null : cert.title)}
+                    aria-expanded={isOpen}
+                    className="mt-5 inline-flex items-center gap-1.5 font-tech text-xs uppercase tracking-wider text-foreground/60 hover:text-[#DFFF00] transition-colors"
+                  >
+                    {isOpen ? 'Hide courses' : 'Courses'}
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                  </button>
                 </div>
 
-                {/* Footer: Date & Verify */}
-                <div className="flex items-center justify-between pt-5 border-t border-foreground/10 mt-auto">
-                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/40">
-                    {cert.date}
-                  </span>
-                  <div className="flex items-center gap-2 font-tech text-xs uppercase tracking-wider text-foreground/60 group-hover:text-foreground transition-colors">
-                    <span>Verify</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </div>
+                <div className="flex flex-wrap items-start gap-3 md:flex-col md:items-end">
+                  <span className="font-lando text-xl md:text-2xl text-[#DFFF00] leading-none">{cert.date}</span>
+                  <a
+                    href={cert.link}
+                    download
+                    className="inline-flex items-center gap-1.5 border border-foreground/20 text-foreground font-tech text-xs uppercase px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all"
+                  >
+                    Verify
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
-              </motion.a>
+
+                {/* Courses — hidden until opened, cascade in one-by-one */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="courses"
+                      initial={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden md:col-span-3"
+                    >
+                      <motion.ul
+                        variants={courseList}
+                        initial={prefersReducedMotion ? false : 'hidden'}
+                        animate="show"
+                        className="grid gap-3 pt-4 sm:grid-cols-3"
+                      >
+                        {cert.courses.map((course) => (
+                          <motion.li key={course.name || course.desc} variants={courseItem}>
+                            <a
+                              href={course.link}
+                              download
+                              className="group/course block border border-foreground/10 p-4 hover:border-[#DFFF00]/50 transition-colors"
+                            >
+                              {course.name && (
+                                <span className="font-tech text-sm uppercase tracking-wide text-foreground group-hover/course:text-[#DFFF00] transition-colors flex items-center gap-2">
+                                  {course.name}
+                                  <ExternalLink className="w-3 h-3 opacity-0 group-hover/course:opacity-100 transition-opacity" />
+                                </span>
+                              )}
+                              <span className="font-tech text-xs text-foreground/50 italic block mt-1.5">
+                                &ldquo;{course.desc}&rdquo;
+                              </span>
+                            </a>
+                          </motion.li>
+                        ))}
+                      </motion.ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* Cinematic marquee */}
+        <div className="mt-14 overflow-hidden border-t border-foreground/10 pt-6" aria-hidden="true">
+          <motion.div
+            animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
+            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
+            className="flex w-max whitespace-nowrap will-change-transform"
+          >
+            {[0, 1].map((copy) => (
+              <span
+                key={copy}
+                className="font-lando text-4xl md:text-6xl uppercase leading-none text-foreground/80 pr-10"
+              >
+                Stanford IBM Google Stanford IBM Google Stanford IBM Google&nbsp;
+              </span>
             ))}
-          </div>
-
+          </motion.div>
         </div>
       </div>
     </section>

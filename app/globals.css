@@ -418,9 +418,10 @@ html.light [style*="DFFF00"] {
   outline-offset: 2px;
 }
 
-/* Smooth scroll for anchor links */
+/* WHY auto: CSS smooth + Lenis double-smooths and feels laggy.
+   Lenis owns wheel smoothing; anchors still jump correctly. */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

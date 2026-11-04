@@ -17,8 +17,8 @@ const currentActivities = [
   {
     icon: <Wrench className="w-4 h-4 md:w-5 md:h-5" />,
     label: "Building",
-    content: "Progressive live 3D reconstruction — phone to laptop, Gaussian Splatting",
-    link: "https://github.com/knsiuss/progressive-live-3d-reconstruction",
+    content: "StarsTask — class tasks, sessions & GPS attendance for Indonesian campuses",
+    link: "https://starstask.vercel.app/",
     color: "from-[#DFFF00]/20 to-orange-600/10",
     borderColor: "border-[#DFFF00]/30",
     iconBg: "bg-[#DFFF00]/20",
@@ -34,7 +34,7 @@ const currentActivities = [
   },
 ];
 
-const lastUpdated = "February 2026";
+const lastUpdated = "November 2026";
 
 export default function CurrentlySection() {
   const prefersReducedMotion = useReducedMotion();

@@ -24,12 +24,11 @@ import MobileMenu from '@/components/MobileMenu';
 
 // Sections
 import HeroSection from '@/components/sections/HeroSection';
+import SpotifySection from '@/components/sections/SpotifySection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import TechStackSection from '@/components/sections/TechStackSection';
-import AchievementsSection from '@/components/sections/AchievementsSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
 import AboutSection from '@/components/sections/AboutSection';
-import StorySection from '@/components/sections/StorySection';
 import ContactSection from '@/components/sections/ContactSection';
 import CurrentlySection from '@/components/sections/CurrentlySection';
 import FooterSection from '@/components/sections/FooterSection';
@@ -97,11 +96,11 @@ export default function Home() {
 
           {/* Subtle Static Light Effects with Parallax */}
           <motion.div
-            className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-[#DFFF00] opacity-10 blur-[120px] pointer-events-none"
+            className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-[#DFFF00] opacity-10 blur-[64px] pointer-events-none transform-gpu will-change-transform"
             style={{ y: glowY1 }}
           />
           <motion.div
-            className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-foreground opacity-5 blur-[100px] pointer-events-none"
+            className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-foreground opacity-5 blur-[48px] pointer-events-none transform-gpu will-change-transform"
             style={{ y: glowY2 }}
           />
         </div>
@@ -120,23 +119,20 @@ export default function Home() {
           {/* Spacer to Show Hero */}
           <div className="h-screen w-full pointer-events-none" />
 
+          {/* Spotify Playlist */}
+          <SpotifySection />
+
           {/* Projects Section */}
           <ProjectsSection />
 
           {/* Tech Stack Section */}
           <TechStackSection />
 
-          {/* Achievements Section */}
-          <AchievementsSection />
-
           {/* Certifications Section */}
           <CertificationsSection />
 
           {/* About Section */}
           <AboutSection />
-
-          {/* Story Section */}
-          <StorySection />
 
           {/* Signature Animation Sector */}
           <SignatureSection />

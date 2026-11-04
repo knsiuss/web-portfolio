@@ -27,8 +27,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://kanisius.dev'),
   title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-  description: "ML Engineer & Data Scientist specializing in real-time F1 analytics, deep learning, and production MLOps pipelines. Based in Jakarta, Indonesia.",
-  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Python", "PyTorch", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "Kanisius Bagaskara"],
+  description: "ML Engineer & Data Scientist building real-time F1 analytics, ML systems, web applications, and 3D vision. Based in Jakarta, Indonesia.",
+  keywords: ["Machine Learning Engineer", "Data Scientist", "F1 Analytics", "Python", "PyTorch", "MLOps", "AI", "Deep Learning", "Indonesia", "Real-time Analytics", "Computer Vision", "NLP", "TypeScript", "Next.js", "Supabase", "3D Reconstruction", "Kanisius Bagaskara"],
   authors: [{ name: "Kanisius Bagaskara", url: "https://github.com/knsiuss" }],
   creator: "Kanisius Bagaskara",
   icons: {
@@ -40,10 +40,10 @@ export const metadata: Metadata = {
     url: "https://kanisius.dev",
     siteName: "Kanisius Bagaskara Portfolio",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures. Deep Learning researcher and AI educator.",
+    description: "ML Engineer & Data Scientist building real-time F1 analytics, ML systems, web applications, and 3D vision. Deep Learning researcher and AI educator.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/opengraph-image",
         width: 1200,
         height: 630,
         alt: "Kanisius Bagaskara - Machine Learning Engineer Portfolio",
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
-    description: "Machine Learning Engineer building real-time F1 analytics and scalable ML architectures.",
-    images: ["/og-image.jpg"],
+    description: "ML Engineer & Data Scientist building real-time F1 analytics, ML systems, web applications, and 3D vision.",
+    images: ["/opengraph-image"],
   },
   verification: {
     google: "hqAZ8rtWx92tpMkiCwDi6imswCTZ7WLBq_lVDUnlpJE",
@@ -83,9 +83,9 @@ const structuredData = {
       givenName: "Kanisius",
       familyName: "Bagaskara",
       jobTitle: "Machine Learning Engineer",
-      description: "Machine Learning Engineer building real-time F1 analytics and production ML systems.",
+      description: "ML Engineer & Data Scientist building real-time F1 analytics, ML systems, web applications, and 3D vision.",
       url: "https://kanisius.dev",
-      image: "https://kanisius.dev/assets/profile.jpg",
+      image: "https://kanisius.dev/logo.svg",
       email: "mailto:kanisius@novar.me",
       telephone: "+6285183268643",
       address: {
@@ -111,11 +111,14 @@ const structuredData = {
         "Data Science",
         "Python",
         "PyTorch",
-        "TensorFlow",
         "MLOps",
         "F1 Analytics",
         "Computer Vision",
         "Natural Language Processing",
+        "TypeScript",
+        "Next.js",
+        "Supabase",
+        "3D Reconstruction",
       ],
       award: [
         "Rising Star Top 100",
@@ -156,7 +159,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
+      className={`${anton.variable} ${spaceGrotesk.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
