@@ -25,6 +25,20 @@ export default function useLenis() {
 
     lenisRef.current = lenis;
 
+    // Lenis scrolls the window programmatically, so `body { overflow: hidden }`
+    // does not stop it: wheel events still move the page behind an open menu.
+    // The modal toggles this attribute instead.
+    const syncLock = () => {
+      if (document.body.hasAttribute('data-scroll-lock')) {
+        if (!lenis.isStopped) lenis.stop();
+      } else if (lenis.isStopped) {
+        lenis.start();
+      }
+    };
+    const observer = new MutationObserver(syncLock);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['data-scroll-lock'] });
+    syncLock();
+
     let rafId = 0;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -34,6 +48,7 @@ export default function useLenis() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      observer.disconnect();
       lenis.destroy();
       lenisRef.current = null;
     };

@@ -1,14 +1,17 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 // Hooks
 import useLenis from '@/hooks/useLenis';
 
 // UI Components
 import LoadingScreen from '@/components/ui/LoadingScreen';
+import ScrollProgress from '@/components/ui/ScrollProgress';
+import RaceStrip from '@/components/ui/RaceStrip';
+import CheckeredDivider from '@/components/ui/CheckeredDivider';
 
 // Background canvas dimuat setelah hydration: LoadingScreen sudah menutupi
 // layar saat ini, sehingga three.js pergi dari critical path tanpa beda visual.
@@ -25,6 +28,7 @@ import MobileMenu from '@/components/MobileMenu';
 // Sections
 import HeroSection from '@/components/sections/HeroSection';
 import SpotifySection from '@/components/sections/SpotifySection';
+import QuoteSection from '@/components/sections/QuoteSection';
 import ProjectsSection from '@/components/sections/ProjectsSection';
 import TechStackSection from '@/components/sections/TechStackSection';
 import CertificationsSection from '@/components/sections/CertificationsSection';
@@ -33,33 +37,26 @@ import ContactSection from '@/components/sections/ContactSection';
 import CurrentlySection from '@/components/sections/CurrentlySection';
 import FooterSection from '@/components/sections/FooterSection';
 import SignatureSection from '@/components/sections/SignatureSection';
+import TickerSection from '@/components/sections/TickerSection';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Parallax scroll effects for background
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const glowY1 = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const glowY2 = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']);
 
   // Initialize smooth scroll
   useLenis();
 
-  // Prevent scroll when menu is open
+  // Prevent scroll when menu is open. The attribute (not inline overflow) also
+  // stops Lenis, which scrolls the window on its own and would otherwise glide
+  // the page behind the dialog.
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.setAttribute('data-scroll-lock', '');
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.removeAttribute('data-scroll-lock');
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.removeAttribute('data-scroll-lock');
     };
   }, [isMenuOpen]);
 
@@ -72,41 +69,26 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-
-
       {/* Easter Egg */}
       <EasterEgg />
 
       {/* Mobile Menu */}
       <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+      <ScrollProgress />
+      <RaceStrip />
 
       {/* Main Content */}
       <main
-        ref={containerRef}
+        id="home"
         className={`min-h-screen bg-transparent text-foreground font-sans relative ${isLoading ? 'overflow-hidden' : ''
           }`}
       >
-        {/* CINEMATIC VIDEO BACKGROUND LAYER */}
+        {/* Persistent background: the topographic shader alone carries the
+            racing identity. The grid, glows and vignette that used to stack on
+            top of it competed with the linework instead of supporting it. */}
         <div className="fixed inset-0 z-0 overflow-hidden bg-background">
-          {/* Math & Physics WebGL Shader Background (Isolines) */}
           <ShaderBackground />
-
-          {/* Tech Grid Overlay - Made extremely faint so it doesn't overpower the shader */}
-          <div className="absolute inset-0 bg-grid-tech opacity-[0.05] z-0 pointer-events-none" />
-
-          {/* Subtle Static Light Effects with Parallax */}
-          <motion.div
-            className="absolute top-0 left-0 w-[400px] h-[400px] rounded-full bg-[#DFFF00] opacity-10 blur-[64px] pointer-events-none transform-gpu will-change-transform"
-            style={{ y: glowY1 }}
-          />
-          <motion.div
-            className="absolute bottom-0 right-0 w-[300px] h-[300px] rounded-full bg-foreground opacity-5 blur-[48px] pointer-events-none transform-gpu will-change-transform"
-            style={{ y: glowY2 }}
-          />
         </div>
-
-        {/* Background Pattern Mask */}
-        <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,var(--color-background)_100%)] opacity-80 pointer-events-none z-0" />
 
         {/* --- HEADER --- */}
         <Navigation onMenuOpen={() => setIsMenuOpen(true)} />
@@ -119,8 +101,8 @@ export default function Home() {
           {/* Spacer to Show Hero */}
           <div className="h-screen w-full pointer-events-none" />
 
-          {/* Spotify Playlist */}
-          <SpotifySection />
+          <TickerSection />
+          <CheckeredDivider label="Lap 01 / Selected Work" />
 
           {/* Projects Section */}
           <ProjectsSection />
@@ -130,6 +112,7 @@ export default function Home() {
 
           {/* Certifications Section */}
           <CertificationsSection />
+          <CheckeredDivider label="Lap 04 / About" />
 
           {/* About Section */}
           <AboutSection />
@@ -139,6 +122,13 @@ export default function Home() {
 
           {/* Currently Section */}
           <CurrentlySection />
+
+          {/* Spotify Playlist — moved below Projects/About: proof of work
+              converts better than a playlist above the fold; embed adds
+              no SEO signal that early placement would improve */}
+          <SpotifySection />
+          <QuoteSection />
+          <CheckeredDivider label="Lap 06 / Finish" />
 
           {/* Contact Section */}
           <ContactSection />

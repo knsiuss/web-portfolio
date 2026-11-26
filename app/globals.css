@@ -1,57 +1,85 @@
 @import "tailwindcss";
 
-/* 
- * KEY: @theme inline makes Tailwind v4 generate utilities like:
- *   bg-background → background-color: var(--color-background)
- * Without `inline`, values are baked in statically at build time.
- * With `inline`, the CSS var is referenced directly, so .dark class
- * toggling by next-themes will update the color at runtime.
+/*
+ * Lando-style token system.
+ * @theme inline re-exposes runtime CSS vars so Tailwind v4 opacity modifiers
+ * like bg-accent/10 work; the dark/light swaps happen in :root and .dark only —
+ * no !important, no component overrides.
  */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-racing-red: var(--racing-red);
-  --color-acid: var(--acid);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
 }
 
-/* Runtime theming tokens — updated by next-themes via .dark class */
 :root {
-  --background: #fafafa;
-  --foreground: #050505;
-  --racing-red: #1D4ED8;
-  --acid: #1D4ED8;
-  /* Override Tailwind's @theme inline generated values at runtime */
-  --color-background: #fafafa;
-  --color-foreground: #050505;
-  --color-racing-red: #1D4ED8;
-  --color-acid: #1D4ED8;
+  /* Light — cream paper (#f4f4ed), dark-olive ink, lime stays a FILL only */
+  --background: #f4f4ed;
+  --foreground: #282c20;
+  --panel: #ebeee0;
+  --panel-2: #dde1d2;
+  /* Secondary text. Opaque on purpose: alpha values like foreground/40
+     mixed down to ~3.8:1 on this cream and failed WCAG AA. */
+  --muted: #5f6259;        /* 5.6:1 on #f4f4ed, 5.3:1 on #ebeee0 */
+  --faint: #63665d;        /* 5.3:1 on #f4f4ed, 5.0:1 on #ebeee0 */
+  --accent: #d2ff00;
+  --accent-foreground: #282c20;
+  --accent-text: #465100;   /* ~7.2:1 on #f4f4ed — AA */
+  --accent-soft: #465100;
+  --line: rgba(40, 44, 32, 0.14);
+  --line-strong: rgba(40, 44, 32, 0.32);
 }
 
 .dark {
-  --background: #050505;
-  --foreground: #ffffff;
-  --racing-red: #DFFF00;
-  --acid: #DFFF00;
-  /* Override Tailwind's @theme inline generated values at runtime */
-  --color-background: #050505;
-  --color-foreground: #ffffff;
-  --color-racing-red: #DFFF00;
-  --color-acid: #DFFF00;
+  /* Dark — warm dark olive, NOT pure black. Lime = #d2ff00 (Lando's own) */
+  --background: #282c20;
+  --foreground: #f4f4ed;
+  --panel: #3b3c38;
+  --panel-2: #535450;
+  --muted: #b3b6aa;        /* 6.9:1 on #282c20, 5.4:1 on #3b3c38 */
+  --faint: #a6aa9d;        /* 6.0:1 on #282c20, 4.7:1 on #3b3c38 */
+  --accent: #d2ff00;
+  --accent-foreground: #282c20;
+  --accent-text: #d2ff00;
+  --accent-soft: #b2c73a;
+  --line: rgba(244, 244, 237, 0.14);
+  --line-strong: rgba(244, 244, 237, 0.32);
 }
 
-/* next-themes adds 'light' class to <html> when light mode is active */
-.light {
-  --background: #fafafa !important;
-  --foreground: #050505 !important;
-  --racing-red: #1D4ED8 !important;
-  --acid: #1D4ED8 !important;
-  --color-background: #fafafa !important;
-  --color-foreground: #050505 !important;
-  --color-racing-red: #1D4ED8 !important;
-  --color-acid: #1D4ED8 !important;
+/* Set while the mobile menu dialog is open. Covers the no-Lenis case
+   (reduced motion), where native scrolling is the only thing to stop. */
+body[data-scroll-lock] {
+  overflow: hidden;
 }
 
-/* Base Styles */
+/* Controls get the hand cursor once, here. Tailwind v4 preflight does not
+   add it to <button>, so every button read as inert text without this. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select,
+  label[for],
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
 body {
   font-family: var(--font-inter), sans-serif;
   background-color: var(--background);
@@ -59,137 +87,30 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* === GLOBAL THEME RULES ===
- * Since Tailwind v4 @theme bakes in static values, we use
- * direct CSS variables here so dark/light toggle actually works.
- * These apply to ALL section backgrounds and text by default.
- */
+/* Sections inherit the page background; keep the Lando warm-olive base */
 section {
   background-color: var(--background);
   color: var(--foreground);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Cards: use a slightly different shade for depth */
 .theme-card {
-  background-color: color-mix(in srgb, var(--foreground) 5%, transparent);
-  border-color: color-mix(in srgb, var(--foreground) 10%, transparent);
+  background-color: var(--panel);
+  border: 1px solid var(--line);
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-/* === ACCENT COLOR SYSTEM ===
- * Dark mode (default): lime yellow #DFFF00
- * Light mode (html.light added by next-themes): blue #1D4ED8
- * Using direct selectors + !important to bypass ANY CSS variable chain issues.
- */
+/* === TOKENS AS UTILITIES (semantic) === */
+.text-accent-text { color: var(--accent-text); }
+.bg-accent { background-color: var(--accent); }
+.text-accent-foreground { color: var(--accent-foreground); }
+.border-accent-soft { border-color: var(--accent-soft); }
+.border-line { border-color: var(--line); }
 
-/* Default (dark mode): lime yellow */
-.text-racing-red,
-.text-accent {
-  color: #DFFF00;
-  transition: color 0.3s ease;
-}
-
-.bg-racing-red,
-.bg-accent {
-  background-color: #DFFF00;
-  transition: background-color 0.3s ease;
-}
-
-.border-racing-red,
-.border-accent {
-  border-color: #DFFF00;
-  transition: border-color 0.3s ease;
-}
-
-/* Light mode override: blue #1D4ED8 — html.light is added by next-themes */
-html.light .text-racing-red,
-html.light .text-accent {
-  color: #1D4ED8 !important;
-}
-
-html.light .bg-racing-red,
-html.light .bg-accent {
-  background-color: #1D4ED8 !important;
-}
-
-html.light .border-racing-red,
-html.light .border-accent {
-  border-color: #1D4ED8 !important;
-}
-
-/* === ADDITIONAL LIGHT MODE OVERRIDES ===
- * Precise selectors ONLY. Do NOT use [class*="bg-[#DFFF00]"] — it matches
- * opacity variants like bg-[#DFFF00]/10 which breaks subtle glow effects.
- */
-
-/* bg-[#DFFF00] exact class: BackToTop, LIVE DEMO button, Timeline NOW badge */
-html.light .bg-\[\#DFFF00\] {
-  background-color: #1D4ED8 !important;
-}
-
-/* Hover bg overrides in light mode */
-html.light .hover\:bg-\[\#DFFF00\]:hover {
-  background-color: #1D4ED8 !important;
-}
-
-/* hover text overrides in light mode */
-html.light .hover\:text-\[\#DFFF00\]:hover {
-  color: #1D4ED8 !important;
-}
-
-/* group-hover text in light mode */
-html.light .group:hover .group-hover\:text-\[\#DFFF00\] {
-  color: #1D4ED8 !important;
-}
-
-/* ring overrides (Timeline current item) */
-html.light .ring-\[\#DFFF00\] {
-  --tw-ring-color: #1D4ED8 !important;
-}
-
-/* SVG fills and strokes (AnimatedCollab, any SVG with fill="DFFF00") */
-html.light [fill="#DFFF00"] {
-  fill: #1D4ED8 !important;
-}
-
-html.light [stroke="#DFFF00"] {
-  stroke: #1D4ED8 !important;
-}
-
-/* Dynamic Shadows for SVGs and Text */
-.svg-shadow-racing {
-  filter: drop-shadow(0px 0px 15px rgba(223, 255, 0, 0.2));
-}
-
-html.light .svg-shadow-racing {
-  filter: drop-shadow(0px 0px 15px rgba(29, 78, 216, 0.4)) !important;
-}
-
-.text-shadow-racing {
-  text-shadow: 0px 10px 30px rgba(223, 255, 0, 0.3);
-}
-
-html.light .text-shadow-racing {
-  text-shadow: 0px 10px 30px rgba(29, 78, 216, 0.4) !important;
-}
-
-/* Neon Glow overrides in light mode */
-html.light .text-glow-neon {
-  text-shadow: 0 0 10px rgba(29, 78, 216, 0.5), 0 0 20px rgba(29, 78, 216, 0.3) !important;
-}
-
-/* About section & StorySection: WebkitTextStroke outline text */
-html.light [style*="1.5px #DFFF00"],
-html.light [style*="2px #DFFF00"],
-html.light [style*="DFFF00"] {
-  -webkit-text-stroke-color: #1D4ED8 !important;
-}
-
-/* Font Utility Classes */
+/* === Font utilities === */
 .font-lando {
   font-family: var(--font-lando), 'Anton', sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .font-tech {
@@ -200,222 +121,92 @@ html.light [style*="DFFF00"] {
   font-family: var(--font-inter), 'Inter', sans-serif;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
+/* === Ticker marquee === */
+@keyframes ticker-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.3333%); }
 }
 
-::-webkit-scrollbar-track {
-  background: #111;
+.ticker-track {
+  animation: ticker-marquee 30s linear infinite;
+  will-change: transform;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 2px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #DFFF00;
-}
-
-/* Selection Color */
-::selection {
-  background-color: #DFFF00;
-  color: white;
-}
-
-/* Cinematic Animations */
-@keyframes gradient-shift {
-
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 15s ease infinite;
-}
-
-@keyframes text-shimmer {
-  0% {
-    background-position: -200% center;
-  }
-
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.text-shimmer {
-  background: linear-gradient(90deg,
-      transparent 0%,
-      rgba(225, 6, 0, 0.4) 50%,
-      transparent 100%);
-  background-size: 200% 100%;
-  animation: text-shimmer 3s ease-in-out infinite;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+    transform: none;
+  }
+}
 
-  *,
-  *::before,
-  *::after {
+/* Lando eyebrow: small caps above display type */
+.eyebrow {
+  font-family: var(--font-tech), 'Space Grotesk', sans-serif;
+  font-size: 0.65rem;
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--panel-2); }
+::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+::selection {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* === Racing structure === */
+.skew-racing { transform: skewX(-10deg); }
+.unskew-racing { transform: skewX(10deg); }
+
+/* Checkered flag — reused by sector kickers, dividers and the finish strip */
+.finish-line {
+  background-image: conic-gradient(
+    var(--foreground) 25%,
+    var(--background) 0 50%,
+    var(--foreground) 0 75%,
+    var(--background) 0
+  );
+  background-size: 8px 8px;
+}
+
+.finish-line-accent {
+  background-image: conic-gradient(
+    var(--accent-foreground) 25%,
+    var(--accent) 0 50%,
+    var(--accent-foreground) 0 75%,
+    var(--accent) 0
+  );
+  background-size: 8px 8px;
+}
+
+/* Hairlines that read like a broadcast timing screen */
+.timing-grid {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--foreground) 12%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 16.66% 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* GPU Acceleration */
-.gpu-accelerated {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Racing Red Accent */
-.text-racing-red {
-  color: #DFFF00;
-}
-
-.bg-racing-red {
-  background-color: #DFFF00;
-}
-
-.border-racing-red {
-  border-color: #DFFF00;
-}
-
-/* Racing Structural Elements */
-.bg-carbon {
-  background-image: linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111),
-    linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111);
-  background-size: 8px 8px;
-  background-position: 0 0, 4px 4px;
-}
-
-.bg-noise {
-  position: absolute;
-  inset: -50%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.05;
-  pointer-events: none;
-  z-index: 50;
-  /* Removed heavy animation, static noise is much cheaper */
-}
-
-.bg-grid-tech {
-  background-size: 50px 50px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-}
-
-.skew-racing {
-  transform: skewX(-10deg);
-}
-
-.unskew-racing {
-  transform: skewX(10deg);
-}
-
-/* Neon Glow */
-.text-glow-neon {
-  text-shadow: 0 0 10px rgba(223, 255, 0, 0.5), 0 0 20px rgba(223, 255, 0, 0.3);
-}
-
-/* Glitch Effect */
-@keyframes glitch-anim {
-  0% {
-    transform: translate(0) skewX(-10deg);
-  }
-
-  2% {
-    transform: translate(-2px, 1px) skewX(-10deg);
-  }
-
-  4% {
-    transform: translate(-1px, -1px) skewX(-10deg);
-  }
-
-  6% {
-    transform: translate(2px, 1px) skewX(-10deg);
-  }
-
-  8% {
-    transform: translate(1px, -1px) skewX(-10deg);
-  }
-
-  10% {
-    transform: translate(0) skewX(-10deg);
-  }
-
-  100% {
-    transform: translate(0) skewX(-10deg);
-  }
-}
-
-.hover-glitch:hover {
-  animation: glitch-anim 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
-  color: #DFFF00;
-}
-
-@keyframes flash-neon {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-}
-
-.animate-flash-neon {
-  animation: flash-neon 0.1s infinite;
-}
-
-/* Typography Lando Style */
-.text-outline-black {
-  -webkit-text-stroke: 1px black;
-  color: transparent;
-}
-
-.text-outline-white {
-  -webkit-text-stroke: 1px white;
-  color: transparent;
-}
-
-/* Spin animation for star */
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 8s linear infinite;
-}
-
-/* Focus visible styles for accessibility */
-:focus-visible {
-  outline: 2px solid #DFFF00;
-  outline-offset: 2px;
 }
 
 /* WHY auto: CSS smooth + Lenis double-smooths and feels laggy.

@@ -63,10 +63,10 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
         return (
             <svg
                 viewBox="0 0 1536 1024"
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)]"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(210,255,0,0.15)]"
                 preserveAspectRatio="xMidYMid meet"
             >
-                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="none">
+                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--accent)" stroke="none">
                     <path d={PATH_MAIN} />
                     <path d={PATH_DOT_1} />
                     <path d={PATH_DOT_2} />
@@ -80,7 +80,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
         return (
             <motion.svg
                 viewBox="0 0 1536 1024"
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(210,255,0,0.15)] pointer-events-none"
                 preserveAspectRatio="xMidYMid meet"
                 style={{
                     opacity: signatureOpacity,
@@ -90,7 +90,7 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
                     transform: 'translateZ(0)',
                 }}
             >
-                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="var(--racing-red, #DFFF00)">
+                <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--accent)" stroke="var(--accent)">
                     <motion.path
                         d={PATH_MAIN}
                         style={{ pathLength: drawMain, fillOpacity: fillOpacityVal }}
@@ -125,10 +125,10 @@ export default function AnimatedSignature({ scrollProgress }: AnimatedSignatureP
     return (
         <svg
             viewBox="0 0 1536 1024"
-            className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)] pointer-events-none"
+            className="w-full h-full drop-shadow-[0_0_15px_rgba(210,255,0,0.15)] pointer-events-none"
             preserveAspectRatio="xMidYMid meet"
         >
-            <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--racing-red, #DFFF00)" stroke="var(--racing-red, #DFFF00)">
+            <g transform="translate(0, 1024) scale(0.1, -0.1)" fill="var(--accent)" stroke="var(--accent)">
                 <motion.path
                     d={PATH_MAIN}
                     variants={timeBasedVariants}

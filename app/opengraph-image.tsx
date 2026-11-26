@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Kanisius Bagaskara — ML Engineer & Data Scientist';
+export const alt = 'Kanisius Bagaskara, Machine Learning Engineer and Data Scientist';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -10,7 +10,7 @@ export default async function OGImage() {
         (
             <div
                 style={{
-                    background: '#080906',
+                    background: '#282c20',
                     width: '100%',
                     height: '100%',
                     display: 'flex',
@@ -23,53 +23,28 @@ export default async function OGImage() {
                     overflow: 'hidden',
                 }}
             >
-                {/* Grid pattern background */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        inset: 0,
-                        backgroundImage:
-                            'linear-gradient(rgba(223,255,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(223,255,0,0.04) 1px, transparent 1px)',
-                        backgroundSize: '40px 40px',
-                    }}
-                />
-
-                {/* Glow accent */}
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: -100,
-                        right: -100,
-                        width: 400,
-                        height: 400,
-                        borderRadius: '50%',
-                        background: 'radial-gradient(circle, rgba(223,255,0,0.12) 0%, transparent 70%)',
-                    }}
-                />
-
                 {/* Top label */}
                 <div
                     style={{
                         display: 'flex',
                         alignItems: 'center',
                         gap: '12px',
-                        marginBottom: '32px',
+                        marginBottom: '36px',
                     }}
                 >
-                    <div style={{ width: 32, height: 2, background: '#DFFF00' }} />
-                    <span style={{ color: '#DFFF00', fontSize: 14, letterSpacing: '0.3em', textTransform: 'uppercase' }}>
-                        kanisius.dev
+                    <div style={{ width: 32, height: 2, background: '#d2ff00' }} />
+                    <span style={{ color: '#d2ff00', fontSize: 14, letterSpacing: '0.3em', textTransform: 'uppercase' }}>
+                        Portfolio
                     </span>
                 </div>
 
                 {/* Name */}
                 <div
                     style={{
-                        fontSize: 72,
+                        fontSize: 76,
                         fontWeight: 900,
-                        color: '#FFFFFF',
-                        lineHeight: 1,
-                        marginBottom: '16px',
+                        color: '#f4f4ed',
+                        lineHeight: 0.95,
                         letterSpacing: '-0.02em',
                     }}
                 >
@@ -77,11 +52,11 @@ export default async function OGImage() {
                 </div>
                 <div
                     style={{
-                        fontSize: 72,
+                        fontSize: 76,
                         fontWeight: 900,
-                        color: '#DFFF00',
-                        lineHeight: 1,
-                        marginBottom: '32px',
+                        color: '#d2ff00',
+                        lineHeight: 0.95,
+                        marginBottom: '36px',
                         letterSpacing: '-0.02em',
                     }}
                 >
@@ -92,28 +67,39 @@ export default async function OGImage() {
                 <div
                     style={{
                         fontSize: 22,
-                        color: 'rgba(255,255,255,0.6)',
+                        color: 'rgba(244,244,237,0.72)',
                         letterSpacing: '0.15em',
                         textTransform: 'uppercase',
-                        marginBottom: '48px',
+                        marginBottom: '56px',
                     }}
                 >
-                    ML Engineer · Data Scientist · AI for Physical World
+                    ML Engineer · Data Scientist
                 </div>
 
-                {/* Stats row */}
+                {/* Facts taken from the site itself, not invented metrics. */}
                 <div style={{ display: 'flex', gap: '48px' }}>
                     {[
-                        { num: '92%', label: 'Model Accuracy' },
-                        { num: '3+', label: 'ML Pipelines' },
-                        { num: '100+', label: 'Students Trained' },
+                        { text: 'F1 Pit Strategy', label: 'Live Streamlit app' },
+                        { text: 'Stanford ML', label: 'Specialization' },
+                        { text: 'Jakarta', label: 'Indonesia' },
                     ].map((s) => (
-                        <div key={s.label} style={{ display: 'flex', flexDirection: 'column' }}>
-                            <span style={{ fontSize: 32, fontWeight: 700, color: '#DFFF00' }}>{s.num}</span>
-                            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{s.label}</span>
+                        <div key={s.text} style={{ display: 'flex', flexDirection: 'column' }}>
+                            <span style={{ fontSize: 28, fontWeight: 700, color: '#f4f4ed' }}>{s.text}</span>
+                            <span style={{ fontSize: 13, color: 'rgba(244,244,237,0.55)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{s.label}</span>
                         </div>
                     ))}
                 </div>
+
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: 10,
+                        background: '#d2ff00',
+                    }}
+                />
             </div>
         ),
         { ...size }

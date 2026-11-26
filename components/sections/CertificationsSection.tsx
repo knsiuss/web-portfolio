@@ -1,9 +1,10 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useScroll, useTransform, type Variants } from 'framer-motion';
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronDown, ExternalLink } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
+import LapKicker from '@/components/ui/LapKicker';
 
 const certificates = [
   {
@@ -15,7 +16,7 @@ const certificates = [
     courses: [
       {
         name: "Supervised Learning",
-        desc: "The math behind the magic — regression to neural nets",
+        desc: "The math behind the magic: regression to neural nets",
         link: "/assets/certificates/stanford-supervised-learning-2026.pdf"
       },
       {
@@ -60,23 +61,6 @@ const certificates = [
   },
 ];
 
-// Cinematic cascade for the course list inside an opened certificate.
-const courseList: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
-};
-
-const courseItem: Variants = {
-  hidden: { opacity: 0, x: -32, scale: 0.9, rotate: -3 },
-  show: {
-    opacity: 1,
-    x: 0,
-    scale: 1,
-    rotate: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
 export default function CertificationsSection() {
   const prefersReducedMotion = useReducedMotion();
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -111,9 +95,7 @@ export default function CertificationsSection() {
           className="flex flex-col md:flex-row justify-between items-start gap-8 mb-16 will-change-transform"
         >
           <div className="md:w-1/2">
-            <span className="font-tech text-xs uppercase tracking-[0.4em] text-racing-red mb-4 block">
-              Continuous Learning
-            </span>
+            <LapKicker lap="03">Continuous Learning</LapKicker>
             <span className="overflow-hidden block">
               <motion.h2
                 initial={prefersReducedMotion ? {} : { y: '110%' }}
@@ -132,9 +114,9 @@ export default function CertificationsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-            className="font-tech text-sm md:text-base text-foreground/60 leading-relaxed border-l border-[#DFFF00]/30 pl-6 md:w-1/2 md:mt-12"
+            className="font-tech text-sm md:text-base text-muted leading-relaxed md:w-1/2 md:mt-12"
           >
-            Every certificate here was earned to solve a real problem — not just to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
+            Every certificate here was earned to solve a real problem, not to collect badges. Stanford for the math, Google for the tools, IBM for the foundations.
           </motion.p>
         </motion.div>
 
@@ -152,15 +134,7 @@ export default function CertificationsSection() {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: Math.min(index * 0.08, 0.24) }}
                 className="group relative border-b border-foreground/10 py-8 md:py-10 grid gap-6 md:grid-cols-[110px_1fr_auto]"
               >
-                {/* Accent line grows left-to-right as the row enters */}
-                <motion.div
-                  initial={prefersReducedMotion ? {} : { scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true, margin: '-80px' }}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-                  className="absolute inset-x-0 top-0 h-px origin-left bg-[#DFFF00]/70"
-                  aria-hidden="true"
-                />
+                <span className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden="true" />
 
                 <motion.span
                   initial={prefersReducedMotion ? {} : { opacity: 0, x: -80, scale: 1.4, rotate: -6 }}
@@ -175,7 +149,7 @@ export default function CertificationsSection() {
                 </motion.span>
 
                 <div className="min-w-0">
-                  <span className="font-tech text-xs uppercase tracking-widest text-foreground/50">
+                  <span className="font-tech text-xs uppercase tracking-widest text-muted">
                     {cert.issuer}
                   </span>
                   <span className="overflow-hidden block mt-2">
@@ -189,94 +163,72 @@ export default function CertificationsSection() {
                       {cert.title}
                     </motion.h3>
                   </span>
-                  <p className="font-tech text-xs text-foreground/40 italic mt-3">
-                    &ldquo;{cert.courses[0].desc}&rdquo;
+                  <p className="font-tech text-xs text-faint mt-3">
+                    {cert.courses[0].desc}
                   </p>
 
                   <button
                     type="button"
                     onClick={() => setExpanded(isOpen ? null : cert.title)}
                     aria-expanded={isOpen}
-                    className="mt-5 inline-flex items-center gap-1.5 font-tech text-xs uppercase tracking-wider text-foreground/60 hover:text-[#DFFF00] transition-colors"
+                    aria-controls={`courses-${number}`}
+                    className="mt-3 inline-flex min-h-11 items-center gap-1.5 font-tech text-xs uppercase tracking-wider text-muted hover:text-accent-text transition-colors"
                   >
-                    {isOpen ? 'Hide courses' : 'Courses'}
-                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+                    {isOpen ? 'Hide courses' : `${cert.courses.length} ${cert.courses.length === 1 ? 'course' : 'courses'}`}
+                    <ChevronDown aria-hidden="true" className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                 </div>
 
                 <div className="flex flex-wrap items-start gap-3 md:flex-col md:items-end">
-                  <span className="font-lando text-xl md:text-2xl text-[#DFFF00] leading-none">{cert.date}</span>
+                  <span className="font-lando text-xl md:text-2xl text-accent-text leading-none">{cert.date}</span>
                   <a
                     href={cert.link}
                     download
-                    className="inline-flex items-center gap-1.5 border border-foreground/20 text-foreground font-tech text-xs uppercase px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all"
+                    className="inline-flex min-h-11 items-center gap-1.5 border border-line-strong text-foreground font-tech text-xs uppercase px-4 rounded-md hover:bg-foreground hover:text-background transition-colors"
                   >
-                    Verify
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    Certificate
+                    <ExternalLink aria-hidden="true" className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
-                {/* Courses — hidden until opened, cascade in one-by-one */}
+                {/* Courses — hidden until opened */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
                       key="courses"
+                      id={`courses-${number}`}
                       initial={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={prefersReducedMotion ? {} : { height: 0, opacity: 0 }}
                       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                       className="overflow-hidden md:col-span-3"
                     >
-                      <motion.ul
-                        variants={courseList}
-                        initial={prefersReducedMotion ? false : 'hidden'}
-                        animate="show"
-                        className="grid gap-3 pt-4 sm:grid-cols-3"
-                      >
+                      <ul className="grid gap-3 pt-4 sm:grid-cols-3">
                         {cert.courses.map((course) => (
-                          <motion.li key={course.name || course.desc} variants={courseItem}>
+                          <li key={course.name || course.desc}>
                             <a
                               href={course.link}
                               download
-                              className="group/course block border border-foreground/10 p-4 hover:border-[#DFFF00]/50 transition-colors"
+                              className="group/course block border border-line p-4 hover:border-accent-soft transition-colors"
                             >
                               {course.name && (
-                                <span className="font-tech text-sm uppercase tracking-wide text-foreground group-hover/course:text-[#DFFF00] transition-colors flex items-center gap-2">
+                                <span className="font-tech text-sm uppercase tracking-wide text-foreground group-hover/course:text-accent-text transition-colors">
                                   {course.name}
-                                  <ExternalLink className="w-3 h-3 opacity-0 group-hover/course:opacity-100 transition-opacity" />
                                 </span>
                               )}
-                              <span className="font-tech text-xs text-foreground/50 italic block mt-1.5">
-                                &ldquo;{course.desc}&rdquo;
+                              <span className="font-tech text-xs text-muted block mt-1.5">
+                                {course.desc}
                               </span>
                             </a>
-                          </motion.li>
+                          </li>
                         ))}
-                      </motion.ul>
+                      </ul>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </motion.article>
             );
           })}
-        </div>
-
-        {/* Cinematic marquee */}
-        <div className="mt-14 overflow-hidden border-t border-foreground/10 pt-6" aria-hidden="true">
-          <motion.div
-            animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-            className="flex w-max whitespace-nowrap will-change-transform"
-          >
-            {[0, 1].map((copy) => (
-              <span
-                key={copy}
-                className="font-lando text-4xl md:text-6xl uppercase leading-none text-foreground/80 pr-10"
-              >
-                Stanford IBM Google Stanford IBM Google Stanford IBM Google&nbsp;
-              </span>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>

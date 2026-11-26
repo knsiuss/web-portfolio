@@ -1,42 +1,42 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, Instagram, Calendar, ArrowUpRight } from 'lucide-react';
+import { Mail, Calendar, ArrowUpRight, FileDown } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import MagneticButton from '@/components/ui/MagneticButton';
 
+// Brand-coloured hover per channel would put six extra hues on the page.
+// One accent governs the list instead.
 const contactMethods = [
   {
-    icon: <Mail className="w-5 h-5" />,
     label: "Email",
     value: "kanisius@novar.me",
     href: "mailto:kanisius@novar.me",
-    color: "hover:bg-blue-500/20 hover:border-blue-500/50",
-    description: "For professional inquiries",
   },
   {
-    icon: <Linkedin className="w-5 h-5" />,
     label: "LinkedIn",
     value: "linkedin.com/in/kanisiusbagas1212",
     href: "https://linkedin.com/in/kanisiusbagas1212",
-    color: "hover:bg-[#0077b5]/20 hover:border-[#0077b5]/50",
-    description: "Connect professionally",
   },
   {
-    icon: <Github className="w-5 h-5" />,
     label: "GitHub",
     value: "github.com/knsiuss",
     href: "https://github.com/knsiuss",
-    color: "hover:bg-white/20 hover:border-foreground/50",
-    description: "See my code",
   },
   {
-    icon: <Instagram className="w-5 h-5" />,
+    label: "Hugging Face",
+    value: "huggingface.co/knss12",
+    href: "https://huggingface.co/knss12",
+  },
+  {
+    label: "X",
+    value: "x.com/grey_stardust",
+    href: "https://x.com/grey_stardust",
+  },
+  {
     label: "Instagram",
     value: "instagram.com/p_knsss",
     href: "https://www.instagram.com/p_knsss/",
-    color: "hover:bg-pink-500/20 hover:border-pink-500/50",
-    description: "Follow my updates",
   },
 ];
 
@@ -51,33 +51,47 @@ export default function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section id="contact" className="relative bg-background py-20 md:py-32 overflow-hidden z-0">
-      {/* Background Glow - Above Graphic */}
-      <div className="absolute inset-0 -z-10 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#DFFF00]/5 rounded-full blur-[150px]" />
-      </div>
-
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Header */}
-        <motion.div
-          initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16"
+    <section id="contact" className="relative bg-background overflow-hidden z-0">
+      {/* Full-bleed lime strip — Lando-style close before footer */}
+      <div className="relative bg-accent text-accent-foreground py-12 md:py-16 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="absolute -top-10 left-0 font-lando text-[22vw] leading-none uppercase text-accent-foreground/[0.08] whitespace-nowrap pointer-events-none select-none"
         >
-          <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
-            Get In Touch
-          </span>
-          <h2 className="font-lando text-4xl md:text-6xl lg:text-7xl uppercase mb-4">
-            Let&apos;s Build{" "}
-            <span className="text-racing-red">Something</span>
+          CONTACT CONTACT
+        </div>
+        <div className="mx-auto max-w-6xl px-4 md:px-6 relative">
+          <div className="mb-4 flex items-center gap-3">
+            <span aria-hidden="true" className="finish-line-accent h-2 w-7 shrink-0" />
+            <span className="font-tech text-[11px] uppercase tracking-[0.25em]">
+              <span className="mr-2 text-accent-foreground/60">Lap 06 /</span>
+              Get In Touch
+            </span>
+          </div>
+          <h2 className="font-lando text-5xl md:text-7xl lg:text-8xl uppercase leading-[0.85] tracking-tight mb-6">
+            Let&apos;s Build<br />Something
           </h2>
-          <p className="font-tech text-foreground/50 max-w-xl mx-auto">
+          <p className="font-tech text-accent-foreground/80 max-w-xl">
             Currently open to opportunities. Usually respond within 24 hours.
           </p>
+        </div>
+      </div>
+
+      <div className="py-16 md:py-24">
+      <div className="mx-auto max-w-6xl px-4 md:px-6 relative z-10">
+        {/* Header (sub-copy kept minimal; lime strip above carries the headline) */}
+        <motion.div
+          initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-12 md:mb-16"
+        >
+          <h2 className="font-lando text-3xl md:text-5xl uppercase tracking-tight">
+            Work With Me
+          </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left - Opportunities */}
           <motion.div
             initial={prefersReducedMotion ? {} : { opacity: 0, x: -30 }}
@@ -85,41 +99,40 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-lando text-xl uppercase mb-6 text-foreground/80">
+            <h3 className="font-lando text-xl uppercase mb-6 text-foreground">
               Open For
             </h3>
-            <div className="space-y-3 mb-8">
-              {opportunities.map((opp, index) => (
-                <motion.div
-                  key={opp}
-                  initial={prefersReducedMotion ? {} : { opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-1.5 h-1.5 bg-racing-red rounded-full" />
-                  <span className="font-tech text-foreground/70">{opp}</span>
-                </motion.div>
+            <ul className="space-y-3 mb-8">
+              {opportunities.map((opp) => (
+                <li key={opp} className="flex items-center gap-3">
+                  <span aria-hidden="true" className="block h-1.5 w-1.5 bg-accent-text" />
+                  <span className="font-tech text-muted">{opp}</span>
+                </li>
               ))}
-            </div>
+            </ul>
 
-            {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
               <MagneticButton
                 href="mailto:kanisius@novar.me"
                 magneticStrength={0.2}
-                className="inline-flex items-center justify-center gap-2 bg-racing-red text-background font-tech uppercase tracking-wider px-6 py-3 rounded-lg hover:brightness-110 transition-all group"
+                className="inline-flex min-h-12 items-center justify-center gap-2 bg-accent text-accent-foreground font-tech uppercase tracking-wider px-6 rounded-md hover:brightness-110 transition-[filter]"
               >
-                <Mail className="w-4 h-4" />
+                <Mail aria-hidden="true" className="w-4 h-4" />
                 Start a Conversation
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </MagneticButton>
+              <MagneticButton
+                href="/assets/resume-kanisius-bagaskara.pdf"
+                download
+                magneticStrength={0.2}
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-line-strong text-foreground font-tech uppercase tracking-wider px-6 rounded-md hover:bg-foreground/10 transition-colors"
+              >
+                <FileDown aria-hidden="true" className="w-4 h-4" />
+                Download CV
               </MagneticButton>
             </div>
 
-            {/* Response Time */}
-            <div className="mt-6 flex items-center gap-2 text-foreground/40">
-              <Calendar className="w-4 h-4" />
+            <div className="mt-6 flex items-center gap-2 text-muted">
+              <Calendar aria-hidden="true" className="w-4 h-4" />
               <span className="font-tech text-xs">Usually respond within 24 hours</span>
             </div>
           </motion.div>
@@ -142,22 +155,18 @@ export default function ContactSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + index * 0.1 }}
-                className={`flex items-center gap-4 p-4 bg-foreground/5 backdrop-blur-md border border-foreground/10 rounded-xl transition-all ${method.color} group`}
+                className="flex items-center gap-4 p-4 min-h-[60px] bg-panel border border-line rounded-md transition-colors hover:border-accent-soft"
               >
-                <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-foreground/60 group-hover:text-foreground group-hover:bg-white/10 transition-colors">
-                  {method.icon}
-                </div>
                 <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <span className="font-tech text-xs uppercase text-foreground/40">{method.label}</span>
-                    <ArrowUpRight className="w-4 h-4 text-foreground/20 group-hover:text-foreground/60 transition-colors" />
-                  </div>
+                  <span className="font-tech text-[10px] uppercase tracking-wider text-faint block">{method.label}</span>
                   <span className="font-tech text-sm text-foreground truncate block">{method.value}</span>
                 </div>
+                <ArrowUpRight aria-hidden="true" className="w-4 h-4 shrink-0 text-muted" />
               </motion.a>
             ))}
           </motion.div>
         </div>
+      </div>
       </div>
     </section>
   );

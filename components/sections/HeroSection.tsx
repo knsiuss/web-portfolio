@@ -17,10 +17,7 @@ interface HeroSectionProps {
 }
 
 // Role tags shown under the name; kept as data so the row stays a simple map.
-const HERO_ROLES = [
-  "ML Engineer"
-
-];
+const HERO_ROLES = ["ML Engineer", "Data Scientist"];
 
 export default function HeroSection({}: HeroSectionProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -35,7 +32,6 @@ export default function HeroSection({}: HeroSectionProps) {
   const textX = useTransform(mouseX, [-1, 1], [-5, 5]);
   const bgTextY = useTransform(scrollYProgress, [0, 0.5], [0, -30]);
   const bgTextOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
-  const starY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (prefersReducedMotion) return;
@@ -46,7 +42,7 @@ export default function HeroSection({}: HeroSectionProps) {
   return (
     <div
       ref={containerRef}
-      className="fixed top-0 left-0 w-full h-screen z-0 flex flex-col items-center justify-end overflow-hidden pointer-events-none"
+      className="fixed top-0 left-0 w-full h-screen z-0 flex flex-col items-center justify-end overflow-hidden"
       onMouseMove={handleMouseMove}
     >
       {/* Removed "KB" Watermark as it was causing visual clutter */}
@@ -62,17 +58,12 @@ export default function HeroSection({}: HeroSectionProps) {
         className="absolute top-[20%] md:top-[12%] w-full flex flex-col items-center justify-center z-20 px-4"
       >
         {/* First Name */}
-        <div
-          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-foreground tracking-tighter select-none skew-racing cursor-default"
-          style={{ filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.8))" }}
-        >
+        <div className="font-lando text-[13vw] leading-[0.8] text-foreground tracking-tighter select-none skew-racing cursor-default">
           <SplitText text="KANISIUS" delay={0.2} />
         </div>
 
-        {/* Last Name */}
-        <div
-          className="font-lando text-[13vw] sm:text-[13vw] md:text-[13vw] leading-[0.8] text-racing-red tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default text-shadow-racing"
-        >
+        {/* Last Name — the lime is the name itself, so it needs no glow */}
+        <div className="font-lando text-[13vw] leading-[0.8] text-accent-text tracking-tighter -mt-1 md:-mt-3 select-none skew-racing cursor-default">
           <SplitText text="BAGASKARA" delay={0.4} />
         </div>
 
@@ -83,19 +74,20 @@ export default function HeroSection({}: HeroSectionProps) {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-4 md:mt-10 flex flex-col items-center gap-1.5 md:gap-3"
         >
+          <span aria-hidden="true" className="finish-line mb-1 h-[6px] w-24 opacity-80" />
           <span className="flex flex-wrap justify-center items-center gap-x-2 md:gap-x-3 gap-y-1">
             {HERO_ROLES.map((role, index) => (
               <span key={role} className="flex items-center gap-x-2 md:gap-x-3">
-                <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.15em] md:tracking-[0.3em] text-foreground">
+                <span className="font-tech text-[11px] md:text-base uppercase tracking-[0.15em] md:tracking-[0.25em] text-foreground">
                   {role}
                 </span>
                 {index < HERO_ROLES.length - 1 && (
-                  <span className="font-tech text-[10px] md:text-sm text-foreground/30">/</span>
+                  <span className="font-tech text-[11px] md:text-base text-accent-text">/</span>
                 )}
               </span>
             ))}
           </span>
-          <span className="font-tech text-[9px] md:text-xs uppercase tracking-[0.1em] md:tracking-[0.2em] text-foreground/60">
+          <span className="font-tech text-[10px] md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] text-muted">
             Jakarta, Indonesia
           </span>
         </motion.div>
@@ -113,13 +105,13 @@ export default function HeroSection({}: HeroSectionProps) {
           className="font-lando text-[14vw] md:text-[14vw] tracking-tighter text-center whitespace-nowrap"
           style={{
             color: "transparent",
-            WebkitTextStroke: "1px rgba(255,255,255,0.06)", // Extremely faint ghost text
+            WebkitTextStroke: "1px color-mix(in srgb, var(--foreground) 12%, transparent)",
           }}
           initial={{ x: "-5%" }}
           animate={{ x: "0%" }}
           transition={{ duration: 2, delay: 0.5, ease: "easeOut" }}
         >
-          DATA SCIENTIST
+          ML ENGINEER
         </motion.h2>
       </motion.div>
 
@@ -130,31 +122,28 @@ export default function HeroSection({}: HeroSectionProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 1.5 }}
       >
-        <span className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/60">
+        <span className="font-tech text-[9px] md:text-[10px] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted">
           Scroll
         </span>
         <motion.div
           animate={prefersReducedMotion ? {} : { y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         >
-          <ChevronDown size={18} className="text-foreground/40 md:w-5 md:h-5" />
+          <ChevronDown size={18} aria-hidden="true" className="text-muted md:w-5 md:h-5" />
         </motion.div>
       </motion.div>
 
-      {/* Floating Star - Smaller on mobile */}
-      <motion.div
-        style={{
-          y: prefersReducedMotion ? 0 : starY,
-        }}
-        className="absolute right-4 md:right-10 top-1/2 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center pointer-events-none"
-      >
+      {/* Star mark: one static accent beside the name. It used to drift on
+          scroll for no reason; a fixed mark reads as a signature, not noise. */}
+      <div className="absolute right-4 md:right-10 top-1/2 w-8 h-8 md:w-12 md:h-12 flex items-center justify-center pointer-events-none">
         <Star
           size={20}
           strokeWidth={1}
-          fill="#DFFF00"
+          fill="var(--accent)"
+          aria-hidden="true"
           className="text-foreground md:w-8 md:h-8"
         />
-      </motion.div>
+      </div>
 
       {/* Socials - Bottom Right, smaller on mobile */}
       <div className="absolute bottom-6 md:bottom-12 right-4 md:right-12 z-40 flex items-center gap-2 md:gap-4 pointer-events-auto">
@@ -162,65 +151,58 @@ export default function HeroSection({}: HeroSectionProps) {
           href="https://github.com/knsiuss"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-8 h-8 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
-          data-cursor
-          data-cursor-text="GitHub"
+          aria-label="GitHub profile"
+          className="w-11 h-11 border border-line-strong rounded-md flex items-center justify-center text-foreground hover:bg-accent hover:border-accent hover:text-accent-foreground transition-colors"
         >
-          <Github size={14} className="md:w-[18px] md:h-[18px]" />
+          <Github size={18} aria-hidden="true" />
         </a>
         <a
           href="https://www.linkedin.com/in/kanisiusbagas1212"
           target="_blank"
           rel="noopener noreferrer"
-          className="w-8 h-8 md:w-10 md:h-10 border border-foreground/30 rounded-full flex items-center justify-center hover:bg-[#DFFF00] hover:border-[#DFFF00] hover:text-background transition-all"
-          data-cursor
-          data-cursor-text="LinkedIn"
+          aria-label="LinkedIn profile"
+          className="w-11 h-11 border border-line-strong rounded-md flex items-center justify-center text-foreground hover:bg-accent hover:border-accent hover:text-accent-foreground transition-colors"
         >
-          <Linkedin size={14} className="md:w-[18px] md:h-[18px]" />
+          <Linkedin size={18} aria-hidden="true" />
         </a>
       </div>
 
-      {/* WIDGET: CURRENT FOCUS - Hidden on mobile, show on md+ */}
-      <div className="fixed bottom-6 md:bottom-12 left-4 md:left-12 z-40 hidden md:flex flex-col gap-2 pointer-events-auto">
-        <span className="font-tech text-glow-neon text-[9px] md:text-[10px] uppercase tracking-widest text-racing-red ml-3">
-          AI for Physical World
+      {/* Live project card. The tag is the real link to the deployed app, so
+          it stays a plain <a>; the card itself only animates on hover. */}
+      <a
+        href="https://f1-lab.streamlit.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open the F1 Data Analytics live demo in a new tab"
+        className="fixed bottom-6 md:bottom-12 left-4 md:left-12 z-40 hidden md:flex flex-col gap-2 group"
+      >
+        <span className="font-tech text-[9px] md:text-[10px] uppercase tracking-widest text-muted ml-3">
+          Live project
         </span>
 
-        <div className="w-32 md:w-40 h-48 md:h-64 border border-foreground/10 rounded-lg bg-white/[0.02] backdrop-blur-md hover:bg-[#DFFF00]/10 hover:border-[#DFFF00]/50 transition-all cursor-pointer group flex flex-col items-center p-3 md:p-4 relative skew-racing overflow-hidden hover:shadow-[0_0_30px_rgba(223,255,0,0.15)]">
-          {/* Carbon Fiber overlay on hover */}
-          <div className="absolute inset-0 bg-carbon opacity-0 border border-foreground/30 group-hover:border-[#DFFF00]/50 transition-colors group-hover:opacity-100 mix-blend-overlay z-0" />
-
-          <div className="absolute -top-[1px] -right-[1px] w-3 md:w-4 h-3 md:h-4 bg-background border-b border-l border-foreground/30 group-hover:border-[#DFFF00]/50 transition-colors z-10" />
-          <div className="flex-1 w-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 z-10 unskew-racing">
+        <div className="w-32 md:w-40 h-48 md:h-64 border border-line bg-panel flex flex-col items-center p-3 md:p-4 relative skew-racing overflow-hidden transition-colors duration-300 group-hover:border-accent-soft">
+          <div className="flex-1 w-full flex items-center justify-center z-10 unskew-racing">
             <svg
               viewBox="0 0 100 100"
-              className="w-full h-full stroke-white/30 group-hover:stroke-[#DFFF00] fill-none stroke-[1.5px] transition-colors"
+              aria-hidden="true"
+              className="w-full h-full stroke-foreground/30 fill-none stroke-[1.5px] transition-colors duration-300 group-hover:stroke-accent"
             >
               <path d="M10,80 Q30,70 40,50 T70,30 T90,20" />
-              <circle
-                cx="90"
-                cy="20"
-                r="3"
-                className="fill-white/30 group-hover:fill-[#DFFF00] transition-colors"
-              />
+              <circle cx="90" cy="20" r="3" className="fill-foreground/30 transition-colors group-hover:fill-accent" />
             </svg>
           </div>
-          <div className="w-full border-t border-foreground/30 group-hover:border-[#DFFF00]/30 pt-2 md:pt-3 mt-2 text-center z-10 unskew-racing">
-            <h4 className="font-lando text-sm md:text-lg uppercase leading-none group-hover:text-[#DFFF00] transition-colors">
+          <div className="w-full border-t border-line pt-2 md:pt-3 mt-2 text-center z-10 unskew-racing">
+            <p className="font-lando text-sm md:text-lg uppercase leading-none transition-colors group-hover:text-accent-text">
               F1 Data
               <br />
               Analytics
-            </h4>
-            <div className="flex justify-center items-center gap-1 md:gap-2 mt-2 md:mt-3 opacity-60 group-hover:opacity-100 transition-opacity">
-              <div className="flex flex-col items-center">
-                <span className="font-tech text-glow-neon text-[7px] md:text-[8px] uppercase font-bold text-racing-red">
-                  V2.0 Live
-                </span>
-              </div>
-            </div>
+            </p>
+            <span className="mt-2 inline-block font-tech text-[8px] uppercase tracking-widest text-faint">
+              Streamlit Cloud
+            </span>
           </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }

@@ -1,120 +1,105 @@
 ---
-title: 'Building a Real-Time F1 Analytics Dashboard with ML'
-date: '2026-02-26'
-tags: ['Machine Learning', 'Python', 'F1', 'XGBoost', 'FastAPI']
-excerpt: 'How I built a real-time Formula 1 strategy predictor using FastF1, XGBoost, and FastAPI — from raw telemetry to 92% accurate pit window predictions.'
-readingTime: '8 min read'
+title: 'Building an F1 Race Dashboard That Admits What It Cannot Measure'
+date: '2026-11-24'
+tags: ['Machine Learning', 'Python', 'F1', 'Streamlit', 'Data Honesty']
+excerpt: 'How I rebuilt an F1 analytics dashboard around one rule: if the number is estimated, the page says so. OpenF1 and FastF1 in, eight pages out, and a ridge model scored against the grid-order baseline.'
+readingTime: '7 min read'
 ---
 
-# Building a Real-Time F1 Analytics Dashboard with ML
+# Building an F1 Race Dashboard That Admits What It Cannot Measure
 
-Formula 1 strategy is one of the most complex real-time optimization problems in sports. Teams spend millions on proprietary tools to predict when to pit, which tire compound to use, and how to respond to safety cars. I wanted to build something accessible for fans that actually *predicts* rather than just reports.
+Every F1 dashboard starts the same way: pull the timing data, plot it, add a model, put a big accuracy number in the header. I built that version first. Then I read my own README and could not defend half of it.
 
-## Why F1?
+This is the rebuild, and the constraint that shaped it: **a number the page cannot justify does not go on the page.**
 
-I've been obsessed with F1 data since Max Verstappen's championship run in 2021. The sport generates terabytes of telemetry per race — throttle position at 50Hz, GPS at 10Hz, tire temperatures, fuel loads. Most of this data is publicly available via the FastF1 Python library. It was too interesting to ignore.
+## What the data actually gives you
 
-## The Stack
+The public surface is better than it used to be. [OpenF1](https://openf1.org) serves live timing, intervals, stints, race control, and 4 Hz car telemetry. [FastF1](https://docs.fastf1.dev) wraps the historical timing API and caches sessions locally.
 
-```python
-# Core pipeline
-import fastf1
-import xgboost as xgb
-import fastapi
-import streamlit as st
-import pandas as pd
-import numpy as np
+What neither gives you is a clean race narrative. You get frames:
+
+- Lap times per driver, per stint, with gaps that need reconstructing
+- Telemetry that covers some drivers and silently misses others
+- Results that include sprint sessions you must not confuse with race sessions
+- JSON where a pit stop is a timestamp, not a decision
+
+The first version I shipped treated that mess as an inconvenience to smooth over. That is how a dashboard ends up drawing a confident car icon at a position nobody measured.
+
+## The rule that changed the design
+
+Each module now carries a written honesty contract at the top. The strategy simulator states that every number it returns is an estimate, labels the confidence from the sample size behind it, and lists the assumptions the projection rests on:
+
+```
+good        >= 15 clean laps
+moderate    >=  8 clean laps
+low         >=  2 clean laps
+insufficient <  2 clean laps
 ```
 
-**FastF1** is an unofficial Python library that wraps the F1 timing API. It gives you everything — session data, lap telemetry, car data, weather. The trick is that it caches aggressively (sessions can be 200MB+), so you build your pipeline around its caching layer.
+With no per-driver data, the level is `insufficient`, which is the honest label for a projection that is just constants. The page shows that label. It does not hide it under a tooltip.
 
-## Feature Engineering
+The replay player follows the same rule. Lap times, gaps, stints, and race order are measured. **Position on track is estimated from lap progress** and the UI says so. A driver with no telemetry is labelled, not rendered reading zero, because a zero in a speed trace reads as "this car stopped" and that is a different claim.
 
-The XGBoost model takes 40+ features per lap snapshot:
+## The model, stated plainly
 
-```python
-features = [
-    'lap_number',
-    'tire_compound',          # SOFT, MEDIUM, HARD
-    'tire_age_laps',          # How old the current tires are
-    'lap_time_delta_p1',      # Delta to race leader
-    'sector_1_time',
-    'sector_2_time', 
-    'sector_3_time',
-    'fuel_load_estimate',     # Calculated from weight loss model
-    'track_temp',
-    'air_temp',
-    'rain_probability',       # From weather API
-    # ... 30+ more
-]
-```
+Here is where I have to be careful, because this is the part most dashboards oversell.
 
-The fuel load estimate was the hardest feature to engineer — F1 teams don't publish fuel loads. I approximated it using the known fuel consumption rate (~110kg over 305km) and fit a degradation curve per car.
+The forecast is a ridge regression on five features, each built only from rounds **before** the race being predicted:
 
-## The Model
+- Grid position
+- Team pace
+- Driver form
+- Positions gained
+- DNF rate
 
-XGBoost worked better than neural networks here because:
-1. **Small dataset**: ~5000 pit events across 3 seasons
-2. **Feature importance** is interpretable — crucial for debugging wrong predictions
-3. **Training time** is seconds, not hours
+When there is too little history to fit (under two training rounds, or under two rows per coefficient), it falls back to a documented hand-weighted heuristic: grid 0.40, team pace 0.35, form 0.25. The output carries an `Engine` column saying which one produced the number. The fallback is never silent.
 
-```python
-model = xgb.XGBClassifier(
-    n_estimators=500,
-    max_depth=6,
-    learning_rate=0.05,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    eval_metric='logloss',
-)
-```
+### Why a backtest, not an accuracy claim
 
-After Optuna hyperparameter tuning: **92% test accuracy** on held-out 2024 season data.
+Grid position is strongly predictive in F1. A model that cannot beat "the finishing order equals the grid" is adding nothing, and most of them cannot.
 
-## The API Layer
+So the project scores it properly. The backtest walks the season race by race. Each race is scored by a model trained only on the rounds before it, and the result is compared against that naive baseline. It reports the sample size for every race, skips races with too few drivers instead of averaging them in, and states plainly whether the model beat the baseline.
 
-FastAPI serves predictions with async refresh:
+When the model loses, the page says the model lost. That is the feature.
 
-```python
-@app.get("/predict/{session_key}/{driver_number}")
-async def predict_pit_window(session_key: int, driver_number: int):
-    features = await extract_live_features(session_key, driver_number)
-    prediction = model.predict_proba(features)[0][1]
-    return {
-        "driver": driver_number,
-        "pit_probability": float(prediction),
-        "recommended_window": calculate_window(features, prediction)
-    }
-```
+## What the eight pages are
 
-Response time: **<50ms** P99 in production (Streamlit Cloud region: us-east-1).
+- **Championship standings** with sprint points included and race points kept separate
+- **Points progression** accumulated round by round
+- **Race analysis**: lap times, position changes, gap to leader, pit stops, tyre stints
+- **Broadcast replay**: a scrubber over a track map, with timing tower and race control
+- **Strategy simulator**: what-if tyre plans with expected time, risk, and assumptions
+- **Sector insights**: per-sector deficits against session best, with clean-lap counts
+- **Setup and aero proxy**: trap speed, cornering buckets, a shift detector between sessions
+- **Competitor watchlist**: head-to-head records and circuit history with sample confidence
 
-## Key Challenges
+## Making it readable to someone who does not watch F1
 
-### 1. Missing Telemetry Data
+The data was never the hard part. The vocabulary is. "Undercut", "stint", "rolling average" mean nothing to a new viewer, and a tooltip that explains them mid-chart is a tooltip nobody opens.
 
-FastF1 sometimes returns incomplete laps — crashes, red flags, VSC periods. I handled these with cubic spline interpolation over the gap, following the same approach F1 teams use internally.
+So every page gets the same treatment:
 
-### 2. Rate Limiting
+- A hero band that states what is happening in one plain sentence
+- A "What this means" line after every chart and table
+- One shared glossary of 30 terms, defined in English **and** Indonesian, reachable from every page
+- A "New to F1? Start here" button in the sidebar that explains the sport in four steps
 
-The unofficial F1 API has limits. I built a caching middleware that stores session data in SQLite and only fetches fresh data every 30 seconds during live sessions.
+The glossary switches language; the data labels and charts stay in English on purpose. A half-translated page is worse than a consistent one.
 
-### 3. Class Imbalance
+## What I learned
 
-Only ~3% of laps end in a pit stop. Class weight balancing (`scale_pos_weight=33`) in XGBoost handled this without needing SMOTE.
+**Honesty is an architecture decision, not a disclaimer.** Labelling a figure `estimated` is trivial. Building the code so every derived number is forced through a function that attaches its sample size is what keeps the label true six months later.
 
-## What I Learned
+**A baseline is the most useful thing you can add.** Without "the result is the grid" as a reference, a mediocre model looks like a good one. With it, the reader can see whether the work is real.
 
-1. **Domain knowledge beats raw ML** — knowing that tire deg is exponential not linear was worth more than 50 extra features
-2. **Caching is architecture** — a well-designed cache made the app feel real-time with 1/100th the API calls
-3. **Interpretability matters** — when the model predicted a strange pit at lap 3, SHAP values let me trace it to a wet track anomaly in the training data
+**Design tokens scale further than features do.** Every page uses one component library, one chart height scale, one table style. That is what makes eight pages read as one tool instead of eight demos.
 
-## What's Next
+## Try it
 
-- Multi-driver simultaneous strategy comparison
-- Live undercut/overcut simulation
-- MongoDB for persistent session cache across deployments
+The dashboard runs on Streamlit. If the public deploy has gone to sleep, open it once and it wakes up.
+
+The source is at [github.com/knsiuss/f1lab](https://github.com/knsiuss/f1lab), and the honesty contract for each module is in the docstring at the top of the file, written before the code below it.
 
 ---
 
-*Want to see more ML projects? [Back to portfolio →](https://kanisius.dev)*
+*More projects at [kanisius.dev](https://kanisius.dev)*

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowLeft, ArrowUpRight, Clock, Tag } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     title: 'Blog | Kanisius Bagaskara',
     description: 'Technical writing on Machine Learning, F1 analytics, Python, and building production ML systems.',
     openGraph: {
-        title: 'Blog — Kanisius Bagaskara',
+        title: 'Blog, Kanisius Bagaskara',
         description: 'Technical writing on ML engineering, F1 analytics, and building production AI systems.',
         url: 'https://kanisius.dev/blog',
     },
@@ -51,79 +51,90 @@ export default function BlogPage() {
     const posts = getPosts();
 
     return (
-        <main className="min-h-screen bg-[#080906] text-white">
-            {/* Nav */}
-            <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 border-b border-white/5 bg-[#080906]/80 backdrop-blur-md">
-                <div className="max-w-3xl mx-auto flex items-center justify-between">
+        <main className="min-h-screen bg-background text-foreground">
+            <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6 py-3 md:py-4 border-b border-line bg-background/80 backdrop-blur-md">
+                <div className="max-w-3xl mx-auto flex items-center justify-between gap-4">
                     <Link
                         href="/"
-                        className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white/50 hover:text-[#DFFF00] transition-colors"
+                        className="inline-flex min-h-11 items-center gap-2 font-tech text-xs uppercase tracking-widest text-muted hover:text-accent-text transition-colors"
                     >
-                        <ArrowLeft className="w-4 h-4" />
+                        <ArrowLeft aria-hidden="true" className="w-4 h-4" />
                         Portfolio
                     </Link>
-                    <span className="font-mono text-xs tracking-widest text-white/30 uppercase">Blog</span>
+                    <span className="font-tech text-xs tracking-widest text-faint uppercase">Blog</span>
                 </div>
             </nav>
 
-            {/* Header */}
-            <section className="pt-32 pb-16 px-6 border-b border-white/5">
+            <header className="pt-28 md:pt-32 pb-12 md:pb-16 px-4 md:px-6 border-b border-line">
                 <div className="max-w-3xl mx-auto">
                     <div className="flex items-center gap-3 mb-6">
-                        <span className="w-8 h-[1px] bg-[#DFFF00]" />
-                        <span className="font-mono text-xs uppercase tracking-widest text-[#DFFF00]">kanisius.dev/blog</span>
+                        <span aria-hidden="true" className="w-8 h-px bg-accent-text" />
+                        <span className="font-tech text-[11px] uppercase tracking-[0.25em] text-accent-text">
+                            Writing
+                        </span>
                     </div>
-                    <h1 className="font-black text-5xl md:text-6xl uppercase tracking-tight mb-4">
-                        Technical<br /><span className="text-[#DFFF00]">Writing</span>
+                    <h1 className="font-lando text-5xl md:text-7xl uppercase leading-[0.85] mb-5">
+                        Notes on<br />
+                        <span className="text-accent-text">Building</span>
                     </h1>
-                    <p className="font-mono text-white/40 text-sm leading-relaxed max-w-md">
-                        Deep dives on ML engineering, F1 data pipelines, Python optimization, and building real production AI systems.
+                    <p className="font-tech text-muted text-sm md:text-base leading-relaxed max-w-lg">
+                        Deep dives on ML engineering, F1 data pipelines, Python, and the parts of
+                        shipping a model that nobody warns you about.
                     </p>
                 </div>
-            </section>
+            </header>
 
-            {/* Posts */}
-            <section className="py-16 px-6">
+            <section className="py-12 md:py-16 px-4 md:px-6">
                 <div className="max-w-3xl mx-auto">
                     {posts.length === 0 ? (
-                        <div className="text-center py-24 border border-white/5 rounded-2xl">
-                            <p className="font-mono text-white/20 text-sm uppercase tracking-widest">Posts incoming</p>
-                            <p className="font-mono text-white/10 text-xs mt-2">First post drops soon.</p>
+                        <div className="border border-line bg-panel px-6 py-16 text-center">
+                            <p className="font-lando text-2xl uppercase mb-2">Nothing published yet</p>
+                            <p className="font-tech text-sm text-muted">
+                                The first post is being written. Check back soon.
+                            </p>
                         </div>
                     ) : (
-                        <div className="space-y-4">
+                        <ul className="border-t border-line">
                             {posts.map((post) => (
-                                <Link
-                                    key={post.slug}
-                                    href={`/blog/${post.slug}`}
-                                    className="group block p-6 border border-white/10 rounded-2xl bg-white/[0.02] hover:border-[#DFFF00]/30 hover:bg-white/[0.04] transition-all duration-300"
-                                >
-                                    <div className="flex items-start justify-between gap-4">
-                                        <div className="flex-1">
-                                            <h2 className="font-black text-lg md:text-xl uppercase mb-2 group-hover:text-[#DFFF00] transition-colors">
+                                <li key={post.slug}>
+                                    <Link
+                                        href={`/blog/${post.slug}`}
+                                        className="group flex items-start justify-between gap-4 border-b border-line py-6 md:py-8 transition-colors hover:bg-panel/60"
+                                    >
+                                        <div className="flex-1 min-w-0">
+                                            <h2 className="font-lando text-xl md:text-3xl uppercase leading-tight mb-2 transition-colors group-hover:text-accent-text">
                                                 {post.title}
                                             </h2>
-                                            <p className="font-mono text-sm text-white/40 leading-relaxed mb-4">{post.excerpt}</p>
-                                            <div className="flex flex-wrap items-center gap-3">
-                                                <div className="flex items-center gap-1.5 text-white/25">
-                                                    <Clock className="w-3 h-3" />
-                                                    <span className="font-mono text-xs">{post.readingTime}</span>
-                                                </div>
-                                                <span className="text-white/10">·</span>
-                                                <span className="font-mono text-xs text-white/25">{post.date}</span>
+                                            {post.excerpt && (
+                                                <p className="font-tech text-sm text-muted leading-relaxed mb-4 max-w-xl">
+                                                    {post.excerpt}
+                                                </p>
+                                            )}
+                                            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 font-tech text-xs text-faint">
+                                                <span className="inline-flex items-center gap-1.5">
+                                                    <Clock aria-hidden="true" className="w-3 h-3" />
+                                                    {post.readingTime}
+                                                </span>
+                                                <span aria-hidden="true">·</span>
+                                                <span>{post.date}</span>
                                                 {post.tags.slice(0, 3).map((tag) => (
-                                                    <span key={tag} className="inline-flex items-center gap-1 font-mono text-[10px] uppercase px-2 py-0.5 border border-white/10 rounded-full text-white/30">
-                                                        <Tag className="w-2.5 h-2.5" />
+                                                    <span
+                                                        key={tag}
+                                                        className="border border-line px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted rounded"
+                                                    >
                                                         {tag}
                                                     </span>
                                                 ))}
                                             </div>
                                         </div>
-                                        <ArrowUpRight className="w-5 h-5 text-white/20 group-hover:text-[#DFFF00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all flex-shrink-0 mt-1" />
-                                    </div>
-                                </Link>
+                                        <ArrowUpRight
+                                            aria-hidden="true"
+                                            className="w-5 h-5 shrink-0 text-faint transition-colors group-hover:text-accent-text mt-2"
+                                        />
+                                    </Link>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                     )}
                 </div>
             </section>

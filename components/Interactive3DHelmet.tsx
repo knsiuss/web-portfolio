@@ -43,7 +43,7 @@ function HelmetModel({ mousePosition }: { mousePosition: { x: number; y: number 
       {/* Helmet Stripe - McLaren Orange/Red */}
       <mesh rotation={[0, 0, Math.PI / 2]} position={[0, 0.5, 1.48]}>
         <torusGeometry args={[1.3, 0.05, 16, 100]} />
-        <meshStandardMaterial color="#DFFF00" emissive="#DFFF00" emissiveIntensity={0.5} />
+        <meshStandardMaterial color="#d2ff00" emissive="#d2ff00" emissiveIntensity={0.5} />
       </mesh>
       
       {/* Visor */}
@@ -75,7 +75,7 @@ function HelmetModel({ mousePosition }: { mousePosition: { x: number; y: number 
       {/* Top Air Intake */}
       <mesh position={[0, 1.5, -0.3]}>
         <boxGeometry args={[0.8, 0.3, 0.6]} />
-        <meshStandardMaterial color="#DFFF00" roughness={0.4} metalness={0.6} />
+        <meshStandardMaterial color="#d2ff00" roughness={0.4} metalness={0.6} />
       </mesh>
       
       {/* Chin Guard */}
@@ -88,8 +88,8 @@ function HelmetModel({ mousePosition }: { mousePosition: { x: number; y: number 
       <mesh position={[0, 0.3, 1.45]} rotation={[0, 0, 0]}>
         <planeGeometry args={[0.4, 0.15]} />
         <meshStandardMaterial 
-          color="#DFFF00" 
-          emissive="#DFFF00" 
+          color="#d2ff00" 
+          emissive="#d2ff00" 
           emissiveIntensity={0.3}
           transparent
           opacity={0.9}
@@ -111,7 +111,7 @@ function Scene({ mousePosition }: { mousePosition: { x: number; y: number } }) {
         intensity={1}
         castShadow
       />
-      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#DFFF00" />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#d2ff00" />
       <pointLight position={[10, 10, -5]} intensity={0.3} color="#fff" />
       
       <PresentationControls
@@ -171,8 +171,8 @@ export default function Interactive3DHelmet() {
       
       {/* Overlay Instructions */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none">
-        <p className="font-tech text-xs uppercase tracking-wider text-foreground/40">
-          Move cursor to rotate • Drag to explore
+        <p className="font-tech text-xs uppercase tracking-wider text-muted">
+          Move cursor to rotate. Drag to explore.
         </p>
       </div>
     </div>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion, useScroll, useTransform, type Variants } from 'framer-motion';
 import { Code2, BarChart3, Sparkles, Rocket, Wrench } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
+import LapKicker from '@/components/ui/LapKicker';
 
 type Tool = {
   name: string;
@@ -43,7 +44,7 @@ const categories: Category[] = [
       { name: 'Scikit-Learn', logo: '/icons/scikit-learn.svg', desc: 'ML algorithms' },
       { name: 'PyTorch', logo: '/icons/pytorch.svg', desc: 'Deep learning' },
       { name: 'Matplotlib', logo: '/icons/matplotlib.svg', desc: 'Visualization' },
-      { name: 'Seaborn', logo: '/icons/python.svg', desc: 'Statistical plots' },
+      { name: 'Seaborn', logo: '/icons/seaborn.svg', desc: 'Statistical plots' },
       { name: 'Plotly', logo: '/icons/plotly.svg', desc: 'Interactive charts' },
     ],
   },
@@ -135,25 +136,23 @@ export default function TechStackSection() {
           className="mb-12 md:mb-20 grid md:grid-cols-[1fr_auto] gap-6 md:gap-12 items-end will-change-transform"
         >
           <div>
-            <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
-              Skills
-            </span>
+            <LapKicker lap="02">Skills</LapKicker>
             <h2 className="font-lando text-4xl md:text-6xl uppercase mb-4">
-              Technical <span className="text-racing-red">Stack</span>
+              Technical <span className="text-accent-text">Stack</span>
             </h2>
-            <p className="font-tech text-sm md:text-base text-foreground/60 max-w-xl leading-relaxed">
+            <p className="font-tech text-sm md:text-base text-muted max-w-xl leading-relaxed">
               Tools and technologies I use to build, experiment, and learn. I focus on data,
               machine learning, and building real-world applications.
             </p>
           </div>
-          <p className="font-tech text-xs text-foreground/50 leading-relaxed max-w-xs">
-            <span className="inline-flex items-center gap-2 text-[#DFFF00] uppercase tracking-wider text-[10px] mb-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#DFFF00] animate-pulse" />
+          <div className="max-w-xs">
+            <span className="font-tech text-accent-text uppercase tracking-wider text-[10px]">
               Always learning
             </span>
-            <br />
-            This stack evolves as I explore new technologies and work on new projects.
-          </p>
+            <p className="font-tech text-xs text-faint leading-relaxed mt-1.5">
+              This stack evolves as I explore new technologies and work on new projects.
+            </p>
+          </div>
         </motion.div>
 
         {/* Categories — Lando-style editorial list with cinematic reveal */}
@@ -167,15 +166,9 @@ export default function TechStackSection() {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: Math.min(index * 0.08, 0.32) }}
               className="group relative border-b border-foreground/10 py-8 md:py-10 grid gap-6 md:grid-cols-[110px_minmax(0,280px)_1fr]"
             >
-              {/* Accent line grows left-to-right as the row enters */}
-              <motion.div
-                initial={prefersReducedMotion ? {} : { scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-                className="absolute inset-x-0 top-0 h-px origin-left bg-[#DFFF00]/70"
-                aria-hidden="true"
-              />
+              {/* A static hairline divides rows; it used to animate in from
+                  the left on every row, which is motion with no job. */}
+              <span className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden="true" />
 
               <motion.span
                 initial={prefersReducedMotion ? {} : { opacity: 0, x: -80, scale: 1.4, rotate: -6 }}
@@ -190,7 +183,7 @@ export default function TechStackSection() {
               </motion.span>
 
               <div>
-                <div className="flex items-center gap-2.5 text-[#DFFF00]">
+                <div className="flex items-center gap-2.5 text-accent-text">
                   {category.icon}
                   {/* Title reveals from behind a clip mask */}
                   <span className="overflow-hidden">
@@ -210,7 +203,7 @@ export default function TechStackSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-80px' }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-                  className="font-tech text-xs md:text-sm text-foreground/50 mt-2.5 leading-relaxed"
+                  className="font-tech text-xs md:text-sm text-muted mt-2.5 leading-relaxed"
                 >
                   {category.desc}
                 </motion.p>
@@ -229,42 +222,24 @@ export default function TechStackSection() {
                     variants={toolItem}
                     whileHover={prefersReducedMotion ? {} : { x: 8, scale: 1.08 }}
                     transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex items-center gap-3 min-w-0 cursor-default"
+                    className="flex items-center gap-3 min-w-0"
                   >
                     <Image
                       src={tool.logo}
                       alt=""
                       width={24}
                       height={24}
-                      className="object-contain shrink-0 transition-transform duration-300 group-hover:scale-110"
+                      className="object-contain shrink-0"
                     />
                     <div className="min-w-0">
                       <div className="font-tech text-sm text-foreground leading-tight">{tool.name}</div>
-                      <div className="font-tech text-[10px] text-foreground/40 leading-tight mt-0.5">{tool.desc}</div>
+                      <div className="font-tech text-[10px] text-faint leading-tight mt-0.5">{tool.desc}</div>
                     </div>
                   </motion.li>
                 ))}
               </motion.ul>
             </motion.article>
           ))}
-        </div>
-
-        {/* Cinematic marquee — infinite horizontal scroll like Lando's gallery */}
-        <div className="mt-14 overflow-hidden border-t border-foreground/10 pt-6" aria-hidden="true">
-          <motion.div
-            animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
-            transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
-            className="flex w-max whitespace-nowrap will-change-transform"
-          >
-            {[0, 1].map((copy) => (
-              <span
-                key={copy}
-                className="font-lando text-4xl md:text-6xl uppercase leading-none text-foreground/80 pr-10"
-              >
-                Exploring Building Improving Exploring Building Improving&nbsp;
-              </span>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>

@@ -12,8 +12,8 @@ const TopographicMaterial = shaderMaterial(
   {
     u_time: 0,
     u_resolution: new THREE.Vector2(),
-    u_colorBg: new THREE.Color('#0a110a'),
-    u_colorLine: new THREE.Color('#dfff00')
+    u_colorBg: new THREE.Color('#282c20'),
+    u_colorLine: new THREE.Color('#d2ff00')
   },
   // Vertex Shader
   `
@@ -159,8 +159,8 @@ function ShaderPlane({ isDark }: { isDark: boolean }) {
   // Switch shader colors when theme changes
   useEffect(() => {
     if (materialRef.current) {
-      materialRef.current.u_colorBg = new THREE.Color(isDark ? '#0a110a' : '#e8f0e8');
-      materialRef.current.u_colorLine = new THREE.Color(isDark ? '#dfff00' : '#5a8a00');
+      materialRef.current.u_colorBg = new THREE.Color(isDark ? '#282c20' : '#eeede2');
+      materialRef.current.u_colorLine = new THREE.Color(isDark ? '#d2ff00' : '#465100');
       invalidate();
     }
   }, [isDark, invalidate]);

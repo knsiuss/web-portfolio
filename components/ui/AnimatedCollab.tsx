@@ -46,7 +46,7 @@ export default function AnimatedCollab({ className = '', scrollProgress }: { cla
         >
             <svg
                 viewBox="0 0 1536 1024"
-                className="w-full h-full drop-shadow-[0_0_15px_rgba(223,255,0,0.15)]"
+                className="w-full h-full drop-shadow-[0_0_15px_rgba(210,255,0,0.15)]"
                 preserveAspectRatio="xMidYMid meet"
                 style={{
                     willChange: 'transform',
@@ -58,7 +58,7 @@ export default function AnimatedCollab({ className = '', scrollProgress }: { cla
                         key={i}
                         d={p.d}
                         pathLength="1"
-                        stroke="#DFFF00"
+                        stroke="var(--accent)"
                         strokeWidth="2.5"
                         fill={p.fill}
                         style={{

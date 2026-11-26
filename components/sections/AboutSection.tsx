@@ -1,43 +1,41 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Database, Users, Trophy, Rocket, ExternalLink, LineChart, Bot } from 'lucide-react';
 import useReducedMotion from '@/hooks/useReducedMotion';
 import Image from 'next/image';
+import LapKicker from '@/components/ui/LapKicker';
 
 const expertise = [
   {
-    icon: <Bot className="w-6 h-6" />,
     title: "Machine Learning",
     desc: "XGBoost, scikit-learn, model evaluation",
   },
   {
-    icon: <LineChart className="w-6 h-6" />,
     title: "Deep Learning",
     desc: "PyTorch, neural networks",
   },
   {
-    icon: <Bot className="w-6 h-6" />,
     title: "Gen AI",
     desc: "LLM prompting, Claude, OpenAI",
   },
   {
-    icon: <Database className="w-6 h-6" />,
     title: "Web & Data",
     desc: "Next.js, TypeScript, Pandas, FastF1 API",
   },
   {
-    icon: <Users className="w-6 h-6" />,
     title: "Teaching",
     desc: "AI workshops, mentoring",
   },
 ];
 
+// Verifiable facts only: the award, the completed specialization, the public
+// repositories, and workshop attendance. Icons were removed because a trophy
+// beside "Rising Star" or a rocket beside "Stanford" told the reader nothing.
 const highlights = [
-  { icon: <Trophy className="w-4 h-4 text-racing-red" />, text: "Rising Star Top 100" },
-  { icon: <Rocket className="w-4 h-4 text-racing-red" />, text: "Stanford ML Specialization" },
-  { icon: <Code2 className="w-4 h-4 text-racing-red" />, text: "8+ Open Source Projects" },
-  { icon: <Users className="w-4 h-4 text-racing-red" />, text: "100+ Students Trained" },
+  "Rising Star Top 100",
+  "Stanford ML Specialization",
+  "14 Public Repositories",
+  "100+ Students Trained",
 ];
 
 export default function AboutSection() {
@@ -45,36 +43,33 @@ export default function AboutSection() {
 
   return (
     <section id="about" className="relative bg-background py-20 md:py-32 overflow-hidden">
-      {/* Accent line */}
-      <div className="absolute inset-x-0 top-0 h-px bg-[#DFFF00]/40" aria-hidden="true" />
+      <div className="absolute inset-x-0 top-0 h-px bg-line" aria-hidden="true" />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-          {/* Left Column - Main Content */}
+          {/* Left column: the person */}
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 80, skewY: 4, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <span className="font-tech text-xs uppercase tracking-[0.3em] text-racing-red mb-4 block">
-              About Me
-            </span>
-            <h2 className="font-lando text-4xl md:text-6xl uppercase mb-6">
+            <LapKicker lap="04">About Me</LapKicker>
+            <h2 className="font-lando text-4xl md:text-6xl uppercase mb-6" aria-label="I build ML that actually runs">
               I build ML that{" "}
-              <span className="text-transparent" style={{ WebkitTextStroke: '2px var(--racing-red)' }}>
+              <span aria-hidden="true" className="text-transparent" style={{ WebkitTextStroke: '2px var(--accent-text)' }}>
                 actually runs
               </span>
             </h2>
 
-            <div className="space-y-4 font-tech text-foreground/70 leading-relaxed">
+            <div className="space-y-4 font-tech text-muted leading-relaxed">
               <p>
                 ML engineer from Jakarta. I make data tools and machine
-                learning things that run for real — most recently an{" "}
-                <span className="text-racing-red">F1 dashboard</span> that
+                learning things that run for real, most recently an{" "}
+                <span className="text-foreground">F1 dashboard</span> that
                 predicts pit windows across 23 races, and a project that
                 turns phone video into a{" "}
-                <span className="text-racing-red">3D model</span>.
+                <span className="text-foreground">3D model</span>.
               </p>
               <p>
                 I also run AI workshops, trying to explain this stuff
@@ -86,117 +81,66 @@ export default function AboutSection() {
               </p>
             </div>
 
-            {/* Profile Card (Photo) */}
             <motion.div
-              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.95, y: 30 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.98, y: 20 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="mt-8 relative group max-w-sm"
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              className="mt-8 relative max-w-sm"
             >
-              <motion.div
-                whileHover={prefersReducedMotion ? {} : { y: -8 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="relative overflow-hidden border border-foreground/10 bg-foreground/5 p-3 group-hover:border-[#DFFF00]/50 transition-colors"
-              >
-                {/* Photo Wrapper */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-white/5">
+              <div className="relative overflow-hidden border border-line bg-panel p-3">
+                <div className="relative aspect-[4/3] overflow-hidden bg-foreground/5">
                   <Image
-                    src="/images/kanisius.jpg"
+                    src="/images/kanisius.webp"
                     alt="Kanisius Bagaskara"
                     fill
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[0.16,1,0.3,1]"
                     sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover"
                   />
-
-                  {/* Racing overlay line */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                 </div>
-
-                {/* Caption */}
                 <div className="mt-3 flex items-center justify-between px-1">
-                  <p className="font-tech text-xs uppercase tracking-wider text-foreground/50">Kanisius Bagaskara</p>
-                  <ExternalLink className="w-4 h-4 text-foreground/30 group-hover:text-[#DFFF00] transition-colors" />
+                  <p className="font-tech text-xs uppercase tracking-wider text-muted">Kanisius Bagaskara</p>
+                  <p className="font-tech text-[10px] uppercase tracking-[0.2em] text-accent-text">Jakarta, 2026</p>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
 
-            {/* Quick Highlights */}
-            <div className="mt-8 flex flex-wrap gap-3">
-              {highlights.map((item, index) => (
-                <motion.div
-                  key={item.text}
-                  initial={prefersReducedMotion ? {} : { opacity: 0, scale: 0.8, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.1 }}
-                  className="flex items-center gap-2 bg-white/5 border border-foreground/10 rounded-full px-4 py-2 hover:border-[#DFFF00] hover:bg-[#DFFF00]/10 transition-colors"
+            <ul className="mt-8 flex flex-wrap gap-2">
+              {highlights.map((text) => (
+                <li
+                  key={text}
+                  className="font-tech text-xs bg-foreground/5 border border-line px-3.5 py-2 text-muted rounded"
                 >
-                  {item.icon}
-                  <span className="font-tech text-xs text-foreground/80">{item.text}</span>
-                </motion.div>
+                  {text}
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
 
-          {/* Right Column - Expertise Grid */}
+          {/* Right column: what I actually do */}
           <motion.div
-            initial={prefersReducedMotion ? {} : { opacity: 0, y: 80, skewY: 4, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, skewY: 0, scale: 1 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="space-y-4"
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           >
             <h3 className="font-lando text-2xl uppercase mb-6">Core Expertise</h3>
 
-            {/* Minimalist Expertise List - Refined First Principles Style */}
-            <div className="flex flex-col space-y-8 md:space-y-12">
-              {expertise.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={prefersReducedMotion ? {} : { opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 + (index * 0.1) }}
-                  className="group relative cursor-default"
-                >
-                  {/* Main Title first — read the category, then the tools */}
-                  <div className="overflow-hidden">
-                    <h4 className="font-lando text-3xl md:text-5xl text-racing-red uppercase leading-[0.85] tracking-tight italic transform group-hover:translate-x-4 transition-transform duration-700 ease-[0.16,1,0.3,1] opacity-90 group-hover:opacity-100">
-                      {item.title}
-                    </h4>
-                  </div>
-
-                  <div className="flex items-center gap-3 mt-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#DFFF00] transition-colors duration-300" />
-                    <p className="font-tech text-[10px] md:text-xs uppercase tracking-[0.2em] md:tracking-[0.3em] text-foreground/50 group-hover:text-foreground transition-colors duration-300">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
+            <div className="border-t border-line">
+              {expertise.map((item) => (
+                <div key={item.title} className="group relative border-b border-line py-6">
+                  <h4 className="font-lando text-3xl md:text-4xl text-foreground uppercase leading-[0.9] tracking-tight transition-colors duration-300 group-hover:text-accent-text">
+                    {item.title}
+                  </h4>
+                  <p className="font-tech text-[11px] uppercase tracking-[0.15em] text-muted mt-2">
+                    {item.desc}
+                  </p>
+                </div>
               ))}
-            </div>
-
-            {/* Skills marquee — loops continuously, never breaks */}
-            <div className="mt-10 overflow-hidden border-t border-foreground/10 pt-5" aria-hidden="true">
-              <motion.div
-                animate={prefersReducedMotion ? undefined : { x: ['0%', '-50%'] }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'linear' }}
-                className="flex w-max whitespace-nowrap will-change-transform"
-              >
-                {[0, 1].map((copy) => (
-                  <span
-                    key={copy}
-                    className="font-lando text-2xl md:text-4xl uppercase leading-none text-foreground/80 pr-8"
-                  >
-                    Machine Learning Deep Learning Gen AI LLM Prompting Claude OpenAI Machine Learning Deep Learning Gen AI&nbsp;
-                  </span>
-                ))}
-              </motion.div>
             </div>
           </motion.div>
         </div>
-      </div >
-    </section >
+      </div>
+    </section>
   );
 }

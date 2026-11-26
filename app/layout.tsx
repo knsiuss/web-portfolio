@@ -46,12 +46,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Kanisius Bagaskara - Machine Learning Engineer Portfolio",
+        alt: "Kanisius Bagaskara, Machine Learning Engineer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    creator: "@grey_stardust",
     title: "Kanisius Bagaskara | ML Engineer & Data Scientist",
     description: "ML Engineer & Data Scientist building real-time F1 analytics, ML systems, web applications, and 3D vision.",
     images: ["/opengraph-image"],
@@ -68,8 +69,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050505",
-  colorScheme: "dark",
+  themeColor: [
+    { media: '(prefers-color-scheme: dark)', color: '#282c20' },
+    { media: '(prefers-color-scheme: light)', color: '#f4f4ed' },
+  ],
+  colorScheme: 'dark light',
 };
 
 // Schema.org JSON-LD
@@ -87,7 +91,8 @@ const structuredData = {
       url: "https://kanisius.dev",
       image: "https://kanisius.dev/logo.svg",
       email: "mailto:kanisius@novar.me",
-      telephone: "+6285183268643",
+      // Phone number intentionally omitted — it would be published in public JSON-LD
+      // and trivially scraped by bots/spam. Email + LinkedIn are sufficient for contact.
       address: {
         "@type": "PostalAddress",
         addressLocality: "Jakarta",
@@ -103,6 +108,8 @@ const structuredData = {
       sameAs: [
         "https://github.com/knsiuss",
         "https://linkedin.com/in/kanisiusbagas1212",
+        "https://huggingface.co/knss12",
+        "https://x.com/grey_stardust",
         "https://www.instagram.com/p_knsss/",
       ],
       knowsAbout: [
@@ -131,7 +138,7 @@ const structuredData = {
       "@id": "https://kanisius.dev/#website",
       url: "https://kanisius.dev",
       name: "Kanisius Bagaskara Portfolio",
-      description: "Portfolio of Kanisius Bagaskara - ML Engineer & Data Scientist",
+      description: "Portfolio of Kanisius Bagaskara, ML Engineer and Data Scientist",
       publisher: {
         "@id": "https://kanisius.dev/#person",
       },
